@@ -21,7 +21,9 @@ public class AreaPersonalActivity extends AppCompatActivity {
         Intent i_result = getIntent();
         String user = i_result.getStringExtra("USER_REGISTER");
         String pass = i_result.getStringExtra("PASS_REGISTER");
+        String user_home = i_result.getStringExtra("USER");
         user_view.setText(user);
+        user_view.setText(user_home);
         Toast.makeText(this,"pass: "+pass,Toast.LENGTH_SHORT).show();
     }
 }

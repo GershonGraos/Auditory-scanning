@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setTitle("Home Screen");
         //setTitleColor(ge);
 
-//        passLogIn = (EditText) findViewById(R.id.editText_login_pass);
-//        userLogin = (EditText) findViewById(R.id.editText_login_user);
+        passLogIn = (EditText) findViewById(R.id.editText_login_pass);
+        userLogin = (EditText) findViewById(R.id.editText_login_user);
 }
 
 
@@ -41,26 +41,21 @@ public class MainActivity extends AppCompatActivity {
 
     // ********** SIGN IN ***********
     public void press_signIn(View view) {
-
         String password = passLogIn.getText().toString();
         String user = userLogin.getText().toString();
 
-        Toast.makeText(this,"pass: "+password,Toast.LENGTH_SHORT).show();
+        if(password.length() < 4){
+            Toast.makeText(this,"Incorrect password",Toast.LENGTH_SHORT).show();
+            passLogIn.setError(getString(R.string.error_field_required));
+            focusView = passLogIn;
+            cancel = true;
+        }
 
-//        if (!isPasswordValid(password)) {
-//            passLogIn.setError(getString(R.string.error_invalid_password));
-//            focusView = passLogIn;
-//            cancel = true;
-//        }
-
-//        Intent i = new Intent(this, AreaPersonalActivity.class);
-//        startActivity(i);
-    }
-
-
-
-    private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+        else{
+            Intent i = new Intent(this, AreaPersonalActivity.class);
+            i.putExtra("USER",user);
+            startActivity(i);
+        }
     }
 
 }
