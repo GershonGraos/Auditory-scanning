@@ -27,6 +27,13 @@
     </string>
 
     <!-- Strings related to Areal Personal -->
-    <string name="hi_user">Hello </string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="tittle_patients">Select Patient</string>
+    <string name="tittle_select">Select State</string>
+    <string name="add_patient">Add</string>
+    <string name="butt_share">Share</string>
+    <string name="butt_next">Continue</string>
+    <string-array name="selectState">
+        <item>Display</item>
+        <item>Edit</item>
+    </string-array>
 </resources>

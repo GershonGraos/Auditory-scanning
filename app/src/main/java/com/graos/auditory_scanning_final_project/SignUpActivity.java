@@ -191,7 +191,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             // perform the user login attempt.
 
             Intent i = new Intent(this, AreaPersonalActivity.class);
-            i.putExtra("USER_REGISTER", user );
+            i.putExtra("USER_REGISTER", user);
             i.putExtra("PASS_REGISTER", password);
             startActivity(i);
 

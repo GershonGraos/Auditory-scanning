@@ -10,17 +10,53 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.graos.auditory_scanning_final_project.AreaPersonalActivity">
 
-    <TextView
-        android:text="@string/hi_user"
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="134dp"
+        android:id="@+id/spinner_state"
+        android:entries="@array/selectState"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="@string/butt_next"
+        android:textAllCaps="false"
         android:textStyle="bold"
-        android:textSize="17sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/button"
+        android:onClick="press_next"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@android:color/background_light"
+        android:background="@android:color/holo_green_light"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="@string/tittle_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:id="@+id/textView4"
+        android:layout_above="@+id/spinner_state"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="35dp"
-        android:id="@+id/textView" />
+        android:textStyle="bold" />
+
+    <TextView
+        android:text="@string/tittle_patients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="37dp"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/spinner_show"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold" />
 
     <TextView
         android:text="TextView"
@@ -28,11 +64,50 @@
         android:textSize="17sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp"
         android:id="@+id/textViewHiUser"
-        android:layout_alignBaseline="@+id/textView"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_show"
+        android:layout_below="@+id/textViewHiUser"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="89dp" />
+
+    <Button
+        android:text="@string/add_patient"
+        android:textSize="11sp"
+        android:textAllCaps="false"
+        android:layout_width="135dp"
+        android:layout_height="33dp"
+        android:id="@+id/button2"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="17dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/background_light"
+        android:background="@android:color/holo_green_light"
+        android:textStyle="bold"
+        android:onClick="addPatient" />
+
+    <Button
+        android:text="@string/butt_share"
+        android:textSize="11sp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:layout_width="135dp"
+        android:layout_height="33dp"
+        android:layout_alignTop="@+id/button2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@android:color/background_light"
+        android:background="@android:color/holo_green_light"
+        android:id="@+id/button3"
+        android:onClick="sharePatient" />
+
+
 </RelativeLayout>
