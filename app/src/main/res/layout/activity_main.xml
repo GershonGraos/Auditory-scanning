@@ -105,12 +105,10 @@
     <EditText
         android:id="@+id/editText_login_user"
         android:inputType="textEmailAddress"
-        android:layout_width="130dp"
+        android:layout_width="246dp"
         android:layout_height="38dp"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_marginRight="43dp"
-        android:layout_marginEnd="43dp"
         android:layout_above="@+id/editText_login_pass"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -118,7 +116,7 @@
     <EditText
         android:id="@+id/editText_login_pass"
         android:inputType="textPassword"
-        android:layout_width="130dp"
+        android:layout_width="246dp"
         android:layout_height="38dp"
         android:textSize="17sp"
         android:textStyle="bold"

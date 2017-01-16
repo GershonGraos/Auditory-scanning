@@ -1,5 +1,7 @@
 package com.graos.auditory_scanning_final_project;
-
+/**
+ * Created by GG on 05/01/2017.
+ */
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -68,7 +70,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         if(flag_login == 1){
             patients = new ArrayList<>();
             flag_login = 0;
-            patients.add("Mosh");
+            patients.add("Moshiko");
         }
 
 
@@ -139,7 +141,9 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
     // ---------------------------------------------------------------------
     // --------------------- Button Next ----------------------------------
     public void press_next(View view){
+        int flag = 1;
         if(_spinner_patient.getSelectedItem() == null){
+            flag = 0;
             Toast.makeText(this,"Select/Add Patient",Toast.LENGTH_SHORT).show();
         }
 
@@ -148,9 +152,18 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         }
 
         s_state = _spinner_choose.getSelectedItem().toString();
-        Toast.makeText(this,"STATE: "+s_state,Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,"PATIENT: "+s_patient, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,"Press NEXT",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,"STATE: "+s_state,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,"PATIENT: "+s_patient, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,"Press NEXT",Toast.LENGTH_SHORT).show();
+
+        if(flag == 1){
+            Intent i = new Intent(this, EditPatient.class);
+            i.putExtra("PATIENT",s_patient);
+            startActivity(i);
+        }
+        else
+            Toast.makeText(this,"Select State/Patient",Toast.LENGTH_SHORT).show();
+
     }
 
 

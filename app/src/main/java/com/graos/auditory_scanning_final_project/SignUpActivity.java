@@ -1,5 +1,7 @@
 package com.graos.auditory_scanning_final_project;
-
+/**
+ * Created by GG on 06/01/2017.
+ */
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;

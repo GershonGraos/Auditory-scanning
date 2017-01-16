@@ -23,7 +23,9 @@
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up" />
-        <activity android:name=".AreaPersonalActivity"></activity>
+        <activity android:name=".AreaPersonalActivity" />
+        <activity android:name=".EditActivity" />
+        <activity android:name=".EditPatient" />
     </application>
 
 </manifest>
