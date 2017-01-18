@@ -20,22 +20,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:text="@string/butt_next"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/button"
-        android:onClick="press_next"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textColor="@android:color/background_light"
-        android:background="@android:color/holo_green_light"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <TextView
         android:text="@string/tittle_select"
         android:layout_width="wrap_content"
@@ -58,17 +42,6 @@
         android:layout_alignParentStart="true"
         android:textStyle="bold" />
 
-    <TextView
-        android:text="TextView"
-        android:textStyle="bold"
-        android:textSize="17sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewHiUser"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -80,10 +53,10 @@
 
     <Button
         android:text="@string/add_patient"
-        android:textSize="11sp"
+        android:textSize="14sp"
         android:textAllCaps="false"
         android:layout_width="135dp"
-        android:layout_height="33dp"
+        android:layout_height="39dp"
         android:id="@+id/button2"
         android:layout_below="@+id/textView3"
         android:layout_marginTop="17dp"
@@ -96,11 +69,11 @@
 
     <Button
         android:text="@string/butt_share"
-        android:textSize="11sp"
+        android:textSize="14sp"
         android:textAllCaps="false"
         android:textStyle="bold"
         android:layout_width="135dp"
-        android:layout_height="33dp"
+        android:layout_height="39dp"
         android:layout_alignTop="@+id/button2"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -108,6 +81,33 @@
         android:background="@android:color/holo_green_light"
         android:id="@+id/button3"
         android:onClick="sharePatient" />
+
+    <TextView
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewHiUser"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="@string/butt_next"
+        android:textSize="15sp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:onClick="press_next"
+        android:textColor="@android:color/background_light"
+        android:background="@android:color/holo_green_light"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

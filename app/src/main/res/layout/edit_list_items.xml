@@ -10,7 +10,8 @@
         app:srcCompat="@mipmap/icon_minus"
         android:id="@+id/imageView3"
         android:layout_row="0"
-        android:layout_column="3" />
+        android:layout_column="3"
+        android:onClick="press_delete"/>
 
     <TextView
         android:text="TextView"

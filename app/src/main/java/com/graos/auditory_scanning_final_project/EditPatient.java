@@ -4,10 +4,12 @@ package com.graos.auditory_scanning_final_project;
  */
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +43,7 @@ public class EditPatient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_patient);
+        setTitle("Edit");
 
         // DB
         dbHelper = new AssignmentsDBHelper(this);
@@ -95,45 +98,27 @@ public class EditPatient extends AppCompatActivity {
             Toast.makeText(this, "Insert new item", Toast.LENGTH_SHORT).show();
     }
 
+
+    // --------------- Delete Item ----------------------------------------
+    //--------------------------------------------------------------------
+    public void press_delete(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditPatient.this);
+        builder.setMessage("Are you sure?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // FIRE ZE MISSILES!
+                        Toast.makeText(getApplicationContext(), "Delete the item" , Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+//                        Toast.makeText(getApplicationContext(), "NO Delete the item" , Toast.LENGTH_LONG).show();
+                    }
+                });
+        // Create the AlertDialog object and return it
+        builder.show();
+    }
+
 }
 
-
-//     ArrayAdapter<String> adapter;
-//// values = new String[]{"adasdasda","asdasdasda"};
-//adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, android.R.id.text1, values);
-//        _my_list.setAdapter(adapter);
-//
-//        _my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//@Override
-//public void onItemClick(AdapterView<?> parent, View view,
-//        int position, long id) {
-//
-//        // ListView Clicked item index
-//        int itemPosition     = position;
-//
-//        // ListView Clicked item value
-//        String  itemValue    = (String)_my_list.getItemAtPosition(position);
-//
-//        // Show Alert
-//        Toast.makeText(getApplicationContext(),
-//        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-//        .show();
-//
-//        }
-//
-//        });
-
-
-
-// ---------- to the screen DISPLAY --------------
-// ********* add image button ********************************
-
-
-//    // Construct the data source
-//    ArrayList<User> arrayOfUsers = new ArrayList<User>();
-//    // Create the adapter to convert the array to views
-//    UsersAdapter adapter = new UsersAdapter(this, arrayOfUsers);
-//    // Attach the adapter to a ListView
-//    ListView listView = (ListView) findViewById(R.id.lvItems);
-//listView.setAdapter(adapter);

@@ -39,7 +39,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_area_personal);
-        setTitle("Therapist Personal Zone");
+        setTitle("Therapist Personal Area");
 
         _user_view = (TextView) findViewById(R.id.textViewHiUser);
         _spinner_patient = (Spinner) findViewById(R.id.spinner_show);
@@ -51,7 +51,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         if(i_result.getStringExtra("USER_REGISTER") != null){
             user_register = i_result.getStringExtra("USER_REGISTER");
             flag_newUser = 1;
-            _user_view.setText("Hello: " + user_register);
+            _user_view.setText("HELLO: " + user_register);
         }
 
         else if(i_result.getStringExtra("USER_SIGN_IN") != null){
@@ -152,14 +152,23 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         }
 
         s_state = _spinner_choose.getSelectedItem().toString();
-//        Toast.makeText(this,"STATE: "+s_state,Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this,"PATIENT: "+s_patient, Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this,"Press NEXT",Toast.LENGTH_SHORT).show();
 
         if(flag == 1){
-            Intent i = new Intent(this, EditPatient.class);
-            i.putExtra("PATIENT",s_patient);
-            startActivity(i);
+            Toast.makeText(this,s_state,Toast.LENGTH_SHORT).show();
+
+            if(s_state.equalsIgnoreCase("Display")){
+                Intent i;
+                i = new Intent(this, Display_Patient.class);
+                i.putExtra("PATIENT",s_patient);
+                startActivity(i);
+            }
+            else if(s_state.equalsIgnoreCase("Edit")){
+                Intent i;
+                i = new Intent(this, EditPatient.class);
+                i.putExtra("PATIENT",s_patient);
+                startActivity(i);
+            }
+
         }
         else
             Toast.makeText(this,"Select State/Patient",Toast.LENGTH_SHORT).show();
@@ -169,3 +178,5 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
 
 
 }
+
+

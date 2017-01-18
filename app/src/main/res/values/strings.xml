@@ -37,5 +37,9 @@
         <item>Edit</item>
     </string-array>
 
+    <!-- Strings related to Areal Personal -->
+    <string name="button_yes">Recorder YES</string>
+    <string name="button_no">Recorder NO</string>
+    <string name="title_activity_display_patient">DisplayPatient</string>
 
 </resources>

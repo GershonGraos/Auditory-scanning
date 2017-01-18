@@ -24,8 +24,9 @@
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up" />
         <activity android:name=".AreaPersonalActivity" />
-        <activity android:name=".EditActivity" />
         <activity android:name=".EditPatient" />
+        <activity android:name=".Display_Patient" />
+        <activity android:name=".Demo_internal_screen"></activity>
     </application>
 
 </manifest>
