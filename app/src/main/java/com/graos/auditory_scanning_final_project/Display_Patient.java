@@ -1,5 +1,7 @@
 package com.graos.auditory_scanning_final_project;
-
+/**
+ * Created by GG on 18/01/2017.
+ */
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -38,7 +40,7 @@ public class Display_Patient extends AppCompatActivity {
         _name.setText(my_patient);
 
 
-        String []values = new String[]{"משהו מפריע לי","משהו דחוף","לעשות משהו","עניין רפואי","לשוחח","רוצה מישהו","החפצים שלי"};
+        String []values = new String[]{"משהו מפריע לי","משהו דחוף","לעשות משהו","עניין רפואי","לשוחח","רוצה מישהו","החפצים שלי","מקום בבית","מקום מחוץ לבית"};
         adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, android.R.id.text1, values);
         _my_list.setAdapter(adapter);
 
@@ -56,11 +58,16 @@ public class Display_Patient extends AppCompatActivity {
 
             // Show Alert
             Toast.makeText(getApplicationContext(), "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG).show();
+            Intent i = new Intent(Display_Patient.this,Demo_internal_screen.class);
+            i.putExtra("CHOOSE",itemValue);
+            startActivity(i);
             }
         });
     }
 
 
+    // ---------------------------------------------------------------------
+    // --------------------- Button Delete --------------------------------
     public void press_delete_demo(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(Display_Patient.this);
         builder.setMessage("Are you sure?")

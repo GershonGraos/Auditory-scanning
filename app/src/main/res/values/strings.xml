@@ -37,9 +37,13 @@
         <item>Edit</item>
     </string-array>
 
-    <!-- Strings related to Areal Personal -->
+    <!-- Strings related to Display List Patient -->
     <string name="button_yes">Recorder YES</string>
     <string name="button_no">Recorder NO</string>
     <string name="title_activity_display_patient">DisplayPatient</string>
+
+    <!-- Strings related to Demo Screen -->
+    <string name="button_get_yes">כן</string>
+    <string name="button_get_no">לא</string>
 
 </resources>

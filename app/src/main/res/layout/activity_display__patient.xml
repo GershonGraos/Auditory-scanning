@@ -12,6 +12,16 @@
     tools:context="com.graos.auditory_scanning_final_project.Display_Patient">
 
 
+    <ListView
+        android:layout_width="270dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/listView"
+        android:layout_alignParentBottom="true" />
+
     <TextView
         android:text="TextView"
         android:textSize="20sp"
@@ -19,25 +29,17 @@
         android:textAllCaps="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="83dp"
         android:id="@+id/textViewName"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <ListView
-        android:layout_width="270dp"
-        android:layout_height="300dp"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/listView" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/icon_minus"
-        android:id="@+id/imageView8"
-        android:layout_alignBottom="@+id/listView"
+        android:id="@+id/imageView"
+        android:onClick="press_delete_demo"
+        android:layout_alignTop="@+id/listView"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -45,26 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/icon_minus"
-        android:id="@+id/imageView7"
-        android:layout_above="@+id/imageView8"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/icon_minus"
-        android:id="@+id/imageView6"
-        android:layout_above="@+id/imageView7"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/icon_minus"
-        android:id="@+id/imageView5"
-        android:layout_above="@+id/imageView6"
+        android:id="@+id/imageView9"
+        android:layout_below="@+id/imageView"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -73,7 +57,7 @@
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/icon_minus"
         android:id="@+id/imageView4"
-        android:layout_above="@+id/imageView5"
+        android:layout_below="@+id/imageView9"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -81,12 +65,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/icon_minus"
-        android:id="@+id/imageView"
-        android:layout_marginTop="85dp"
-        android:layout_below="@+id/textViewName"
+        android:id="@+id/imageView5"
+        android:layout_below="@+id/imageView4"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="press_delete_demo"/>
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/icon_minus"
+        android:id="@+id/imageView6"
+        android:layout_below="@+id/imageView5"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/icon_minus"
+        android:id="@+id/imageView7"
+        android:layout_below="@+id/imageView6"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/icon_minus"
+        android:id="@+id/imageView8"
+        android:layout_below="@+id/imageView7"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="@string/button_get_no"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="@android:color/background_light"
+        android:background="@android:color/holo_green_light"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button7"
+        android:layout_alignBaseline="@+id/button6"
+        android:layout_alignBottom="@+id/button6"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="@string/button_get_yes"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="@android:color/background_light"
+        android:background="@android:color/holo_green_light"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button6"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

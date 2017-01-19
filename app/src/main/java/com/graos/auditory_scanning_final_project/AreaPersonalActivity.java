@@ -70,7 +70,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         if(flag_login == 1){
             patients = new ArrayList<>();
             flag_login = 0;
-            patients.add("Moshiko");
+            patients.add("משה אשכנזי");
         }
 
 
