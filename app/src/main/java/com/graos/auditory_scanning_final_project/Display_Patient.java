@@ -26,7 +26,8 @@ public class Display_Patient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display__patient);
-        setTitle("Display");
+        //setTitle("Display");
+        setTitle("תצוגה");
 
         _name = (TextView) findViewById(R.id.textViewName);
         _my_list = (ListView) findViewById(R.id.listView);

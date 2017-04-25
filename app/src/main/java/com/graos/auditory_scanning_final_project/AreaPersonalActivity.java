@@ -4,6 +4,7 @@ package com.graos.auditory_scanning_final_project;
  */
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import java.util.List;
 public class AreaPersonalActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     TextView _user_view;
+    TextView _hi;
     Spinner _spinner_patient;
     Spinner _spinner_choose;
     EditText input_patient;
@@ -32,6 +34,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
     String new_patient;
     String s_patient;
     String s_state;
+    int s_state_index;
     int flag_newUser=0;
     int flag_login=0;
 
@@ -39,8 +42,9 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_area_personal);
-        setTitle("Therapist Personal Area");
-
+        //setTitle("Therapist Personal Area");
+        setTitle("איזור אישי עבור מטפל");
+        _hi = (TextView) findViewById(R.id.textViewHi);
         _user_view = (TextView) findViewById(R.id.textViewHiUser);
         _spinner_patient = (Spinner) findViewById(R.id.spinner_show);
         _spinner_choose = (Spinner) findViewById(R.id.spinner_state);
@@ -51,13 +55,17 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         if(i_result.getStringExtra("USER_REGISTER") != null){
             user_register = i_result.getStringExtra("USER_REGISTER");
             flag_newUser = 1;
-            _user_view.setText("HELLO: " + user_register);
+            _hi.setText("שלום: ");
+            _user_view.setText(user_register);
+            _user_view.setTextColor(Color.rgb(204,0,0));
         }
 
         else if(i_result.getStringExtra("USER_SIGN_IN") != null){
             user_signIn = i_result.getStringExtra("USER_SIGN_IN");
             flag_login = 1;
-            _user_view.setText("Hello: " + user_signIn);
+            _hi.setText("שלום: ");
+            _user_view.setText(user_signIn);
+            _user_view.setTextColor(Color.rgb(204,0,0));
         }
         _spinner_patient.setOnItemSelectedListener(this);
 
@@ -71,6 +79,8 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
             patients = new ArrayList<>();
             flag_login = 0;
             patients.add("משה אשכנזי");
+            patients.add("דוד מזרחי");
+            patients.add("שלמה כהן");
         }
 
 
@@ -99,13 +109,16 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
     public void addPatient(View view){
         // Dialog and show spinner
         AlertDialog.Builder builder = new AlertDialog.Builder(AreaPersonalActivity.this);
-        builder.setTitle("New Patient");
+        //builder.setTitle("New Patient");
+        builder.setTitle("מטופל חדש");
         builder.setIcon(android.R.drawable.ic_menu_edit);
-        builder.setMessage("Please enter Name and Last Name");
+        //builder.setMessage("Please enter Name and Last Name");
+        builder.setMessage("אנא הקלד שם פרטי ושם משפחה עבור מטופל");
         input_patient = new EditText(AreaPersonalActivity.this);
         builder.setView(input_patient);
 
-        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        //builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("הוסף", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(input_patient.getText().toString()!=null ) {
@@ -118,7 +131,8 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
             }
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        //builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("בטל", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -152,17 +166,18 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         }
 
         s_state = _spinner_choose.getSelectedItem().toString();
+        s_state_index = _spinner_choose.getSelectedItemPosition();
 
         if(flag == 1){
             Toast.makeText(this,s_state,Toast.LENGTH_SHORT).show();
 
-            if(s_state.equalsIgnoreCase("Display")){
+            if(s_state_index == 0){
                 Intent i;
                 i = new Intent(this, Display_Patient.class);
                 i.putExtra("PATIENT",s_patient);
                 startActivity(i);
             }
-            else if(s_state.equalsIgnoreCase("Edit")){
+            else if(s_state_index == 1){
                 Intent i;
                 i = new Intent(this, EditPatient.class);
                 i.putExtra("PATIENT",s_patient);

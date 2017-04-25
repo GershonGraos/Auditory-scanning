@@ -1,49 +1,100 @@
 <resources>
+<!--=================================== Hebrew Strings ==========================================-->
+
     <!-- Strings related to Name os Activitys -->
-    <string name="activity_home">Auditory Scanning</string>
+    <string name="activity_home">סריקה שמיעתית</string>
 
     <!-- Strings related to the First Screen -->
-    <string name="app_name">Auditory_Scanning_Final_Project</string>
-    <string name="app_textLoginUser">User Name:</string>
-    <string name="app_textLoginPass">Password:</string>
-    <string name="app_textPassForgot">Forgot password?</string>
-    <string name="app_textNotAccount">Have not account?</string>
-    <string name="app_textButtonExplication">Know me!</string>
-    <string name="app_textButtonSignUp">Sign up</string>
-    <string name="app_textButtonLogin">Login</string>
+    <string name="app_textLoginUser">שם משתמש:</string>
+    <string name="app_textLoginPass">סיסמה:</string>
+    <string name="app_textPassForgot">שחכת סיסמה?</string>
+    <string name="app_textNotAccount">אין לך חשבון?</string>
+    <string name="app_textButtonExplication">ידע אותנו!</string>
+    <string name="app_textButtonSignUp">הירשם</string>
+    <string name="app_textButtonLogin">התחבר</string>
 
     <!-- Strings related to SignUp -->
-    <string name="title_activity_sign_up">Sign up</string>
-    <string name="prompt_email">User Name</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
+    <string name="title_activity_sign_up">הרשמה</string>
+    <string name="prompt_email">שם משתמש</string>
+    <string name="prompt_password">סיסמה</string>
+    <string name="action_sign_in">הירשם</string>
+    <string name="action_sign_in_short">הירשם</string>
+    <string name="error_invalid_email">האימייל שהוכנס אינו תקין</string>
+    <string name="error_invalid_password">הסיסמה קצרה מידי</string>
+    <string name="error_incorrect_password">הסיסמה אינה נכונה</string>
+    <string name="error_field_required">שדה זה הינו שדה חובה</string>
+    <string name="permission_rationale">"הרשאות אנשי קשר נדרשות לקבלת אימייל."
+    </string>
+
+    <!-- Strings related to Areal Personal -->
+    <string name="tittle_patients">בחר מטופל</string>
+    <string name="tittle_select">בחר מצב</string>
+    <string name="add_patient">הוסף</string>
+    <string name="butt_share">שתף</string>
+    <string name="butt_next">המשך</string>
+    <string-array name="selectState">
+        <item>תצוגה</item>
+        <item>עריכה</item>
+    </string-array>
+
+    <!-- Strings related to Display List Patient -->
+    <string name="button_yes">הקלט כן</string>
+    <string name="button_no">הקלט לא</string>
+    <string name="title_activity_display_patient">הצגת מטופל</string>
+
+    <!-- Strings related to Demo Screen -->
+    <string name="button_get_yes">כן</string>
+    <string name="button_get_no">לא</string>
+
+
+<!--=================================== English Strings =========================================-->
+
+
+    <!-- Strings related to Name os Activitys -->
+    <string name="app_name">Auditory_Scanning_Final_Project</string>
+    <string name="activity_home_eng">Auditory Scanning</string>
+
+    <!-- Strings related to the First Screen -->
+    <string name="app_textLoginUser_eng">User Name:</string>
+    <string name="app_textLoginPass_eng">Password:</string>
+    <string name="app_textPassForgot_eng">Forgot password?</string>
+    <string name="app_textNotAccount_eng">Have not account?</string>
+    <string name="app_textButtonExplication_eng">Know me!</string>
+    <string name="app_textButtonSignUp_eng">Sign up</string>
+    <string name="app_textButtonLogin_eng">Login</string>
+
+    <!-- Strings related to SignUp -->
+    <string name="title_activity_sign_up_eng">Sign up</string>
+    <string name="prompt_email_eng">User Name</string>
+    <string name="prompt_password_eng">Password</string>
+    <string name="action_sign_in_eng">Register</string>
+    <string name="action_sign_in_short_eng">Sign in</string>
+    <string name="error_invalid_email_eng">This email address is invalid</string>
+    <string name="error_invalid_password_eng">This password is too short</string>
+    <string name="error_incorrect_password_eng">This password is incorrect</string>
+    <string name="error_field_required_eng">This field is required</string>
+    <string name="permission_rationale_eng">"Contacts permissions are needed for providing email
         completions."
     </string>
 
     <!-- Strings related to Areal Personal -->
-    <string name="tittle_patients">Select Patient</string>
-    <string name="tittle_select">Select State</string>
-    <string name="add_patient">Add</string>
-    <string name="butt_share">Share</string>
-    <string name="butt_next">Continue</string>
-    <string-array name="selectState">
+    <string name="tittle_patients_eng">Select Patient</string>
+    <string name="tittle_select_eng">Select State</string>
+    <string name="add_patient_eng">Add</string>
+    <string name="butt_share_eng">Share</string>
+    <string name="butt_next_eng">Continue</string>
+    <string-array name="selectState_eng">
         <item>Display</item>
         <item>Edit</item>
     </string-array>
 
     <!-- Strings related to Display List Patient -->
-    <string name="button_yes">Recorder YES</string>
-    <string name="button_no">Recorder NO</string>
-    <string name="title_activity_display_patient">DisplayPatient</string>
+    <string name="button_yes_eng">Recorder YES</string>
+    <string name="button_no_eng">Recorder NO</string>
+    <string name="title_activity_display_patient_eng">DisplayPatient</string>
 
     <!-- Strings related to Demo Screen -->
-    <string name="button_get_yes">כן</string>
-    <string name="button_get_no">לא</string>
+    <string name="button_get_yes_eng">Yes</string>
+    <string name="button_get_no_eng">No</string>
 
 </resources>

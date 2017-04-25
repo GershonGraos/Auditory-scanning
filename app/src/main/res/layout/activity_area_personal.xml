@@ -88,9 +88,18 @@
         android:textAllCaps="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:id="@+id/textViewHi" />
+
+    <TextView
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/textViewHiUser"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginRight="60dp"
+        android:layout_gravity="right" />
 
     <Button
         android:text="@string/butt_next"

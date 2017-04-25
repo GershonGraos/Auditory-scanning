@@ -1,6 +1,8 @@
 package com.graos.auditory_scanning_final_project;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,24 +13,30 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class MainActivity extends AppCompatActivity {
 
     EditText _passLogIn;
     EditText _userLogin;
     View focusView = null;
     boolean cancel = false;
+    private MongoDBJDBC mong;
 
-
+    //boolean isRightToLeft = getResources().getBoolean(R.bool.is_right_to_left);}
     // ***************************************************
     // ************* ON CREATE **************************
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Home Screen");
+        //setTitle("Home Screen");
         //setTitleColor(ge);
 
         _passLogIn = (EditText) findViewById(R.id.editText_login_pass);
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
+        mong = new MongoDBJDBC();
+        //_userLogin.setText("" + mong.getAuth());
+        //mong.getDB();
+
     }
 
 
