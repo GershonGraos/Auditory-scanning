@@ -58,30 +58,39 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        android:text="@string/button_yes"
-        android:textColor="@android:color/background_light"
-        android:background="@android:color/holo_green_light"
-        android:textSize="14sp"
-        android:textAllCaps="false"
-        android:textStyle="bold"
+        android:id="@+id/record_yes"
         android:layout_width="147dp"
         android:layout_height="wrap_content"
-        android:id="@+id/button4"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@android:color/holo_green_light"
+        android:onClick="onClick_record_yes"
+        android:text="@string/button_yes"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <Button
-        android:text="@string/button_no"
-        android:textColor="@android:color/background_light"
-        android:background="@android:color/holo_green_light"
-        android:textSize="14sp"
-        android:textAllCaps="false"
-        android:textStyle="bold"
+        android:id="@+id/record_no"
         android:layout_width="147dp"
         android:layout_height="wrap_content"
-        android:id="@+id/button5"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:background="@android:color/holo_green_light"
+        android:onClick="onClick_record_no"
+        android:text="@string/button_no"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <VideoView
+        android:id="@+id/PatientVideoView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/record_yes"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
