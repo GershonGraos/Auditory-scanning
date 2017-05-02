@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,16 +18,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EditPatient extends AppCompatActivity {
+
+    static final int REQUEST_VIDEO_CAPTURE = 1;
+    private boolean btn_rec_yes_mode = false;
+    private boolean btn_rec_no_mode = false;
+    private Uri UriYesVideo;
+    private Uri UriNoVideo;
 
     AssignmentsDBHelper dbHelper;
     Cursor cursor;
@@ -120,5 +130,55 @@ public class EditPatient extends AppCompatActivity {
         builder.show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
+            if(btn_rec_yes_mode)
+                UriYesVideo = intent.getData();
+            else
+                UriNoVideo = intent.getData();
+            //mVideoView.setVideoURI(videoUri);
+        }
+    }
+
+    public void onClick_record_yes(View view){
+        Button rec_yes_btn = (Button) view;
+        if(!btn_rec_yes_mode) {
+            btn_rec_yes_mode = true;
+            Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+            if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+            }
+            rec_yes_btn.setText("Show YES recorder");
+        }else{
+            VideoView patient_video =  (VideoView) findViewById(R.id.PatientVideoView);
+            patient_video.setVideoURI(UriYesVideo);
+        }
+    }
+
+    public void onClick_delete_record_yes(View view){
+        //rec_yes_btn.setText("Recorder YES");
+        //btn_rec_yes_mode = false;
+    }
+
+    public void onClick_record_no(View view){
+        Button rec_no_btn = (Button) view;
+        if(!btn_rec_no_mode) {
+            btn_rec_no_mode = true;
+            Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+            if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+            }
+            rec_no_btn.setText("Show NO recorder");
+        }else{
+            VideoView patient_video = (VideoView)findViewById(R.id.PatientVideoView);
+            patient_video.setVideoURI(UriNoVideo);
+        }
+    }
+
+    public void onClick_delete_record_no(View view){
+        //rec_yes_btn.setText("Recorder NO");
+        //btn_rec_no_mode = false;
+    }
 }
 

@@ -81,22 +81,36 @@
                 android:background="@drawable/button_style"
                 android:text="@string/button_yes"
                 android:textAllCaps="false"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/button5"
                 android:layout_width="147dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:background="@drawable/button_style"
                 android:text="@string/button_no"
                 android:textAllCaps="false"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/button4"
+                android:visibility="invisible">
+
+                <VideoView
+                    android:id="@+id/PatientVideoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 </pl.polidea.view.ZoomView>
 </ScrollView>
+
+
+
