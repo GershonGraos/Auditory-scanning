@@ -12,10 +12,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import org.bson.Document;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
-
     EditText _passLogIn;
     EditText _userLogin;
     View focusView = null;
@@ -34,6 +45,31 @@ public class MainActivity extends AppCompatActivity {
         _passLogIn = (EditText) findViewById(R.id.editText_login_pass);
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
         mong = new MongoDBJDBC();
+        MongoDatabase db = mong.getDB();
+        MongoCollection<BasicDBObject> table = db.getCollection("patients", BasicDBObject.class);
+        BasicDBObject document = new BasicDBObject();
+        document.put("id", "302530009");
+        document.put("name", "aviel edri");
+        document.put("register_date", new Date());
+        //table.insertOne(document);
+
+        /*
+        ArrayList<String> col = new ArrayList<String>();
+        ArrayList<String> op = new ArrayList<String>();
+        ArrayList<Object> val = new ArrayList<Object>();
+        col.add("id");
+        op.add("$eq");
+        val.add("302530002");
+        FindIterable<Document> therapists_tbl  = mong.selectQuery("therapists",col,op,val);
+        */
+        /*MongoCursor<Document> cursor = therapists_tbl.iterator();
+        try {
+            while (cursor.hasNext()) {
+                Document doc = cursor.next();
+            }
+        } finally {
+            cursor.close();
+        }*/
         //_userLogin.setText("" + mong.getAuth());
         //mong.getDB();
 

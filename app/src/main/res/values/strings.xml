@@ -45,7 +45,7 @@
     <!-- Strings related to Demo Screen -->
     <string name="button_get_yes">כן</string>
     <string name="button_get_no">לא</string>
-
+    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
 
 <!--=================================== English Strings =========================================-->
 

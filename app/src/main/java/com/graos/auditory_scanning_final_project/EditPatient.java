@@ -2,26 +2,41 @@ package com.graos.auditory_scanning_final_project;
 /**
  * Created by GG on 13/01/2017.
  */
+import android.Manifest;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -32,10 +47,18 @@ import java.util.List;
 public class EditPatient extends AppCompatActivity {
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
+    private static final int REQUEST_RECORD_AUDIO = 1;
+    private static final int REQUEST_WRITE_STORAGE = 112;
+    private static final int CAMERA_REQUEST = 1888;
+
     private boolean btn_rec_yes_mode = false;
     private boolean btn_rec_no_mode = false;
-    private Uri UriYesVideo;
-    private Uri UriNoVideo;
+    private boolean start_no_video_mode = false;
+    private boolean start_yes_video_mode = false;
+    public Uri UriYesVideo;
+    public Uri UriNoVideo;
+    private VideoView patient_video;
+    private RelativeLayout VideoContainer;
 
     AssignmentsDBHelper dbHelper;
     Cursor cursor;
@@ -53,7 +76,65 @@ public class EditPatient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_patient);
-        //setTitle("Edit");
+
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this,
+                    Manifest.permission.RECORD_AUDIO)) {
+            } else {// No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions((Activity) this,
+                        new String[]{Manifest.permission.RECORD_AUDIO},
+                        REQUEST_RECORD_AUDIO);
+            }
+        }
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            } else {// No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions((Activity) this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_WRITE_STORAGE);
+            }
+        }
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this,
+                    Manifest.permission.CAMERA)) {
+            } else {// No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions((Activity) this,
+                        new String[]{Manifest.permission.CAMERA},
+                        CAMERA_REQUEST);
+            }
+        }
+
+        patient_video =  (VideoView) findViewById(R.id.PatientVideoView);
+        VideoContainer = (RelativeLayout) findViewById(R.id.VideoContainer);
+        patient_video.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+            @Override
+            public void onCompletion(MediaPlayer mp){
+                // invoke your activity here
+                Button record_yes = (Button) findViewById(R.id.record_yes);
+                Button record_no = (Button) findViewById(R.id.record_no);
+                record_yes.setVisibility(View.VISIBLE);
+                record_no.setVisibility(View.VISIBLE);
+                VideoContainer.setVisibility(View.INVISIBLE);
+            }
+        });
+
         setTitle("עריכה");
 
         // DB
@@ -134,11 +215,14 @@ public class EditPatient extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-            if(btn_rec_yes_mode)
+            if(btn_rec_yes_mode&&!btn_rec_no_mode)
+                UriYesVideo = intent.getData();
+            else if(!btn_rec_yes_mode&&btn_rec_no_mode)
+                UriNoVideo = intent.getData();
+            else if(start_yes_video_mode)
                 UriYesVideo = intent.getData();
             else
                 UriNoVideo = intent.getData();
-            //mVideoView.setVideoURI(videoUri);
         }
     }
 
@@ -152,8 +236,9 @@ public class EditPatient extends AppCompatActivity {
             }
             rec_yes_btn.setText("Show YES recorder");
         }else{
-            VideoView patient_video =  (VideoView) findViewById(R.id.PatientVideoView);
-            patient_video.setVideoURI(UriYesVideo);
+            start_yes_video_mode = true;
+            start_no_video_mode = false;
+            start_video_and_hide_button(UriYesVideo);
         }
     }
 
@@ -172,14 +257,33 @@ public class EditPatient extends AppCompatActivity {
             }
             rec_no_btn.setText("Show NO recorder");
         }else{
-            VideoView patient_video = (VideoView)findViewById(R.id.PatientVideoView);
-            patient_video.setVideoURI(UriNoVideo);
+            start_no_video_mode = true;
+            start_yes_video_mode = false;
+            start_video_and_hide_button(UriNoVideo);
         }
     }
 
     public void onClick_delete_record_no(View view){
         //rec_yes_btn.setText("Recorder NO");
         //btn_rec_no_mode = false;
+    }
+    private void start_video_and_hide_button(Uri video_uri){
+        VideoContainer.setVisibility(View.VISIBLE);
+        DisplayMetrics metrics = new DisplayMetrics(); getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        android.widget.RelativeLayout.LayoutParams params = (android.widget.RelativeLayout.LayoutParams) VideoContainer.getLayoutParams();
+        params.width =  metrics.widthPixels;
+        params.height = metrics.heightPixels;
+        params.leftMargin = 0;
+        VideoContainer.setLayoutParams(params);
+
+        Button record_yes = (Button) findViewById(R.id.record_yes);
+        Button record_no = (Button) findViewById(R.id.record_no);
+        record_yes.setVisibility(View.INVISIBLE);
+        record_no.setVisibility(View.INVISIBLE);
+
+        patient_video.setVideoURI(video_uri);
+        patient_video.requestFocus();
+        patient_video.start();
     }
 }
 
