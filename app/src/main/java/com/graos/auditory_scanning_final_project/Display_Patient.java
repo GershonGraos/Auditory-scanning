@@ -26,8 +26,7 @@ public class Display_Patient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display__patient);
-        //setTitle("Display");
-        setTitle("תצוגה");
+        setTitle(R.string.nameActivity_display_pattient);
 
         _name = (TextView) findViewById(R.id.textViewName);
         _my_list = (ListView) findViewById(R.id.listView);
@@ -58,7 +57,7 @@ public class Display_Patient extends AppCompatActivity {
             String  itemValue    = (String)_my_list.getItemAtPosition(position);
 
             // Show Alert
-            Toast.makeText(getApplicationContext(), "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG).show();
             Intent i = new Intent(Display_Patient.this,Demo_internal_screen.class);
             i.putExtra("CHOOSE",itemValue);
             startActivity(i);
@@ -86,6 +85,13 @@ public class Display_Patient extends AppCompatActivity {
                 });
         // Create the AlertDialog object and return it
         builder.show();
+    }
+
+    public void editPatient(View view){
+        Intent i;
+        i = new Intent(this, EditPatient.class);
+        i.putExtra("PATIENT",my_patient);
+        startActivity(i);
     }
 
 }

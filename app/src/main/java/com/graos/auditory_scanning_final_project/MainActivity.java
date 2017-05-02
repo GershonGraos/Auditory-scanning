@@ -2,12 +2,14 @@ package com.graos.auditory_scanning_final_project;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -34,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         _passLogIn = (EditText) findViewById(R.id.editText_login_pass);
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
         mong = new MongoDBJDBC();
+
+        _userLogin.requestFocus();
+//        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+//        imm.showSoftInput(_userLogin, InputMethodManager.SHOW_IMPLICIT);
         //_userLogin.setText("" + mong.getAuth());
         //mong.getDB();
 
@@ -53,31 +59,32 @@ public class MainActivity extends AppCompatActivity {
     public void press_signIn(View view) {
         String password = _passLogIn.getText().toString();
         String user = _userLogin.getText().toString();
+        int flag = 0;
 
         if(user.length() == 0){
-            _passLogIn.setError(getString(R.string.error_invalid_email));
-            focusView = _passLogIn;
+            _userLogin.setError(getString(R.string.error_field_required));
+            focusView = _userLogin;
             cancel = true;
+            flag++;
         }
 
-        if(password.length() == 0){
+        else if(password.length() == 0){
             _passLogIn.setError(getString(R.string.error_field_required));
             focusView = _passLogIn;
             cancel = true;
+            flag++;
         }
 
-        if(password.length() < 5){
-            _passLogIn.setError(getString(R.string.error_invalid_password));
-            focusView = _passLogIn;
-            cancel = true;
-        }
-
-        else{
+        if(flag == 0)
+        {
             Intent i = new Intent(this, AreaPersonalActivity.class);
             i.putExtra("USER_SIGN_IN",user);
             startActivity(i);
         }
 
+        else{
+            Toast.makeText(this,R.string.error_field_pass_user,Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

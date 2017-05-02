@@ -1,15 +1,19 @@
 <resources>
 <!--=================================== Hebrew Strings ==========================================-->
 
-    <!-- Strings related to Name os Activitys -->
+    <!-- Strings related to Name os Activities -->
     <string name="activity_home">סריקה שמיעתית</string>
+    <string name="app_textSplash"> תלמד לתקשר איתי </string>
+    <string name="nameActivity_area_personal"> מטופלים </string>
+    <string name="nameActivity_edit_pattient"> עריכה </string>
+    <string name="nameActivity_display_pattient"> תצוגה </string>
 
     <!-- Strings related to the First Screen -->
-    <string name="app_textLoginUser">שם משתמש:</string>
-    <string name="app_textLoginPass">סיסמה:</string>
-    <string name="app_textPassForgot">שחכת סיסמה?</string>
-    <string name="app_textNotAccount">אין לך חשבון?</string>
-    <string name="app_textButtonExplication">ידע אותנו!</string>
+    <string name="app_textLoginUser">שם משתמש</string>
+    <string name="app_textLoginPass">סיסמה</string>
+    <string name="app_textPassForgot">שחכתי סיסמה</string>
+    <string name="app_textNotAccount">ליצור חשבון</string>
+    <string name="app_textButtonExplication">ידע אותנו</string>
     <string name="app_textButtonSignUp">הירשם</string>
     <string name="app_textButtonLogin">התחבר</string>
 
@@ -19,10 +23,11 @@
     <string name="prompt_password">סיסמה</string>
     <string name="action_sign_in">הירשם</string>
     <string name="action_sign_in_short">הירשם</string>
-    <string name="error_invalid_email">האימייל שהוכנס אינו תקין</string>
+    <string name="error_invalid_email">נא להכניס שם משתמש</string>
     <string name="error_invalid_password">הסיסמה קצרה מידי</string>
     <string name="error_incorrect_password">הסיסמה אינה נכונה</string>
     <string name="error_field_required">שדה זה הינו שדה חובה</string>
+    <string name="error_field_pass_user">יש להאזין שם וסיסמא</string>
     <string name="permission_rationale">"הרשאות אנשי קשר נדרשות לקבלת אימייל."
     </string>
 
@@ -32,10 +37,10 @@
     <string name="add_patient">הוסף</string>
     <string name="butt_share">שתף</string>
     <string name="butt_next">המשך</string>
-    <string-array name="selectState">
-        <item>תצוגה</item>
-        <item>עריכה</item>
-    </string-array>
+    <string name="newPtnt_tittle">מטופל חדש</string>
+    <string name="newPtnt_text">אנא הקלד שם פרטי ושם משפחה עבור מטופל</string>
+    <string name="newPtnt_cancel">בטל</string>
+    <string name="newPtnt_ok">הוסף</string>
 
     <!-- Strings related to Display List Patient -->
     <string name="button_yes">הקלט כן</string>
@@ -46,8 +51,20 @@
     <string name="button_get_yes">כן</string>
     <string name="button_get_no">לא</string>
 
+    <!-- Strings related to Slide Menu -->
+    <string-array name="tittles">
+        <item>עריכה</item>
+        <item>זיהוי קולי</item>
+        <item>בחר מטופל</item>
+    </string-array>
 
-<!--=================================== English Strings =========================================-->
+    <string-array name="items">
+        <item>@mipmap/ic_share</item>
+        <item>"@mipmap/ic_share"</item>
+        <item>"@mipmap/ic_share"</item>
+    </string-array>
+
+    <!--=================================== English Strings =========================================-->
 
 
     <!-- Strings related to Name os Activitys -->

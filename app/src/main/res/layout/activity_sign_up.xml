@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,18 +12,15 @@
     tools:context="com.graos.auditory_scanning_final_project.SignUpActivity">
 
     <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
 
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <pl.polidea.view.ZoomView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -30,20 +28,31 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/imageView17"
+                android:layout_marginTop="50dp"
+                android:layout_width="596dp"
+                android:layout_height="140dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.32"
+                app:srcCompat="@mipmap/logo" />
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                >
 
                 <AutoCompleteTextView
                     android:id="@+id/user_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="13sp"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
+                    android:textDirection="ltr"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -53,8 +62,6 @@
 
                 <EditText
                     android:id="@+id/password_register"
-                    android:textStyle="bold"
-                    android:textSize="13sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
@@ -62,23 +69,38 @@
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
+                    android:textDirection="ltr"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
             </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/button_register"
                 style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/button_style"
+                android:gravity="center"
                 android:text="@string/action_sign_in"
-                android:textColor="@android:color/background_light"
-                android:background="@android:color/holo_green_light"
                 android:textAllCaps="false"
                 android:textStyle="bold" />
 
         </LinearLayout>
+        </pl.polidea.view.ZoomView>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
 </LinearLayout>
+

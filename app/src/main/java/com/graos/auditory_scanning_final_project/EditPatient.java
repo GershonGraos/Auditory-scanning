@@ -43,8 +43,7 @@ public class EditPatient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_patient);
-        //setTitle("Edit");
-        setTitle("עריכה");
+        setTitle(R.string.nameActivity_edit_pattient);
 
         // DB
         dbHelper = new AssignmentsDBHelper(this);
