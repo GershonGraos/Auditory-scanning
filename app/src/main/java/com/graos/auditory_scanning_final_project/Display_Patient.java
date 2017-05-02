@@ -40,8 +40,7 @@ public class Display_Patient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display__patient);
-        //setTitle("Display");
-        setTitle("תצוגה");
+        setTitle(R.string.nameActivity_display_pattient);
 
         _name = (TextView) findViewById(R.id.textViewName);
         _my_list = (ListView) findViewById(R.id.listView);
@@ -60,17 +59,11 @@ public class Display_Patient extends AppCompatActivity {
         _my_list.setAdapter(adapter);
 
         _my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // ListView Clicked item index
                 int itemPosition     = position;
-
                 // ListView Clicked item value
                 String  itemValue    = (String)_my_list.getItemAtPosition(position);
-
                 // Show Alert
                 Toast.makeText(getApplicationContext(), "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG).show();
                 Intent i = new Intent(Display_Patient.this,Demo_internal_screen.class);
@@ -78,6 +71,7 @@ public class Display_Patient extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
 
         textViewName = (TextView) findViewById(R.id.textViewName);
         //start STT
@@ -140,6 +134,7 @@ public class Display_Patient extends AppCompatActivity {
             @Override
             public void onRmsChanged(float rmsdB) {
                 // TODO Auto-generated method stub
+
             }
         });
         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
@@ -166,6 +161,13 @@ public class Display_Patient extends AppCompatActivity {
                 });
         // Create the AlertDialog object and return it
         builder.show();
+    }
+
+    public void editPatient(View view){
+        Intent i;
+        i = new Intent(this, EditPatient.class);
+        i.putExtra("PATIENT",my_patient);
+        startActivity(i);
     }
 }
 

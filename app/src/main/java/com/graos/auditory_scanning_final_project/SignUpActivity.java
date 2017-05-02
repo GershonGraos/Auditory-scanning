@@ -72,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
         setContentView(R.layout.activity_sign_up);
         // Set up the login form.
         userRegister = (AutoCompleteTextView) findViewById(R.id.user_register);
+        userRegister.requestFocus();
         populateAutoComplete();
 
         mPasswordRegister= (EditText) findViewById(R.id.password_register);

@@ -76,6 +76,7 @@ public class EditPatient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_patient);
+        setTitle(R.string.nameActivity_edit_pattient);
 
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -127,15 +128,14 @@ public class EditPatient extends AppCompatActivity {
             @Override
             public void onCompletion(MediaPlayer mp){
                 // invoke your activity here
-                Button record_yes = (Button) findViewById(R.id.record_yes);
-                Button record_no = (Button) findViewById(R.id.record_no);
+                Button record_yes = (Button) findViewById(R.id.button4);
+                Button record_no = (Button) findViewById(R.id.button5);
                 record_yes.setVisibility(View.VISIBLE);
                 record_no.setVisibility(View.VISIBLE);
                 VideoContainer.setVisibility(View.INVISIBLE);
             }
         });
 
-        setTitle("עריכה");
 
         // DB
         dbHelper = new AssignmentsDBHelper(this);
@@ -276,8 +276,8 @@ public class EditPatient extends AppCompatActivity {
         params.leftMargin = 0;
         VideoContainer.setLayoutParams(params);
 
-        Button record_yes = (Button) findViewById(R.id.record_yes);
-        Button record_no = (Button) findViewById(R.id.record_no);
+        Button record_yes = (Button) findViewById(R.id.button4);
+        Button record_no = (Button) findViewById(R.id.button5);
         record_yes.setVisibility(View.INVISIBLE);
         record_no.setVisibility(View.INVISIBLE);
 

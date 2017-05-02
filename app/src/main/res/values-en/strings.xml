@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--=================================== English Strings ==========================================-->
+
+    <!-- Strings related to Name os Activities -->
+    <string name="activity_home">Auditory Scanning</string>
+    <string name="app_textSplash">Learn to communicate with me</string>
+    <string name="nameActivity_area_personal"> Patients </string>
+    <string name="nameActivity_edit_pattient"> Edit </string>
+    <string name="nameActivity_display_pattient"> Display </string>
+
+    <!-- Strings related to the First Screen -->
+    <string name="app_textLoginUser">User name</string>
+    <string name="app_textLoginPass">Password</string>
+    <string name="app_textPassForgot">Forgot password</string>
+    <string name="app_textNotAccount">Have not account</string>
+    <string name="app_textButtonSignUp">Sign up</string>
+    <string name="app_textButtonLogin">Sign in</string>
+
+    <!-- Strings related to SignUp -->
+    <string name="title_activity_sign_up">Sign up</string>
+    <string name="prompt_email">User name</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Register</string>
+    <string name="action_sign_in_short">sign in</string>
+    <string name="error_invalid_email">the user name is invalid</string>
+    <string name="error_invalid_password">the password is too short</string>
+    <string name="error_incorrect_password">the password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_field_pass_user">Need enter user name and password!</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions"
+    </string>
+
+    <!-- Strings related to Areal Personal -->
+    <string name="tittle_patients">Select patient</string>
+    <string name="tittle_select">Select state</string>
+    <string name="add_patient">Add</string>
+    <string name="butt_share">Share</string>
+    <string name="newPtnt_tittle">New patient</string>
+    <string name="newPtnt_text">Please enter first and last name of the patient</string>
+    <string name="newPtnt_cancel">cancel</string>
+    <string name="newPtnt_ok">add</string>
+
+    <!-- Strings related to Display List Patient -->
+    <string name="button_yes">Recorder YES</string>
+    <string name="button_no">Recorder NO</string>
+    <string name="title_activity_display_patient">Display Patient</string>
+
+    <!-- Strings related to Demo Screen -->
+    <string name="button_get_yes">YES</string>
+    <string name="button_get_no">NO</string>
+
+    <!-- Strings related to Slide Menu -->
+    <string-array name="tittles">
+        <item>Edit</item>
+        <item>Scanning auditory</item>
+        <item>Select patient</item>
+    </string-array>
+
+    <string-array name="items">
+        <item>@mipmap/ic_share</item>
+        <item>"@mipmap/ic_share"</item>
+        <item>"@mipmap/ic_share"</item>
+    </string-array>
+</resources>
