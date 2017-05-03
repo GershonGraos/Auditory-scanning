@@ -55,6 +55,8 @@ public class EditPatient extends AppCompatActivity {
     private boolean btn_rec_no_mode = false;
     private boolean start_no_video_mode = false;
     private boolean start_yes_video_mode = false;
+    private boolean yes_mode = false;
+    private boolean no_mode = false;
     public Uri UriYesVideo;
     public Uri UriNoVideo;
     private VideoView patient_video;
@@ -215,11 +217,11 @@ public class EditPatient extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-            if(btn_rec_yes_mode&&!btn_rec_no_mode)
+            if(start_yes_video_mode)
                 UriYesVideo = intent.getData();
-            else if(!btn_rec_yes_mode&&btn_rec_no_mode)
+            else if(start_no_video_mode)
                 UriNoVideo = intent.getData();
-            else if(start_yes_video_mode)
+            else if(btn_rec_yes_mode&&yes_mode)
                 UriYesVideo = intent.getData();
             else
                 UriNoVideo = intent.getData();
@@ -228,8 +230,12 @@ public class EditPatient extends AppCompatActivity {
 
     public void onClick_record_yes(View view){
         Button rec_yes_btn = (Button) view;
+        yes_mode = true;
+        no_mode = false;
         if(!btn_rec_yes_mode) {
             btn_rec_yes_mode = true;
+            start_no_video_mode = false;
+            start_yes_video_mode = false;
             Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
             if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
@@ -249,8 +255,12 @@ public class EditPatient extends AppCompatActivity {
 
     public void onClick_record_no(View view){
         Button rec_no_btn = (Button) view;
+        yes_mode = false;
+        no_mode = true;
         if(!btn_rec_no_mode) {
             btn_rec_no_mode = true;
+            start_no_video_mode = false;
+            start_yes_video_mode = false;
             Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
             if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);

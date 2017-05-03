@@ -100,9 +100,9 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_above="@+id/button4"
                     android:id="@+id/VideoContainer"
-                    android:visibility="invisible">
+                    android:visibility="invisible"
+                    android:layout_alignParentBottom="true">
 
                     <VideoView
                         android:id="@+id/PatientVideoView"
