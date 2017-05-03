@@ -11,8 +11,9 @@
 
     <LinearLayout
         android:id="@+id/LinearLayout01"
+        android:background="@drawable/b"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="587dp"
         android:orientation="vertical"
         android:paddingTop="25dp"
         android:weightSum="1">
@@ -30,10 +31,9 @@
         <ImageView
             android:id="@+id/imageView17"
             android:layout_width="596dp"
-            android:layout_height="165dp"
+            android:layout_height="158dp"
             android:layout_gravity="center"
-            android:layout_marginTop="-25dp"
-            android:layout_weight="0.32"
+            android:layout_marginTop="-5dp"
             app:srcCompat="@mipmap/logo" />
 
         <TextView
@@ -47,7 +47,8 @@
             android:layout_marginTop="20dp"
             android:text="@string/app_textLoginUser"
             android:textDirection="ltr"
-            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
@@ -76,7 +77,8 @@
             android:layout_gravity="center"
             android:text="@string/app_textLoginPass"
             android:textDirection="ltr"
-            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
@@ -106,6 +108,8 @@
             android:background="@drawable/button_style"
             android:gravity="center"
             android:onClick="press_signIn"
+            android:textSize="16sp"
+            android:textColor="#008000"
             android:text="@string/app_textButtonLogin"
             android:textAllCaps="false"
             android:textStyle="bold" />
@@ -120,6 +124,7 @@
             android:gravity="center"
             android:onClick="press_signUp"
             android:text="@string/app_textButtonSignUp"
+            android:textColor="#FFFFFF"
             android:textAllCaps="false"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -133,6 +138,7 @@
             android:layout_marginLeft="20dp"
             android:text="@string/app_textPassForgot"
             android:layout_marginTop="2dp"
+            android:textColor="#FFFFFF"
             android:paddingBottom="5dp"
             android:textSize="18sp"
             android:textStyle="bold" />

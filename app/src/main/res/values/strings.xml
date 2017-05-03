@@ -47,6 +47,9 @@
     <string name="button_no">הקלט לא</string>
     <string name="title_activity_display_patient">הצגת מטופל</string>
 
+    <!-- Strings related to Edit List Patient -->
+    <string name="text_hint_edit">הוסף פריט</string>
+
     <!-- Strings related to Demo Screen -->
     <string name="button_get_yes">כן</string>
     <string name="button_get_no">לא</string>
@@ -63,6 +66,4 @@
         <item>"@mipmap/ic_share"</item>
         <item>"@mipmap/ic_share"</item>
     </string-array>
-
-
 </resources>

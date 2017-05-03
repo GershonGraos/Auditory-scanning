@@ -47,6 +47,9 @@
     <string name="button_no">Recorder NO</string>
     <string name="title_activity_display_patient">Display Patient</string>
 
+    <!-- Strings related to Edit List Patient -->
+    <string name="text_hint_edit">Add item</string>
+
     <!-- Strings related to Demo Screen -->
     <string name="button_get_yes">YES</string>
     <string name="button_get_no">NO</string>
