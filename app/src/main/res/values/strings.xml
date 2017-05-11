@@ -11,7 +11,7 @@
     <!-- Strings related to the First Screen -->
     <string name="app_textLoginUser">שם משתמש</string>
     <string name="app_textLoginPass">סיסמה</string>
-    <string name="app_textPassForgot">שחכתי סיסמה</string>
+    <string name="app_textPassForgot">שכחתי סיסמה</string>
     <string name="app_textNotAccount">ליצור חשבון</string>
     <string name="app_textButtonExplication">ידע אותנו</string>
     <string name="app_textButtonSignUp">הירשם</string>

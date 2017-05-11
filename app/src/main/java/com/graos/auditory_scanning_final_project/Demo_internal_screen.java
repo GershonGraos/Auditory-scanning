@@ -37,7 +37,7 @@ public class Demo_internal_screen extends AppCompatActivity {
         setTitle(my_choose);
 
         String []values = new String[]{"לשבת","לקום","לשכב","להתהפך","להזיז","לקפל","לזוז","ליישר","לסדר","לחפש","להביא"};
-        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, values);
         _my_list.setAdapter(adapter);
 
         _my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

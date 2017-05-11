@@ -2,6 +2,7 @@ package com.graos.auditory_scanning_final_project;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,14 +28,12 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
-
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-
 
 public class MainActivity extends AppCompatActivity {
     EditText _passLogIn;
@@ -55,80 +54,191 @@ public class MainActivity extends AppCompatActivity {
 
         _passLogIn = (EditText) findViewById(R.id.editText_login_pass);
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
-        //mong = new MongoDBJDBC();
 
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        //mong = new MongoDBJDBC();
         //MongoDatabase db = mong.getDB();
 
+        MongoClientURI uri  = new MongoClientURI("mongodb://yerson28890:auditoryMongo1!@ds133398.mlab.com:33398/patients_db");
+        MongoClient client = new MongoClient(uri);
+        MongoDatabase db = client.getDatabase(uri.getDatabase());
 
-        try {
-            MongoClientURI uri  = new MongoClientURI("mongodb://yerson28890:auditoryMongo1!@ds133398.mlab.com:33398/patients_db");
-            MongoClient client = new MongoClient(uri);
-
-            MongoDatabase db = client.getDatabase(uri.getDatabase());
-            db.
-            MongoCollection<BasicDBObject> collection = db.getCollection("patients", BasicDBObject.class);
-
-            BasicDBObject document = new BasicDBObject();
-            document.put("id", "302530009");
-            document.put("name", "aviel edri");
-            document.put("register_date", new Date());
-            /*collection.insertOne(document);
-
-            MongoCursor iterator = collection.find().iterator();
-
-            while (iterator.hasNext()) {
-                Log.d("data:",iterator.next().toString());
-            }*/
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         /*
-        try {
-            MongoClient mongoClient = new MongoClient("ds133398.mlab.com", 33398);
-            DB db = mongoClient.getDB("patients_db");
-            char[] password = new char[] {'a', 'u', 'd', 'i', 't', 'o', 'r', 'y', 'M', 'o', 'n', 'g', 'o', '1', '!'};
-            boolean authenticated = db.authenticate("yerson28890", password);
-            if (authenticated) {
-                System.out.println("Successfully logged in to MongoDB!");
-            } else {
-                System.out.println("Invalid username/password");
-            }
-            mongoClient.close();
-        } catch (UnknownHostException ex) {
-            ex.printStackTrace();
+        MongoCollection<BasicDBObject> collection = db.getCollection("patients", BasicDBObject.class);
+        MongoCursor iterator = collection.find().iterator();
+        while (iterator.hasNext()) {
+            Log.d("data:",iterator.next().toString());
         }
 
-       /*
-        MongoCredential mongoCredential = MongoCredential.createMongoCRCredential("yerson28890", "patients_db", "auditoryMongo1!".toCharArray());
-        mongoClient = new MongoClient(new ServerAddress("ds133398.mlab.com", 33398), Arrays.asList(mongoCredential));
-        MongoDatabase db = mongoClient.getDatabase("patients_db");
-        MongoCollection<BasicDBObject> table = db.getCollection("patients", BasicDBObject.class);
+
         BasicDBObject document = new BasicDBObject();
+
+        document.put("id", "302530001");
+        document.put("name", "avi choen");
+        document.put("register_date", new Date());
+        document.put("therapist_id", "302530002");
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", "302530003");
+        document.put("name", "maor lavi");
+        document.put("register_date", new Date());
+        document.put("therapist_id", "302530004");
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", "302530005");
+        document.put("name", "david villa");
+        document.put("register_date", new Date());
+        document.put("therapist_id", "302530006");
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", "302530007");
+        document.put("name", "eli ovad");
+        document.put("register_date", new Date());
+        document.put("therapist_id", "302530008");
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
         document.put("id", "302530009");
         document.put("name", "aviel edri");
         document.put("register_date", new Date());
-        table.insertOne(document);
+        document.put("therapist_id", "302530010");
+        collection.insertOne(document);
 
+        collection = db.getCollection("optionals_requests_of_patient", BasicDBObject.class);
+        document = new BasicDBObject();
 
-        ArrayList<String> col = new ArrayList<String>();
-        ArrayList<String> op = new ArrayList<String>();
-        ArrayList<Object> val = new ArrayList<Object>();
-        col.add("id");
-        op.add("$eq");
-        val.add("302530002");
-        FindIterable<Document> therapists_tbl  = mong.selectQuery("therapists",col,op,val);
+        document.put("id", 0);
+        document.put("parent_id", -1);
+        document.put("stage", 1);
+        document.put("request", "משהו דחוף");
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", 1);
+        document.put("parent_id", -1);
+        document.put("stage", 1);
+        document.put("request", "משהו מפריע לי");
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", 2);
+        document.put("parent_id", -1);
+        document.put("stage", 1);
+        document.put("request", "לשוחח");
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", 3);
+        document.put("parent_id", -1);
+        document.put("stage", 1);
+        document.put("request", "נושאים");
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", 4);
+        document.put("parent_id", 3);
+        document.put("stage", 2);
+        document.put("request", "אוכל ושתיה");
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", 5);
+        document.put("parent_id", 3);
+        document.put("stage", 2);
+        document.put("request", "בגדים");
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", 6);
+        document.put("parent_id", 3);
+        document.put("stage", 2);
+        document.put("request", "כלי אוכל");
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", 7);
+        document.put("parent_id", 3);
+        document.put("stage", 2);
+        document.put("request", "כלי שתיה");
+        collection.insertOne(document);
+
+        collection = db.getCollection("statistics_of_patient", BasicDBObject.class);
+
+        document = new BasicDBObject();
+        document.put("patient_id", "302530001");
+        document.put("therapist_id", "302530002");
+        document.put("request_id", 0);
+        document.put("last_update", new Date());
+        document.put("requests_counter", 2);
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("patient_id", "302530003");
+        document.put("therapist_id", "302530004");
+        document.put("request_id", 1);
+        document.put("last_update", new Date());
+        document.put("requests_counter", 1);
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("patient_id", "302530005");
+        document.put("therapist_id", "302530006");
+        document.put("request_id", 3);
+        document.put("last_update", new Date());
+        document.put("requests_counter", 8);
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("patient_id", "302530007");
+        document.put("therapist_id", "302530008");
+        document.put("request_id", 5);
+        document.put("last_update", new Date());
+        document.put("requests_counter", 4);
+        collection.insertOne(document);
+
+        collection = db.getCollection("therapists", BasicDBObject.class);
+
+        document = new BasicDBObject();
+        document.put("id", "302530002");
+        document.put("name", "bani mizrchi");
+        document.put("user_name", "avi123");
+        document.put("password", "123456");
+        document.put("register_date", new Date());
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", "302530004");
+        document.put("name", "lior gor");
+        document.put("user_name", "lior123");
+        document.put("password", "123456");
+        document.put("register_date", new Date());
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", "302530006");
+        document.put("name", "gad choen");
+        document.put("user_name", "gad123");
+        document.put("password", "123456");
+        document.put("register_date", new Date());
+        collection.insertOne(document);
+
+        document = new BasicDBObject();
+        document.put("id", "302530008");
+        document.put("name", "salom bar");
+        document.put("user_name", "salom123");
+        document.put("password", "123456");
+        document.put("register_date", new Date());
+        collection.insertOne(document);
         */
-        /*MongoCursor<Document> cursor = therapists_tbl.iterator();
-        try {
-            while (cursor.hasNext()) {
-                Document doc = cursor.next();
-            }
-        } finally {
-            cursor.close();
-        }*/
 
-//        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-//        imm.showSoftInput(_userLogin, InputMethodManager.SHOW_IMPLICIT);
         //_userLogin.setText("" + mong.getAuth());
         //mong.getDB();
         _userLogin.requestFocus();

@@ -63,13 +63,13 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         _spinner_patient.setOnItemSelectedListener(this);
 
         if(flag_newUser == 1){
-            patients = new ArrayList<>();
+            patients = new ArrayList<String>();
 //            flag_newUser = 0;
             addPatient(_user_view);
         }
 
         if(flag_login == 1){
-            patients = new ArrayList<>();
+            patients = new ArrayList<String>();
             flag_login = 0;
             patients.add("משה אשכנזי");
             patients.add("דוד מזרחי");
@@ -78,7 +78,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
 
         // -- show Spinner --
         if(patients.size() > 0){
-            adapter = new ArrayAdapter<>(AreaPersonalActivity.this,android.R.layout.simple_spinner_item, patients);
+            adapter = new ArrayAdapter<String>(AreaPersonalActivity.this,android.R.layout.simple_spinner_item, patients);
             adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
             _spinner_patient.setAdapter(adapter);
             Toast.makeText(this,"size: " + String.valueOf(patients.size()),Toast.LENGTH_SHORT).show();
@@ -131,7 +131,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
                     new_patient = input_patient.getText().toString();
                     patients.add(new_patient);
                 }
-                adapter = new ArrayAdapter<>(AreaPersonalActivity.this,android.R.layout.simple_spinner_item, patients);
+                adapter = new ArrayAdapter<String>(AreaPersonalActivity.this,android.R.layout.simple_spinner_item, patients);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 _spinner_patient.setAdapter(adapter);
             }

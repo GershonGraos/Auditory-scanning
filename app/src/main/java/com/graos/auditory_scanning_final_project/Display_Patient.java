@@ -55,9 +55,10 @@ public class Display_Patient extends AppCompatActivity {
 
 
         String []values = new String[]{"משהו מפריע לי","משהו דחוף","לעשות משהו","עניין רפואי","לשוחח","רוצה מישהו","החפצים שלי","מקום בבית","מקום מחוץ לבית"};
-        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, values);
         _my_list.setAdapter(adapter);
-
+        _my_list.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        adapter.notifyDataSetChanged();
         _my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // ListView Clicked item index
@@ -71,7 +72,6 @@ public class Display_Patient extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
 
         textViewName = (TextView) findViewById(R.id.textViewName);
         //start STT
@@ -139,6 +139,7 @@ public class Display_Patient extends AppCompatActivity {
         });
         mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
         exit_rec = false;
+
     }
 
 

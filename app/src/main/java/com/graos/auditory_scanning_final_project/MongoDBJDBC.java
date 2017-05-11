@@ -7,23 +7,11 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 
-import org.bson.BasicBSONObject;
-import org.bson.Document;
-import java.util.Arrays;
-import com.mongodb.Block;
-
-import com.mongodb.client.MongoCursor;
-import static com.mongodb.client.model.Filters.*;
-import com.mongodb.client.result.DeleteResult;
-import static com.mongodb.client.model.Updates.*;
-import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,7 +64,7 @@ public class MongoDBJDBC {
         for (int i=0;i<where_columns.size();i++) {
             Object o = where_values.get(i);
             if (o instanceof Integer) {
-                Query.put(where_columns.get(i), new BasicDBObject(where_operators.get(i), (int) o));
+                Query.put(where_columns.get(i), new BasicDBObject(where_operators.get(i), (Integer) o));
             }else if (o instanceof String){
                 Query.put(where_columns.get(i), new BasicDBObject(where_operators.get(i), (String)o));
             }else if (o instanceof Date){
@@ -86,6 +74,7 @@ public class MongoDBJDBC {
         return Query;
     }
 
+    /*
     //http://www.unityjdbc.com/doc/mongo/mongo_java_jdbc.php
     public FindIterable<Document> selectQuery(String collection_name, ArrayList<String> where_columns, ArrayList<String> where_operators, ArrayList<Object> where_values) {
         MongoCollection coll = db.getCollection(collection_name);
@@ -94,6 +83,6 @@ public class MongoDBJDBC {
         BasicDBObject Query = queryBuilder(where_columns,where_operators,where_values);
         return coll.find(Query);
     }
-
+    */
 
 }
