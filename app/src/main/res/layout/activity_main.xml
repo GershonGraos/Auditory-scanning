@@ -11,11 +11,11 @@
 
     <LinearLayout
         android:id="@+id/LinearLayout01"
-        android:background="@drawable/b"
         android:layout_width="match_parent"
         android:layout_height="587dp"
         android:orientation="vertical"
         android:paddingTop="25dp"
+        android:background="@drawable/b"
         android:weightSum="1">
 
 
@@ -26,6 +26,7 @@
             android:layout_gravity="right"
             android:paddingTop="-10dp"
             android:text="help"
+            android:onClick="help_main_activity"
             app:srcCompat="@mipmap/ic_help3" />
 
         <ImageView
@@ -47,7 +48,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/app_textLoginUser"
             android:textDirection="ltr"
-            android:textColor="#FFFFFF"
+            android:textColor="#F8F8FF"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -77,8 +78,8 @@
             android:layout_gravity="center"
             android:text="@string/app_textLoginPass"
             android:textDirection="ltr"
-            android:textColor="#FFFFFF"
             android:textSize="18sp"
+            android:textColor="#F8F8FF"
             android:textStyle="bold" />
 
         <EditText
@@ -89,11 +90,11 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginBottom="45dp"
+            android:inputType="textPassword"
             android:background="@drawable/edit_text_style"
             android:ellipsize="start"
             android:ems="10"
             android:gravity="center"
-            android:inputType="textPersonName"
             android:textSize="21.3sp" />
 
         <Button
@@ -115,7 +116,6 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/button_signUp"
             android:layout_width="76dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -124,9 +124,9 @@
             android:gravity="center"
             android:onClick="press_signUp"
             android:text="@string/app_textButtonSignUp"
-            android:textColor="#FFFFFF"
             android:textAllCaps="false"
             android:textSize="18sp"
+            android:textColor="#F8F8FF"
             android:textStyle="bold" />
 
         <TextView
@@ -138,9 +138,9 @@
             android:layout_marginLeft="20dp"
             android:text="@string/app_textPassForgot"
             android:layout_marginTop="2dp"
-            android:textColor="#FFFFFF"
             android:paddingBottom="5dp"
             android:textSize="18sp"
+            android:textColor="#F8F8FF"
             android:textStyle="bold" />
     </LinearLayout>
     </pl.polidea.view.ZoomView>

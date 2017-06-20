@@ -11,96 +11,150 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.graos.auditory_scanning_final_project.SignUpActivity">
 
-    <!-- Login progress -->
+    <!--&lt;!&ndash; Login progress &ndash;&gt;-->
+    <!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/ScrollView01"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-    <ScrollView
-        android:id="@+id/login_form"
+    <!--<pl.polidea.view.ZoomView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" >-->
+
+
+    <LinearLayout
+        android:id="@+id/email_login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <pl.polidea.view.ZoomView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:id="@+id/email_login_form"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView17"
-                android:layout_marginTop="50dp"
-                android:layout_width="596dp"
-                android:layout_height="140dp"
-                android:layout_gravity="center"
-                android:layout_weight="0.32"
-                app:srcCompat="@mipmap/logo" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-                <AutoCompleteTextView
-                    android:id="@+id/user_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress"
-                    android:textDirection="ltr"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/password_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_password"
-                    android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPassword"
-                    android:textDirection="ltr"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/button_register"
-                style="?android:textAppearanceSmall"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/button_style"
-                android:gravity="center"
-                android:text="@string/action_sign_in"
-                android:textAllCaps="false"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-        </pl.polidea.view.ZoomView>
-    </ScrollView>
-
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="596dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_weight="0.32"
+            app:srcCompat="@mipmap/logo" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/id_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_id"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textDirection="ltr"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/name_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_name"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textDirection="ltr"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/user_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textDirection="ltr"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/password_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_password"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textDirection="ltr"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/button_view_all"
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:onClick="view_all_function"
+            android:text="View db"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="151dp"
+            android:layout_height="38dp"
+            android:onClick="update_d"
+            android:text="Update"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="147dp"
+            android:layout_height="wrap_content"
+            android:text="delete"
+            android:textAllCaps="false"
+            android:onClick="delete_d"/>
+
+        <Button
+            android:id="@+id/button_register"
+            style="?android:textAppearanceSmall"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_style"
+            android:gravity="center"
+            android:text="@string/action_sign_in"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!--</pl.polidea.view.ZoomView>-->
+    <!--</ScrollView>-->
+
 
 </LinearLayout>
 

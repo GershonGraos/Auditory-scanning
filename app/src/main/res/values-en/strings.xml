@@ -16,17 +16,26 @@
     <string name="app_textNotAccount">Have not account</string>
     <string name="app_textButtonSignUp">Sign up</string>
     <string name="app_textButtonLogin">Sign in</string>
+    <string name="tittle_help_main">Instruction</string>
+    <string name="text_help_main">In this screen, the therapist will be able to connect to the system by entering his ID/passport number and password</string>
 
     <!-- Strings related to SignUp -->
     <string name="title_activity_sign_up">Sign up</string>
     <string name="prompt_email">User name</string>
     <string name="prompt_password">Password</string>
+    <string name="prompt_id">Id/Passport number</string>
+    <string name="prompt_name">First name</string>
     <string name="action_sign_in">Register</string>
     <string name="action_sign_in_short">sign in</string>
     <string name="error_invalid_email">the user name is invalid</string>
     <string name="error_invalid_password">the password is too short</string>
     <string name="error_incorrect_password">the password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="error_field_required_id">please enter 9 digits</string>
+    <string name="sign_up_successful">Successfully registered</string>
+    <string name="sign_in_check">Please try to login to your account</string>
+    <string name="sign_up_error">Error, please try again</string>
+    <string name="id_error_no_int">ID or Passport Error</string>
     <string name="error_field_pass_user">Need enter user name and password!</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions"
@@ -38,17 +47,41 @@
     <string name="add_patient">Add</string>
     <string name="butt_share">Share</string>
     <string name="newPtnt_tittle">New patient</string>
-    <string name="newPtnt_text">Please enter first and last name of the patient</string>
+    <string name="newPtnt_name">Name</string>
+    <string name="newPtnt_id">Id/Passport number</string>
+    <string name="newPtnt_text">Add patient</string>
     <string name="newPtnt_cancel">cancel</string>
     <string name="newPtnt_ok">add</string>
+    <string name="error_fields_required_alert">Please enter name and id</string>
 
     <!-- Strings related to Display List Patient -->
     <string name="button_yes">Recorder YES</string>
     <string name="button_no">Recorder NO</string>
+    <string name="tittle_options">Options</string>
+    <string name="option_edit">Edit Patient</string>
+    <string name="option_personal_area">My Personal Area</string>
+    <string name="option_log_out">Logout</string>
     <string name="title_activity_display_patient">Display Patient</string>
 
     <!-- Strings related to Edit List Patient -->
     <string name="text_hint_edit">Add item</string>
+    <string name="insert_item">Please insert item</string>
+    <string name="show_yes_record">Show YES record</string>
+    <string name="show_no_record">Show NO record</string>
+    <string name="delete_item_quetion">Are you sure?</string>
+    <string name="delete_item_tittle">Delete request</string>
+    <string name="delete_the_item">The item is deleted</string>
+    <string name="delete_button">delete</string>
+    <string name="edit_button">edit</string>
+    <string name="edit_tittle">Edit Request</string>
+    <string name="edit_message">Please re-enter a request</string>
+    <string name="edit_successfully">Updated</string>
+    <string name="edit_not_successfully">Could not edit</string>
+    <string name="edit_tittle_buttons">Edit or Delete Request</string>
+    <string name="edit_enter_request">Enter request name</string>
+    <string name="edit_exit_option">Exit</string>
+    <string name="same_request">The request is already exists in the system, please enter a different request</string>
+    <string name="text_press_item">Request</string>
 
     <!-- Strings related to Demo Screen -->
     <string name="button_get_yes">YES</string>
