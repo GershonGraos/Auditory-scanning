@@ -4,6 +4,7 @@ package com.graos.auditory_scanning_final_project;
  */
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,9 +14,11 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -23,6 +26,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.SurfaceView;
 import android.view.View;
@@ -41,7 +45,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
+import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
+import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class EditPatient extends AppCompatActivity {
@@ -52,16 +67,14 @@ public class EditPatient extends AppCompatActivity {
     private static final int CAMERA_REQUEST = 1888;
 
     private boolean btn_rec_yes_mode = false;
-    private boolean btn_rec_no_mode = false;
-    private boolean start_no_video_mode = false;
-    private boolean start_yes_video_mode = false;
-    private boolean yes_mode = false;
-    private boolean no_mode = false;
     public Uri UriYesVideo;
-    public Uri UriNoVideo;
+    public String abs_path;
+    public String audio_path;
     private VideoView patient_video;
     private RelativeLayout VideoContainer;
-
+    private global_variables mApp;
+    private Context thisContext;
+    private Button rec_yes_btn;
     AssignmentsDBHelper dbHelper;
     Cursor cursor;
     MyListAdapter mla;
@@ -79,7 +92,7 @@ public class EditPatient extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_patient);
         setTitle(R.string.nameActivity_edit_pattient);
-
+        thisContext = this;
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (ContextCompat.checkSelfPermission(this,
@@ -124,6 +137,8 @@ public class EditPatient extends AppCompatActivity {
             }
         }
 
+        mApp = ((global_variables)getApplicationContext());
+
         patient_video =  (VideoView) findViewById(R.id.PatientVideoView);
         VideoContainer = (RelativeLayout) findViewById(R.id.VideoContainer);
         patient_video.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
@@ -157,7 +172,17 @@ public class EditPatient extends AppCompatActivity {
 
         // Cursor approaching to the TableDB-Contacts
         cursor = db.query(Constants.Items.TABLE_NAME, null, null, null, null, null, null);
+        //doron changes:
+        _my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                // TODO Auto-generated method stub
+                Log.d("############","Items "+ arg2);
+            }
 
+        });
+        //-----
         mla = new MyListAdapter(this, cursor);
         _my_list.setAdapter(mla);
 
@@ -217,33 +242,102 @@ public class EditPatient extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-            if(start_yes_video_mode)
-                UriYesVideo = intent.getData();
-            else if(start_no_video_mode)
-                UriNoVideo = intent.getData();
-            else if(btn_rec_yes_mode&&yes_mode)
-                UriYesVideo = intent.getData();
-            else
-                UriNoVideo = intent.getData();
+            UriYesVideo = intent.getData();
+            //convert from video to audio
+            abs_path = getRealPathFromURI(this,UriYesVideo);
+            audio_path = abs_path.substring(0,abs_path.lastIndexOf(".mp4")+1) + "flac";
+            //String[] cmd = {"-i",abs_path,"-ab","128k","-ac","2","-ar","44100","-vn","my_audio.mp3"};
+            //command with filter
+            //String[] cmd = {"-i",abs_path,"-acodec","flac","-sample_fmt","s16","-bits_per_raw_sample","16","-ar","44100","-ac","1","-af","highpass=f=200, lowpass=f=3000",audio_path};
+            String[] cmd = {"-i",abs_path,"-acodec","flac","-sample_fmt","s16","-bits_per_raw_sample","16","-ar","44100","-ac","1",audio_path};
+            final FFmpeg ffmpeg = FFmpeg.getInstance(this);
+            try {
+                //Load the binary
+                ffmpeg.loadBinary(new LoadBinaryResponseHandler() {
+                    @Override
+                    public void onStart() {}
+                    @Override
+                    public void onFailure() {}
+                    @Override
+                    public void onSuccess() {}
+                    @Override
+                    public void onFinish() {}
+                });
+            } catch (FFmpegNotSupportedException e) {
+                // Handle if FFmpeg is not supported by device
+            }
+            try {
+                ffmpeg.execute(cmd, new ExecuteBinaryResponseHandler() {
+                    @Override
+                    public void onStart() {
+                    }
+                    @Override
+                    public void onProgress(String message) {}
+                    @Override
+                    public void onFailure(String message) {
+                        Log.d("error", "FFmpeg cmd failure");
+                    }
+                    @Override
+                    public void onSuccess(String message) {
+                        Log.d("success", "FFmpeg cmd success");
+                        ffmpeg.killRunningProcesses();
+                        Log.d("kill running process", "FFmpeg kill running process: " + ffmpeg.killRunningProcesses());
+
+                        //get google speech transcription from audio
+                        //---------------------------------------------
+                        //audio_path = "/storage/emulated/0/DCIM/Camera/mono.flac";
+                        //audio_path = "/storage/emulated/0/DCIM/Camera/last.flac";
+                        //audio_path = "/storage/emulated/0/DCIM/Camera/test1.flac";
+                        //audio_path = "/storage/emulated/0/DCIM/Camera/roy.flac";
+                        //audio_path = "/storage/emulated/0/DCIM/Camera/boom.flac";
+                        STT_external_api STT = new STT_external_api(audio_path);
+                        ArrayList<String> matches = STT.transcript();
+                        if(matches==null) {
+                            mApp.alertMessage(thisContext,"Please try again","can't recognize this voice ,please try again.");
+                            File file = new File(abs_path);
+                            boolean deleted = file.delete();
+                            file = new File(audio_path);
+                            deleted = file.delete();
+                            btn_rec_yes_mode = false;
+                            rec_yes_btn.setText(R.string.button_yes);
+                            return;
+                        }
+                        if(matches.size()==0) {
+                            mApp.alertMessage(thisContext,"Please try again","can't recognize this voice ,please try again.");
+                            File file = new File(abs_path);
+                            boolean deleted = file.delete();
+                            file = new File(audio_path);
+                            deleted = file.delete();
+                            btn_rec_yes_mode = false;
+                            rec_yes_btn.setText(R.string.button_yes);
+                            return;
+                        }
+                        mApp.setUriYesVideo(UriYesVideo);
+                        mApp.setAudioPath(audio_path);
+                        mApp.setMatchesList(matches);
+                    }
+                    @Override
+                    public void onFinish() {
+                        Log.d("finished", "FFmpeg cmd finished: is FFmpeg process running: " + ffmpeg.isFFmpegCommandRunning());
+                    }
+                });
+            } catch (FFmpegCommandAlreadyRunningException e) {
+                // Handle if FFmpeg is already running
+                Log.d("exception", "FFmpeg exception: " + e);
+            }
         }
     }
 
     public void onClick_record_yes(View view){
-        Button rec_yes_btn = (Button) view;
-        yes_mode = true;
-        no_mode = false;
+        rec_yes_btn = (Button) view;
         if(!btn_rec_yes_mode) {
             btn_rec_yes_mode = true;
-            start_no_video_mode = false;
-            start_yes_video_mode = false;
             Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
             if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
             }
-            rec_yes_btn.setText("Show YES recorder");
+            rec_yes_btn.setText(R.string.button_watch_record);
         }else{
-            start_yes_video_mode = true;
-            start_no_video_mode = false;
             start_video_and_hide_button(UriYesVideo);
         }
     }
@@ -253,30 +347,6 @@ public class EditPatient extends AppCompatActivity {
         //btn_rec_yes_mode = false;
     }
 
-    public void onClick_record_no(View view){
-        Button rec_no_btn = (Button) view;
-        yes_mode = false;
-        no_mode = true;
-        if(!btn_rec_no_mode) {
-            btn_rec_no_mode = true;
-            start_no_video_mode = false;
-            start_yes_video_mode = false;
-            Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-            if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
-            }
-            rec_no_btn.setText("Show NO recorder");
-        }else{
-            start_no_video_mode = true;
-            start_yes_video_mode = false;
-            start_video_and_hide_button(UriNoVideo);
-        }
-    }
-
-    public void onClick_delete_record_no(View view){
-        //rec_yes_btn.setText("Recorder NO");
-        //btn_rec_no_mode = false;
-    }
     private void start_video_and_hide_button(Uri video_uri){
         VideoContainer.setVisibility(View.VISIBLE);
         DisplayMetrics metrics = new DisplayMetrics(); getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -294,6 +364,20 @@ public class EditPatient extends AppCompatActivity {
         patient_video.setVideoURI(video_uri);
         patient_video.requestFocus();
         patient_video.start();
+    }
+    private String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Video.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
     }
 }
 

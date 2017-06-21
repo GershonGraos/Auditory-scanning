@@ -19,6 +19,7 @@
     <uses-feature android:name="android.hardware.camera" android:required="true" />
 
     <application
+        android:name=".global_variables"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/activity_home"
@@ -49,6 +50,8 @@
         <activity android:name=".EditPatient" />
         <activity android:name=".Display_Patient" />
         <activity android:name=".Demo_internal_screen"></activity>
+        <activity android:name=".AlgorithmLevel" android:theme="@style/NoActionBar" />
+
     </application>
 
 </manifest>

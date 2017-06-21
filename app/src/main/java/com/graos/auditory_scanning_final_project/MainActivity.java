@@ -1,5 +1,6 @@
 package com.graos.auditory_scanning_final_project;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.StrictMode;
@@ -9,10 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     EditText _userLogin;
     View focusView = null;
     boolean cancel = false;
-    //private MongoDBJDBC mong;
+
     private MongoClient mongoClient;
 
     //boolean isRightToLeft = getResources().getBoolean(R.bool.is_right_to_left);}
@@ -61,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        //mong = new MongoDBJDBC();
-        //MongoDatabase db = mong.getDB();
 
         MongoClientURI uri  = new MongoClientURI("mongodb://yerson28890:auditoryMongo1!@ds133398.mlab.com:33398/patients_db");
         MongoClient client = new MongoClient(uri);
@@ -252,7 +254,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-
     // ***************************************************
     // ************ SIGN IN *****************************
     public void press_signIn(View view) {
@@ -285,5 +286,4 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,R.string.error_field_pass_user,Toast.LENGTH_SHORT).show();
         }
     }
-
 }

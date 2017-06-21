@@ -45,6 +45,7 @@
     <!-- Strings related to Display List Patient -->
     <string name="button_yes">הקלט כן</string>
     <string name="button_no">הקלט לא</string>
+    <string name="button_watch_record">צפה בהקלטה</string>
     <string name="title_activity_display_patient">הצגת מטופל</string>
 
     <!-- Strings related to Edit List Patient -->
@@ -53,6 +54,21 @@
     <!-- Strings related to Demo Screen -->
     <string name="button_get_yes">כן</string>
     <string name="button_get_no">לא</string>
+
+    <!-- Strings related to Algorithm Level Screen -->
+    <string name="level_1">רמה 1</string>
+    <string name="level_2">רמה 2</string>
+    <string name="level_3">רמה 3</string>
+    <string name="level_4">רמה 4</string>
+    <string name="your_position_header">המיקום שלך</string>
+
+    <!--helps -->
+    <string name="help_main_activity">במסך זה המטפל יוכל להתחבר למערכת ע"י הקשת מס' תעודת הזהות/דרכון שלו והסיסמה שלו, במידה והוא משתמש חדש יוכל הוא לעבור למסך הרישום.</string>
+    <string name="help_sign_up_activity"></string>
+    <string name="help_personal_area_activity"></string>
+    <string name="help_edit_patient_activity"></string>
+    <string name="help_display_patient_activity"></string>
+    <string name="help_algorithm_level_activity"></string>
 
     <!-- Strings related to Slide Menu -->
     <string-array name="tittles">

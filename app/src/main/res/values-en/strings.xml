@@ -44,15 +44,30 @@
 
     <!-- Strings related to Display List Patient -->
     <string name="button_yes">Recorder YES</string>
+    <string name="button_watch_record">Watch Record</string>
     <string name="button_no">Recorder NO</string>
     <string name="title_activity_display_patient">Display Patient</string>
 
     <!-- Strings related to Edit List Patient -->
     <string name="text_hint_edit">Add item</string>
 
+    <!-- Strings related to Algorithm Level Screen -->
+    <string name="level_1">Level 1</string>
+    <string name="level_2">Level 2</string>
+    <string name="level_3">Level 3</string>
+    <string name="level_4">Level 4</string>
+    <string name="your_position_header">Your Position</string>
+
+    <!--helps -->
+    <string name="help_main_activity">In this screen, the therapist will be able to connect to the system by entering his ID/passport number and password.</string>
+    <string name="help_sign_up_activity"></string>
+    <string name="help_personal_area_activity"></string>
+    <string name="help_edit_patient_activity"></string>
+    <string name="help_display_patient_activity"></string>
+    <string name="help_algorithm_level_activity"></string>
+
+
     <!-- Strings related to Demo Screen -->
-    <string name="button_get_yes">YES</string>
-    <string name="button_get_no">NO</string>
 
     <!-- Strings related to Slide Menu -->
     <string-array name="tittles">

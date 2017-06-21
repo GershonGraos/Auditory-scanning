@@ -5,9 +5,12 @@ package com.graos.auditory_scanning_final_project;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,7 +158,46 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
     // ---------------------------------------------------------------------
     // --------------------- Share Patient --------------------------------
     public void sharePatient(View view){
-        Toast.makeText(this,"Share Demo Patients",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"Share Demo Patients",Toast.LENGTH_SHORT).show();
+
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+// set the type to 'email'
+        emailIntent .setType("vnd.android.cursor.dir/email");
+        String to[] = {"send_to@gmail.com"};
+        emailIntent .putExtra(Intent.EXTRA_EMAIL, to);
+// the attachment
+        /*String filename="contacts_sid.vcf";
+        File filelocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), filename);
+        Uri path = Uri.fromFile(filelocation);
+        emailIntent .putExtra(Intent.EXTRA_STREAM, path);*/
+// the mail subject
+        emailIntent .putExtra(Intent.EXTRA_SUBJECT, "Subject");
+        startActivity(Intent.createChooser(emailIntent , "Send email..."));
+    }
+
+    protected void sendEmail() {
+        Log.d("Send email", "");
+
+        String[] TO = {"someone@gmail.com"};
+        String[] CC = {"xyz@gmail.com"};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+
+
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+            Log.d("Finished sending email...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this,
+                    "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
