@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.graos.auditory_scanning_final_project.Display_rama1">
+    tools:context="com.graos.auditory_scanning_final_project.Display_Rama_1">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

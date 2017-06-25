@@ -19,7 +19,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.ArrayList;
 //public class AreaPersonalActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -98,7 +97,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         if(!first_entry){
             id_patient = adapterView.getItemAtPosition(position).toString();
 
-            Intent i = new Intent(this, Display_rama1.class);
+            Intent i = new Intent(this, Display_Rama_1.class);
             i.putExtra("ID_PATIENT", id_patient);
             i.putExtra("ID_ONLY", id_therapist_to_displayAct);
             startActivity(i);

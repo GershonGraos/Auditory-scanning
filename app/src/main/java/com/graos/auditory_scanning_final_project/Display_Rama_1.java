@@ -1,6 +1,5 @@
 package com.graos.auditory_scanning_final_project;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,8 +9,6 @@ import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,17 +19,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Locale;
 
-public class Display_rama1 extends AppCompatActivity
+public class Display_Rama_1 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     // my parameters
@@ -119,7 +113,6 @@ public class Display_rama1 extends AppCompatActivity
         // my Functions
         setTitle(R.string.nameActivity_display_pattient);
 
-        btn_yes = (Button) findViewById(R.id.button6);
         my_dbHelper_requests = new DBHelper_Requests(this);
         _name = (TextView) findViewById(R.id.textViewName);
         _my_list = (ListView) findViewById(R.id.listView);
@@ -156,7 +149,7 @@ public class Display_rama1 extends AppCompatActivity
                 }
 
                 Intent i;
-                i = new Intent(Display_rama1.this, Display_rama2.class);
+                i = new Intent(Display_Rama_1.this, Display_Rama_2.class);
                 i.putExtra("THE_REQUEST",request_click);
                 i.putExtra("ID_PT",my_id_patient);
                 i.putExtra("MY_I_PARENT",id_parent_send);
@@ -410,7 +403,7 @@ public class Display_rama1 extends AppCompatActivity
 
     //show algorithm level
     public void press_show_algo_level_btn(View v){
-        startActivity(new Intent(Display_rama1.this,AlgorithmLevel.class));
+        startActivity(new Intent(Display_Rama_1.this,AlgorithmLevel.class));
     }
     public void onStop () {
         if(mApp.auto_recognize) {

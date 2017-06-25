@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class Display_rama4 extends AppCompatActivity {
+public class Display_Rama_4 extends AppCompatActivity {
     TextView _my_lastClick_item;
     ListView _my_list_view;
 
@@ -210,7 +210,7 @@ public class Display_rama4 extends AppCompatActivity {
             _my_list_view.setAdapter(null);
     }
     public void press_show_algo_level_btn(View v){
-        startActivity(new Intent(Display_rama4.this,AlgorithmLevel.class));
+        startActivity(new Intent(Display_Rama_4.this,AlgorithmLevel.class));
     }
     public void onStop () {
         if(mApp.auto_recognize) {

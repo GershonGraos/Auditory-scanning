@@ -17,6 +17,9 @@
     <string name="app_textButtonSignUp">הירשם</string>
     <string name="app_textButtonLogin">התחבר</string>
     <string name="tittle_help_main">הדרכה</string>
+    <string name="error_user_pass">לא קיימים משתמשים במסד הנתונים, נא להירשם</string>
+    <string name="error_user_not_exists">שם משתמש זה אינו קיים במערכת</string>
+    <string name="error_pass">סיסמא שגויה, נא להזין סיסמא תקינה</string>
     <string name="text_help_main">במסך זה המטפל יוכל להתחבר למערכת ע"י הקשת מס' תעודת הזהות/דרכון שלו והסיסמה שלו, במידה והוא משתמש חדש יוכל הוא לעבור למסך הרישום.</string>
 
     <!-- Strings related to SignUp -->
@@ -37,8 +40,8 @@
     <string name="sign_up_error">בעיה ברישום, תנסה שוב בבקשה</string>
     <string name="id_error_no_int">טעות בהזנת מספר ת.ז. דרכון</string>
     <string name="error_field_pass_user">יש להאזין שם וסיסמא</string>
-    <string name="permission_rationale">"הרשאות אנשי קשר נדרשות לקבלת אימייל."
-    </string>
+    <string name="error_user_exist">שם משתמש כבר קיים במערכת, נא להזין שם משתמש אחר</string>
+    <string name="permission_rationale">"הרשאות אנשי קשר נדרשות לקבלת אימייל."</string>
 
     <!-- Strings related to Areal Personal -->
     <string name="tittle_patients">בחר מטופל</string>

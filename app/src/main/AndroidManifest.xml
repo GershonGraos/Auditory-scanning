@@ -49,18 +49,17 @@
             android:theme="@style/NoActionBar" />
         <activity android:name=".AlgorithmLevel" android:theme="@style/NoActionBar" />
         <activity android:name=".Edit_Rama_1" />
-        <activity android:name=".Display_Patient" />
         <activity android:name=".Demo_internal_screen" />
         <activity android:name=".Edit_Rama_2" />
         <activity android:name=".Edit_Rama_3" />
         <activity android:name=".Edit_Rama_4" />
         <activity
-            android:name=".Display_rama1"
+            android:name=".Display_Rama_1"
             android:label="@string/title_activity_display_rama1"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Display_rama2" />
-        <activity android:name=".Display_rama3" />
-        <activity android:name=".Display_rama4"></activity>
+        <activity android:name=".Display_Rama_2" />
+        <activity android:name=".Display_Rama_3" />
+        <activity android:name=".Display_Rama_4"></activity>
     </application>
 
 </manifest>

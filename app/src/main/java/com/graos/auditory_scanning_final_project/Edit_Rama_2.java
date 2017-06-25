@@ -119,7 +119,7 @@ public class Edit_Rama_2 extends AppCompatActivity {
         if(!request_now.equals("")){
             Cursor cursor = my_db_requests.show_requests();
             while (cursor.moveToNext()){
-                if(cursor.getString(3). equals(request_now)) {
+                if(cursor.getString(0). equals(id_patient) && cursor.getString(3). equals(request_now)){
                     Toast.makeText(this, R.string.same_request, Toast.LENGTH_SHORT).show();
                     flag = 1;
                 }

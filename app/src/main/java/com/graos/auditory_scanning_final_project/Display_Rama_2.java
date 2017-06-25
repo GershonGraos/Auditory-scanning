@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class Display_rama3 extends AppCompatActivity {
+public class Display_Rama_2 extends AppCompatActivity {
     TextView _my_lastClick_item;
     ListView _my_list_view;
 
@@ -60,29 +60,30 @@ public class Display_rama3 extends AppCompatActivity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_rama3);
+        setContentView(R.layout.activity_display_rama2);
 
         thisContext = this;
         mApp = ((global_variables)getApplicationContext());
-        mApp.l = 3;
         STT_matches = mApp.getMatchesList();
+        mApp.l = 2;
 
         setTitle(R.string.nameActivity_display_pattient);
 
         my_db_requests = new DBHelper_Requests(this);
 
-        _my_lastClick_item = (TextView) findViewById(R.id.textViewName_rama3);
-        _my_list_view = (ListView) findViewById(R.id.listView_rama3);
+        _my_lastClick_item = (TextView) findViewById(R.id.textViewName_rama2);
+        _my_list_view = (ListView) findViewById(R.id.listView_rama2);
 
         Intent i;
         i = getIntent();
-        lastClick_request = i.getStringExtra("THE_REQUEST_2");
-        id_patient = i.getStringExtra("ID_PT_2");
-        i_parent = i.getStringExtra("MY_I_PARENT_2");
-        mApp.l2 = lastClick_request;
+        lastClick_request = i.getStringExtra("THE_REQUEST");
+        id_patient = i.getStringExtra("ID_PT");
+        i_parent = i.getStringExtra("MY_I_PARENT");
+        mApp.l1 = lastClick_request;
         _my_lastClick_item.setText(lastClick_request);
 
         populateListViews();
@@ -106,10 +107,10 @@ public class Display_rama3 extends AppCompatActivity {
                 }
 
                 Intent i;
-                i = new Intent(Display_rama3.this, Display_rama4.class);
-                i.putExtra("THE_REQUEST_3",request_click);
-                i.putExtra("ID_PT_3",id_patient);
-                i.putExtra("MY_I_PARENT_3",id_parent_send);
+                i = new Intent(Display_Rama_2.this, Display_Rama_3.class);
+                i.putExtra("THE_REQUEST_2",request_click);
+                i.putExtra("ID_PT_2",id_patient);
+                i.putExtra("MY_I_PARENT_2",id_parent_send);
                 startActivity(i);
             }
         });
@@ -198,7 +199,6 @@ public class Display_rama3 extends AppCompatActivity {
             //start Timer
             customHandler.postDelayed(updateTimerThread, 2000);
         }
-
     }
 
 
@@ -208,7 +208,7 @@ public class Display_rama3 extends AppCompatActivity {
         if(cursor.getCount() != 0) {
             ArrayList<String> listRequests = new ArrayList<String >();
             while (cursor.moveToNext()) {
-                if(cursor.getString(0).equals(id_patient) && cursor.getString(1).equals(i_parent) && cursor.getString(2).equals("3"))
+                if(cursor.getString(0).equals(id_patient) && cursor.getString(1).equals(i_parent) && cursor.getString(2).equals("2"))
                     listRequests.add(cursor.getString(3));
             }
             my_list_adapter = new MyListAdapter(this, listRequests);
@@ -218,7 +218,7 @@ public class Display_rama3 extends AppCompatActivity {
             _my_list_view.setAdapter(null);
     }
     public void press_show_algo_level_btn(View v){
-        startActivity(new Intent(Display_rama3.this,AlgorithmLevel.class));
+        startActivity(new Intent(Display_Rama_2.this,AlgorithmLevel.class));
     }
     public void onStop () {
         if(mApp.auto_recognize) {
