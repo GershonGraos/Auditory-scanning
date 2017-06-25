@@ -5,10 +5,13 @@ package com.graos.auditory_scanning_final_project;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -30,6 +33,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,37 +46,38 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
     private static final int REQUEST_READ_CONTACTS = 0;
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
     private UserLoginTask mAuthTask = null;
 
-    // UI references.
+    // UI references //
     private AutoCompleteTextView userRegister;
     private EditText mPasswordRegister;
+    private EditText idRegister;
+    private EditText nameRegister;
     private View mProgressView;
     private View mLoginFormView;
+
+    // To save the DB //
+    DBHelper_Therapists my_db_new_therapist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+
+        // ----- DB -------
+        my_db_new_therapist = new DBHelper_Therapists(this);
+
+        idRegister = (EditText) findViewById(R.id.id_register);
+        nameRegister = (EditText) findViewById(R.id.name_register);
+
         // Set up the login form.
         userRegister = (AutoCompleteTextView) findViewById(R.id.user_register);
-        userRegister.requestFocus();
+        idRegister.requestFocus();
         populateAutoComplete();
 
         mPasswordRegister= (EditText) findViewById(R.id.password_register);
@@ -94,9 +99,9 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
                 attemptRegister();
             }
         });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+//
+//        mLoginFormView = findViewById(R.id.login_form);
+//        mProgressView = findViewById(R.id.login_progress);
     }
 
     private void populateAutoComplete() {
@@ -143,67 +148,161 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     }
 
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-    // ------- ATTEMP TO REGISTER ---------- //
+    // ------- ATTEMPT TO REGISTER ---------- //
     public void attemptRegister() {
-        if (mAuthTask != null) {
+        Intent i = new Intent(this, AreaPersonalActivity.class);
+        String id = idRegister.getText().toString();
+        i.putExtra("ID_REGISTER", id);  // put only this data to next activity
+        startActivity(i);
+
+
+//        if (mAuthTask != null) {
+//            return;
+//        }
+//
+//        // Reset errors.
+//        userRegister.setError(null);
+//        mPasswordRegister.setError(null);
+//
+//        // Store values at the time of the login attempt.
+//        String user = userRegister.getText().toString();
+//        String password = mPasswordRegister.getText().toString();
+//        String id = idRegister.getText().toString();
+//        String name = nameRegister.getText().toString();
+//
+//
+//
+//        boolean cancel = false;
+//        View focusView = null;
+//
+//        // Check for a valid password, if the user entered one.
+//        if (!isPasswordValid(password)) {
+//            mPasswordRegister.setError(getString(R.string.error_invalid_password));
+//            focusView = mPasswordRegister;
+//            cancel = true;
+//        }
+//
+//        if(TextUtils.isEmpty(password)){
+//            mPasswordRegister.setError(getString(R.string.error_field_required));
+//            focusView = mPasswordRegister;
+//            cancel = true;
+//        }
+//
+//        // Check for a valid user
+//        if (TextUtils.isEmpty(user)) {
+//            userRegister.setError(getString(R.string.error_field_required));
+//            focusView = userRegister;
+//            cancel = true;
+//        }
+//
+//        if (TextUtils.isEmpty(id)) {
+//            idRegister.setError(getString(R.string.error_field_required));
+//            focusView = idRegister;
+//            cancel = true;
+//        }
+//
+//        if (TextUtils.isEmpty(name)) {
+//            nameRegister.setError(getString(R.string.error_field_required));
+//            focusView = nameRegister;
+//            cancel = true;
+//        }
+//
+//
+//        if (cancel)
+//            focusView.requestFocus();
+//
+//        else {
+//            if (id.matches("\\d+(?:\\.\\d+)?")){  // is number
+//                // ***** Save the DB ***** //
+//                long b = my_db_new_therapist.insert_data_therapist(id, name, user, password);
+//                if (b == -1)
+//                    Toast.makeText(this, R.string.sign_up_error, Toast.LENGTH_SHORT).show();
+//                else
+//                    Toast.makeText(this, R.string.sign_up_successful, Toast.LENGTH_SHORT).show();
+//
+//                userRegister.setText("");
+//                mPasswordRegister.setText("");
+//                idRegister.setText("");
+//                nameRegister.setText("");
+//
+//                Intent i = new Intent(this, AreaPersonalActivity.class);
+//                i.putExtra("ID_REGISTER", id);  // put only this data to next activity
+//                i.putExtra("USER_REGISTER", user);
+//                startActivity(i);
+//            }
+//            else
+//                Toast.makeText(this, R.string.id_error_no_int, Toast.LENGTH_SHORT).show();
+//        }
+    }
+
+
+    // DB - view all
+    public void view_all_function(View view){
+        Cursor res = my_db_new_therapist.show_data_therapists();
+        if(res.getCount() == 0) {
+            showMessage("Error", "No data found");
             return;
         }
 
-        // Reset errors.
-        userRegister.setError(null);
-        mPasswordRegister.setError(null);
-
-        // Store values at the time of the login attempt.
-        String user = userRegister.getText().toString();
-        String password = mPasswordRegister.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!isPasswordValid(password)) {
-            mPasswordRegister.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordRegister;
-            cancel = true;
+        StringBuffer buffer = new StringBuffer();
+        while (res.moveToNext()){
+            buffer.append("Id: " + res.getString(0) + "\n");
+            buffer.append("Name: " + res.getString(1) + "\n");
+            buffer.append("User: " + res.getString(2) + "\n");
+            buffer.append("Password: " + res.getString(3)+ "\n\n");
         }
-
-        if(TextUtils.isEmpty(password)){
-            mPasswordRegister.setError(getString(R.string.error_field_required));
-            focusView = mPasswordRegister;
-            cancel = true;
-        }
-
-        // Check for a valid user
-        if (TextUtils.isEmpty(user)) {
-            userRegister.setError(getString(R.string.error_field_required));
-            focusView = userRegister;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-
-            Intent i = new Intent(this, AreaPersonalActivity.class);
-            i.putExtra("USER_REGISTER", user);
-            i.putExtra("PASS_REGISTER", password);
-            startActivity(i);
-
-            //            showProgress(true);
-//            mAuthTask = new UserLoginTask(user, password);
-//            mAuthTask.execute((Void) null);
-        }
+        showMessage("Data", buffer.toString());
     }
 
+    public void showMessage(String tittle, String Message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(tittle);
+        builder.setMessage(Message);
+        builder.show();
+    }
+    //--- END View all ----
+
+
+    // DB - update data
+    public void update_d(View view){
+        String user = userRegister.getText().toString();
+        String password = mPasswordRegister.getText().toString();
+        String id = idRegister.getText().toString();
+        String name = nameRegister.getText().toString();
+
+        if (id.matches("\\d+(?:\\.\\d+)?")){
+            boolean r_up = my_db_new_therapist.update_data(id, user, name, password);
+            if(r_up == true)
+                Toast.makeText(this, "updated", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "NOT update", Toast.LENGTH_SHORT).show();
+        }
+        else
+            Toast.makeText(this, R.string.id_error_no_int, Toast.LENGTH_SHORT).show();
+
+        userRegister.setText("");
+        mPasswordRegister.setText("");
+        idRegister.setText("");
+        nameRegister.setText("");
+    }
+
+    // DB - delete user
+    public void delete_d(View view){
+        String id = idRegister.getText().toString();
+        if (id.matches("\\d+(?:\\.\\d+)?")){
+            Integer delete_rows = my_db_new_therapist.delete_data(id);
+            if(delete_rows > 0 )
+                Toast.makeText(this, "deleted", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "NOT delete", Toast.LENGTH_SHORT).show();
+
+        }
+        else
+            Toast.makeText(this, R.string.id_error_no_int, Toast.LENGTH_SHORT).show();
+
+        idRegister.setText("");
+    }
 
 
     // ---------------------------------------------------------------
@@ -220,7 +319,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allowa
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
@@ -372,24 +471,3 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
     }
 
 }
-//
-//Toast.makeText(this,"user: "+user,Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this,"pass: "+password,Toast.LENGTH_SHORT).show();
-//
-//        Intent i = new Intent(this, AreaPersonalActivity.class);
-//        i.putExtra("USER_REGISTER", user );
-//        i.putExtra("PASS_REGISTER", password);
-//        startActivity(i);
-
-
-
-// AREA PERSONAL JAVA
-//
-//    TextView user_view;
-//user_view = (TextView) findViewById(R.id.textViewHiUser);
-
-//            Intent i_result = getIntent();
-//            String user = i_result.getStringExtra("USER_REGISTER");
-//            String pass = i_result.getStringExtra("PASS_REGISTER");
-//            user_view.setText(user);
-//            Toast.makeText(this,"pass: "+pass,Toast.LENGTH_SHORT).show();

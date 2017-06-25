@@ -2,53 +2,46 @@ package com.graos.auditory_scanning_final_project;
 /**
  * Created by GG on 15/01/2017.
  */
-import android.content.ClipData;
 import android.content.Context;
 import android.database.Cursor;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CursorAdapter;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.Serializable;
-import java.util.List;
-
+import java.util.ArrayList;
 
 
 // ************* to ListView ************** //
-class MyListAdapter extends CursorAdapter {
+class MyListAdapter extends ArrayAdapter<String> {
 
-    private LayoutInflater inflater;
-    private TextView name;
+    Context c;
+    ArrayList<String> list_requests;
+    LayoutInflater inflater;
+    TextView item;
 
-    public MyListAdapter(Context context, Cursor cursor) {
-        super(context, cursor, true);
-        inflater = LayoutInflater.from(context);
+    public MyListAdapter(Context context, ArrayList<String> list_requests) {
+        //super(context, R.layout.list_items_rows_edit, list_requests);
+        super(context, android.R.layout.simple_list_item_activated_1, list_requests);
+        this.c = context;
+        this.list_requests = list_requests;
     }
 
-    @Override
-    public void bindView(View view, Context context, Cursor cursor)
-    {
-        name = (TextView) view.findViewById(R.id.textViewItem);
+    /*
+    public View getView(int position, View convertView, ViewGroup parent){
 
-        if(!cursor.getString(1).equals("")){
-            name.setText(cursor.getString(1));
+        //check if the view is null, if so then create this
+        if(convertView == null){
+            inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.list_items_rows_edit, null);
         }
 
-        notifyDataSetChanged();
-    }
+        item = (TextView) convertView.findViewById(R.id.textViewItem_all_Ramas);
+        item.setText(list_requests.get(position));
 
-    @Override
-    public View newView(Context context, Cursor cursor, ViewGroup viewGroup)
-    {
-        return inflater.inflate(R.layout.edit_list_items, viewGroup, false);
+        return  convertView;
     }
+    */
 }

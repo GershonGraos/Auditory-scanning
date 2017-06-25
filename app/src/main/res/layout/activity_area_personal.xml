@@ -82,6 +82,16 @@
                 android:onClick="sharePatient"
                 app:srcCompat="@mipmap/ic_share" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:onClick="view_db_patients"
+                android:text="View patientsDB"
+                android:visibility="invisible" />
+
 
         </RelativeLayout>
     </LinearLayout>

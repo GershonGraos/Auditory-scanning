@@ -4,21 +4,13 @@ package com.graos.auditory_scanning_final_project;
  */
 import android.Manifest;
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.database.DataSetObserver;
-import android.database.sqlite.SQLiteDatabase;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.MediaRecorder;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -27,18 +19,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Menu;
-import android.view.SurfaceView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -52,14 +40,11 @@ import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunnin
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Date;
 
-public class EditPatient extends AppCompatActivity {
+public class Edit_Rama_1 extends AppCompatActivity {
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
     private static final int REQUEST_RECORD_AUDIO = 1;
@@ -75,25 +60,96 @@ public class EditPatient extends AppCompatActivity {
     private global_variables mApp;
     private Context thisContext;
     private Button rec_yes_btn;
-    AssignmentsDBHelper dbHelper;
-    Cursor cursor;
-    MyListAdapter mla;
 
-    ListView _my_list;
+
+
+    DBHelper_Requests my_dbHelper_requests;
+    MyListAdapter my_list_adapter;
+    ListView _my_list_view;
+
     TextView _patient;
     EditText _item;
+    EditText a;
+    int flag_edit_delete = 0;
 
-    String my_patient;
-    String add_item;
-    String [] projection = new String[]{Constants.Items._ID, Constants.Items.ITEM};
-
+    String id_patient, request;
+    String request_click;
+    String id_parent_send;
+    ImageView help;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_patient);
+        setContentView(R.layout.activity_edit__rama_1);
         setTitle(R.string.nameActivity_edit_pattient);
         thisContext = this;
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        //help = (ImageView) findViewById(R.id.imageView8);
+        //help.bringToFront();
+
+        // ----- DB -------
+        my_dbHelper_requests = new DBHelper_Requests(Edit_Rama_1.this);
+
+        _patient = (TextView) findViewById(R.id.textViewHiPatient);
+        _item = (EditText) findViewById(R.id.editText);
+        _my_list_view = (ListView) findViewById(R.id.listItems);
+
+        Intent i_result_patient;
+        i_result_patient = getIntent();
+        id_patient = i_result_patient.getStringExtra("ID_PATIENT");
+
+        _patient.setText(id_patient);
+
+        // SHOW THE LIST OF REQUESTS
+        populateListViews();
+
+        // ONE-CLICK TO ENTRY TO INTERIOR LIST
+        _my_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // ListView Clicked item value
+                request_click = (String)_my_list_view.getItemAtPosition(position);
+
+                Cursor cursor = my_dbHelper_requests.show_requests();
+                while(cursor.moveToNext()){
+                    if(cursor.getString(3).equals(request_click)){
+                        id_parent_send = cursor.getString(4);
+                        break;
+                    }
+                }
+
+                Intent i;
+                i = new Intent(Edit_Rama_1.this, Edit_Rama_2.class);
+                i.putExtra("THE_REQUEST",request_click);
+                i.putExtra("ID_PT",id_patient);
+                i.putExtra("MY_I_PARENT",id_parent_send);
+                startActivity(i);
+            }
+        });
+
+
+        // LONG-CLICK TO DELETE SPECIFIC REQUEST
+        _my_list_view.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l){
+                request_click = (String)_my_list_view.getItemAtPosition(position);
+                View view1 = LayoutInflater.from(Edit_Rama_1.this).inflate(R.layout.edit_or_delete_request, null);
+                final AlertDialog.Builder builder_buttons = new AlertDialog.Builder(Edit_Rama_1.this);
+                builder_buttons.setView(view1);
+                builder_buttons.setTitle(R.string.edit_tittle_buttons);
+                builder_buttons.setIcon(R.mipmap.ic_alert);
+                builder_buttons.setNegativeButton(R.string.edit_exit_option, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+                builder_buttons.show();
+                return true;
+            }
+        });
+
+
+        // ----------- VIDEO RECORD ------------
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.RECORD_AUDIO)
@@ -152,93 +208,171 @@ public class EditPatient extends AppCompatActivity {
                 VideoContainer.setVisibility(View.INVISIBLE);
             }
         });
-
-
-        // DB
-        dbHelper = new AssignmentsDBHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase(); //lock to write and read
-
-        _patient = (TextView) findViewById(R.id.textViewHiPatient);
-        _my_list = (ListView) findViewById(R.id.listItems);
-        _item = (EditText) findViewById(R.id.editText);
-
-        Intent i_result_patient;
-        i_result_patient = getIntent();
-        if(i_result_patient.getStringExtra("PATIENT") != null){
-            my_patient = i_result_patient.getStringExtra("PATIENT");
-        }
-
-        _patient.setText(my_patient);
-
-        // Cursor approaching to the TableDB-Contacts
-        cursor = db.query(Constants.Items.TABLE_NAME, null, null, null, null, null, null);
-        //doron changes:
-        _my_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                // TODO Auto-generated method stub
-                Log.d("############","Items "+ arg2);
-            }
-
-        });
-        //-----
-        mla = new MyListAdapter(this, cursor);
-        _my_list.setAdapter(mla);
-
-        _my_list.invalidateViews();
-        db.close();
     }
 
 
 
-    // --------------- Add Item ----------------------------------------
-    //-----------------------------------------------------------------
-    public void press_addItem(View view){
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values;
+    // EDIT REQUEST
+    public void button_edit_request(View view){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Edit_Rama_1.this);
+        builder.setTitle(R.string.edit_tittle);
+        builder.setIcon(R.mipmap.ic_edit_req);
+        a = new EditText(Edit_Rama_1.this);
+        builder.setView(a);
+        builder.setMessage(R.string.edit_message)
 
-        if(_item.getText()!= null){
-            add_item = _item.getText().toString();
-        }
-        else
-            Toast.makeText(getApplicationContext(),"Please insert item" , Toast.LENGTH_LONG).show();
-
-        if( !add_item.equals("") ){
-            values = new ContentValues();
-            values.put(Constants.Items.ITEM, add_item);
-            db.insert(Constants.Items.TABLE_NAME, null, values);
-            cursor = db.query(Constants.Items.TABLE_NAME, projection, null,null, null, null, null);
-            mla = new MyListAdapter(this, cursor);
-            _my_list.setAdapter(mla);
-            _item.setText("");
-        }
-        else
-            Toast.makeText(this, "Insert new item", Toast.LENGTH_SHORT).show();
-    }
-
-
-    // --------------- Delete Item ----------------------------------------
-    //--------------------------------------------------------------------
-    public void press_delete(View view){
-        AlertDialog.Builder builder = new AlertDialog.Builder(EditPatient.this);
-        builder.setMessage("Are you sure?")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.button_get_yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
-                        Toast.makeText(getApplicationContext(), "Delete the item" , Toast.LENGTH_LONG).show();
+                        String in = a.getText().toString();
+                        if( !in.equals("")){
+                            Cursor cursor = my_dbHelper_requests.show_requests();
+                            while(cursor.moveToNext()) {
+                                if(cursor.getString(3).equals(request_click)){
+                                    boolean edit_row = my_dbHelper_requests.update_data(in , cursor.getString(4));
+                                    if(edit_row == true){
+                                        flag_edit_delete = 1;
+                                        populateListViews();
+                                        Toast.makeText(Edit_Rama_1.this, R.string.edit_successfully, Toast.LENGTH_SHORT).show();
+                                    }
+                                    else
+                                        Toast.makeText(Edit_Rama_1.this, R.string.edit_not_successfully, Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                            Toast.makeText(Edit_Rama_1.this, R.string.edit_enter_request, Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+
+                .setNegativeButton(R.string.button_get_no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-//                        Toast.makeText(getApplicationContext(), "NO Delete the item" , Toast.LENGTH_LONG).show();
                     }
                 });
-        // Create the AlertDialog object and return it
         builder.show();
     }
 
+
+    // DELETE REQUEST
+    public void button_delete_request(View view){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Edit_Rama_1.this);
+        builder.setTitle(R.string.delete_item_tittle);
+        builder.setIcon(R.mipmap.ic_remove);
+        builder.setMessage(R.string.delete_item_quetion)
+
+                .setPositiveButton(R.string.button_get_yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Cursor cursor = my_dbHelper_requests.show_requests();
+                        if(cursor.getCount() != 0){
+                            while(cursor.moveToNext()) {
+                                if(cursor.getString(3).equals(request_click)){
+                                    Integer delete_row = my_dbHelper_requests.delete_data(cursor.getString(4));
+                                    if(delete_row > 0)
+                                        populateListViews();
+                                    Toast.makeText(getApplicationContext(), R.string.delete_the_item , Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                    }
+                })
+
+                .setNegativeButton(R.string.button_get_no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        builder.show();
+    }
+
+
+
+    // ADD REQUEST TO DB
+    public void press_addItem(View view){
+        request= _item.getText().toString();
+        int count = 0;
+        int flag = 0;
+
+        if(!request.equals("")){
+            Cursor cursor = my_dbHelper_requests.show_requests();
+            while (cursor.moveToNext()){
+                if(cursor.getString(3). equals(request)){
+                    Toast.makeText(this, R.string.same_request, Toast.LENGTH_SHORT).show();
+                    flag = 1;
+                }
+
+            }
+
+            if(flag == 0){
+                long temp = my_dbHelper_requests.add_request(id_patient, "-1", "1", request, getDateTime(), count);
+                if (temp == -1)
+                    Toast.makeText(this, R.string.sign_up_error, Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(this, R.string.sign_up_successful, Toast.LENGTH_SHORT).show();
+
+                _item.setText("");
+                populateListViews();
+            }
+
+        }
+        else
+            Toast.makeText(this, R.string.insert_item, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    // SHOW DATABASE
+    public void show_db_requests(View view){
+        Cursor res = my_dbHelper_requests.show_requests();
+        if(res.getCount() == 0) {
+            showMessage("Error", "No data found");
+            return;
+        }
+        StringBuffer buffer = new StringBuffer();
+        while (res.moveToNext()){
+            buffer.append("Id-patient: " + res.getString(0) + "\n");
+            buffer.append("I_parent: " + res.getString(1) + "\n");
+            buffer.append("Stage: " + res.getString(2) + "\n");
+            buffer.append("Request: " + res.getString(3)+ "\n");
+            buffer.append("I: " + res.getString(4) + "\n");
+            buffer.append("time: " + res.getString(5) + "\n");
+            buffer.append("count: " + String.valueOf(res.getInt(6)) + "\n\n");
+        }
+        showMessage("Data", buffer.toString());
+    }
+
+    public void showMessage(String tittle, String Message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(tittle);
+        builder.setMessage(Message);
+        builder.show();
+    }
+
+    // SHOW THE STRING ARRAY REQUESTS INTO LAYOUT //
+    public void populateListViews(){
+        Cursor cursor = my_dbHelper_requests.show_requests();
+        if(cursor.getCount() != 0) {
+            ArrayList<String> listRequests = new ArrayList<String >();
+            while (cursor.moveToNext()) {
+                if(cursor.getString(0).equals(id_patient) && cursor.getString(1).equals("-1") && cursor.getString(2).equals("1"))
+                    listRequests.add(cursor.getString(3));
+            }
+            my_list_adapter = new MyListAdapter(this, listRequests);
+            _my_list_view.setAdapter(my_list_adapter);
+        }
+        else
+            _my_list_view.setAdapter(null);
+    }
+
+    // GET DATE TIME
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
+    // ----------- VIDEO FUNCTIONS ------------
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
@@ -339,8 +473,7 @@ public class EditPatient extends AppCompatActivity {
             rec_yes_btn.setText(R.string.button_watch_record);
         }else{
             start_video_and_hide_button(UriYesVideo);
-        }
-    }
+        }    }
 
     public void onClick_delete_record_yes(View view){
         //rec_yes_btn.setText("Recorder YES");
@@ -365,6 +498,7 @@ public class EditPatient extends AppCompatActivity {
         patient_video.requestFocus();
         patient_video.start();
     }
+
     private String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
@@ -380,4 +514,3 @@ public class EditPatient extends AppCompatActivity {
         }
     }
 }
-

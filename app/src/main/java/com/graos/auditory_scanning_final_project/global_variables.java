@@ -11,6 +11,13 @@ import java.util.ArrayList;
 
 public class global_variables extends Application {
 
+    public int l=0;
+    public String l1="";
+    public String l2="";
+    public String l3="";
+    public boolean auto_recognize = false;
+    public boolean statistic_sort = false;
+
     private Uri UriYesVideo;
     public Uri getUriYesVideo() {
         return UriYesVideo;

@@ -13,19 +13,19 @@
         android:id="@+id/splash"
         android:layout_width="296dp"
         android:layout_height="284dp"
-        android:layout_marginTop="-80dp"
+        android:layout_marginTop="-60dp"
         android:background="@mipmap/logo" />
 
     <TextView
         android:id="@+id/textView_splash"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="@string/app_textSplash"
         android:layout_gravity="center"
-        android:textDirection="ltr"
         android:gravity="center"
+        android:text="@string/app_textSplash"
+        android:textColor="#FFFFFF"
+        android:textDirection="ltr"
         android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#1A2421" />
+        android:textStyle="bold" />
 </LinearLayout>
 

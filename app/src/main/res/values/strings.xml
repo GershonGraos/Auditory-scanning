@@ -1,5 +1,5 @@
 <resources>
-<!--=================================== Hebrew Strings ==========================================-->
+    <!--=================================== Hebrew Strings ==========================================-->
 
     <!-- Strings related to Name os Activities -->
     <string name="activity_home">סריקה שמיעתית</string>
@@ -16,17 +16,26 @@
     <string name="app_textButtonExplication">ידע אותנו</string>
     <string name="app_textButtonSignUp">הירשם</string>
     <string name="app_textButtonLogin">התחבר</string>
+    <string name="tittle_help_main">הדרכה</string>
+    <string name="text_help_main">במסך זה המטפל יוכל להתחבר למערכת ע"י הקשת מס' תעודת הזהות/דרכון שלו והסיסמה שלו, במידה והוא משתמש חדש יוכל הוא לעבור למסך הרישום.</string>
 
     <!-- Strings related to SignUp -->
     <string name="title_activity_sign_up">הרשמה</string>
     <string name="prompt_email">שם משתמש</string>
     <string name="prompt_password">סיסמה</string>
+    <string name="prompt_id">מספר ת.ז/דרכון</string>
+    <string name="prompt_name">שם פרטי</string>
     <string name="action_sign_in">הירשם</string>
     <string name="action_sign_in_short">הירשם</string>
     <string name="error_invalid_email">נא להכניס שם משתמש</string>
     <string name="error_invalid_password">הסיסמה קצרה מידי</string>
     <string name="error_incorrect_password">הסיסמה אינה נכונה</string>
     <string name="error_field_required">שדה זה הינו שדה חובה</string>
+    <string name="error_field_required_id">נא להזין 9 ספרות</string>
+    <string name="sign_up_successful">רישום בוצה בהצלחה!</string>
+    <string name="sign_in_check">בבקשה תנסה להכנס לחשבונך</string>
+    <string name="sign_up_error">בעיה ברישום, תנסה שוב בבקשה</string>
+    <string name="id_error_no_int">טעות בהזנת מספר ת.ז. דרכון</string>
     <string name="error_field_pass_user">יש להאזין שם וסיסמא</string>
     <string name="permission_rationale">"הרשאות אנשי קשר נדרשות לקבלת אימייל."
     </string>
@@ -38,18 +47,48 @@
     <string name="butt_share">שתף</string>
     <string name="butt_next">המשך</string>
     <string name="newPtnt_tittle">מטופל חדש</string>
-    <string name="newPtnt_text">אנא הקלד שם פרטי ושם משפחה עבור מטופל</string>
+    <string name="newPtnt_name">שם</string>
+    <string name="newPtnt_id">תז/דרכון</string>
+    <string name="newPtnt_text">הוספת מטופל</string>
     <string name="newPtnt_cancel">בטל</string>
     <string name="newPtnt_ok">הוסף</string>
+    <string name="error_fields_required_alert">כל השדות הינם שדות חובה</string>
 
     <!-- Strings related to Display List Patient -->
     <string name="button_yes">הקלט כן</string>
     <string name="button_no">הקלט לא</string>
+
     <string name="button_watch_record">צפה בהקלטה</string>
+    <string name="tittle_options">אפשרויות</string>
+    <string name="option_edit">ערוך מטופל</string>
+    <string name="option_personal_area">האיזור האישי שלי</string>
+    <string name="option_voice_recognize_active">הפעל זיהוי קולי</string>
+    <string name="option_voice_recognize_inactive">כבה זיהוי קולי</string>
+    <string name="option_sort_list_by_statistic_active">הפעל סידור רשימה באופן סטטיסטי</string>
+    <string name="option_sort_list_by_statistic_inactive">כבה סידור רשימה באופן סטטיסטי</string>
+    <string name="option_log_out">התנתקות</string>
     <string name="title_activity_display_patient">הצגת מטופל</string>
 
     <!-- Strings related to Edit List Patient -->
     <string name="text_hint_edit">הוסף פריט</string>
+    <string name="insert_item">נא להכניס פריט</string>
+    <string name="show_yes_record">הצג "כן"</string>
+    <string name="show_no_record">הצג "לא"</string>
+    <string name="delete_item_tittle">מחיקת בקשה</string>
+    <string name="delete_item_quetion">האם אתה בטוח?</string>
+    <string name="delete_the_item">הפריט נמחק</string>
+    <string name="delete_button">למחוק</string>
+    <string name="edit_button">לערוך</string>
+    <string name="edit_tittle">עריכת הבקשה</string>
+    <string name="edit_message">נא להזין בקשה מחודשת</string>
+    <string name="edit_successfully">עריכה בוצע בהצלחה</string>
+    <string name="edit_not_successfully">העריכה לא הצליחה </string>
+    <string name="edit_tittle_buttons">עריכה או מחיקת בקשה</string>
+    <string name="edit_enter_request">הכנס שם הבקשה</string>
+    <string name="edit_exit_option">יציאה</string>
+    <string name="same_request">הבקשה כבר קיימת במערכת, נא להזין בקשה שונה</string>
+    <string name="text_press_item">בקשה</string>
+
 
     <!-- Strings related to Demo Screen -->
     <string name="button_get_yes">כן</string>
@@ -82,4 +121,10 @@
         <item>"@mipmap/ic_share"</item>
         <item>"@mipmap/ic_share"</item>
     </string-array>
+    <string name="title_activity_display_rama1">Display_rama1</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

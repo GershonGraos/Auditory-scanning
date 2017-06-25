@@ -1,48 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ScrollView01"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/ScrollView01"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
+
+<pl.polidea.view.ZoomView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <pl.polidea.view.ZoomView
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="568dp">
 
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <RelativeLayout
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/activity_display__patient"
             android:layout_width="match_parent"
-            android:layout_height="503dp"
+            android:layout_height="match_parent"
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:orientation="horizontal"
             tools:context="com.graos.auditory_scanning_final_project.Display_Patient">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:paddingTop="-10dp"
+                android:text="help"
+                app:srcCompat="@mipmap/ic_help3"
+                android:layout_alignBottom="@+id/textViewName"
+                android:layout_alignParentEnd="true" />
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="press_show_algo_level_btn"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:text="Visual View" />
+                android:text="Visual View"
+                android:layout_alignBottom="@+id/textViewName"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="20dp" />
 
             <ListView
                 android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="80dp"
-                android:layout_marginTop="60dp" />
+                android:layout_width="290dp"
+                android:layout_height="330dp"
+                android:layout_above="@+id/button7"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="24dp"
+                android:choiceMode="singleChoice" />
+            <!-- (Doron)  android:listSelector="@android:color/holo_blue_dark" -->
 
             <TextView
                 android:id="@+id/textViewName"
@@ -50,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="68dp"
                 android:text="TextView"
                 android:textAllCaps="false"
                 android:textSize="20sp"
@@ -59,10 +73,11 @@
                 android:id="@+id/button7"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/button6"
-                android:layout_alignBottom="@+id/button6"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
                 android:background="@drawable/button_style"
                 android:text="@string/button_get_no"
                 android:textAllCaps="false"
@@ -75,23 +90,14 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
                 android:background="@drawable/button_style"
                 android:text="@string/button_get_yes"
                 android:textAllCaps="false"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/imageView21"
-                android:layout_width="70dp"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-
-                android:layout_alignParentTop="true"
-                android:onClick="editPatient"
-                app:srcCompat="@mipmap/ic_edit" />
-
-
         </RelativeLayout>
     </LinearLayout>
-    </pl.polidea.view.ZoomView>
+</pl.polidea.view.ZoomView>
 </ScrollView>

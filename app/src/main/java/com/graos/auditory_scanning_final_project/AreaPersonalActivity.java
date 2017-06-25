@@ -4,13 +4,13 @@ package com.graos.auditory_scanning_final_project;
  */
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.database.Cursor;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
+//public class AreaPersonalActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
 public class AreaPersonalActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -30,83 +30,80 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
     Spinner _spinner_choose;
     EditText input_patient;
 
-    ArrayList<String> patients;
+    ArrayList<String> list_patients;
     ArrayAdapter<String> adapter;
-    String user_signIn;
-    String user_register;
-    String new_patient;
-    String s_patient;
-    String s_state;
-    int s_state_index;
+    String userName_signIn;
+    String userName_register;
+    String idNew_patient, nameNew_patient, id_therapist;
+    String id_patient;
+    String id_therapist_to_displayAct;
     int flag_newUser=0;
     int flag_login=0;
+    String s_state;
+    int s_state_index;
     int flag_add_one_user = 0;
-
+    DBHelper_Patients my_dbHelper_patients;
+    private boolean first_entry = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_area_personal);
         setTitle(R.string.nameActivity_area_personal);
+        first_entry = true;
+        my_dbHelper_patients = new DBHelper_Patients(this);
 
         // -- connect with Xml --
         _spinner_patient = (Spinner) findViewById(R.id.spinner_show);
 
         // -- get intent --
         Intent i_result = getIntent();
-//        String pass = i_result.getStringExtra("PASS_REGISTER");
-//        Toast.makeText(this,"pass: "+pass,Toast.LENGTH_SHORT).show();
+        id_therapist = i_result.getStringExtra("ID_REGISTER");
+
         if(i_result.getStringExtra("USER_REGISTER") != null){
-            user_register = i_result.getStringExtra("USER_REGISTER");
+            userName_register = i_result.getStringExtra("USER_REGISTER");
             flag_newUser = 1;
         }
 
         else if(i_result.getStringExtra("USER_SIGN_IN") != null){
-            user_signIn = i_result.getStringExtra("USER_SIGN_IN");
+            userName_signIn = i_result.getStringExtra("USER_SIGN_IN");
             flag_login = 1;
         }
+
         _spinner_patient.setOnItemSelectedListener(this);
 
         if(flag_newUser == 1){
-            patients = new ArrayList<String>();
-//            flag_newUser = 0;
             addPatient(_user_view);
         }
 
-        if(flag_login == 1){
-            patients = new ArrayList<String>();
-            flag_login = 0;
-            patients.add("משה אשכנזי");
-            patients.add("דוד מזרחי");
-            patients.add("שלמה כהן");
-        }
 
-        // -- show Spinner --
-        if(patients.size() > 0){
-            adapter = new ArrayAdapter<String>(AreaPersonalActivity.this,android.R.layout.simple_spinner_item, patients);
-            adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-            _spinner_patient.setAdapter(adapter);
-            Toast.makeText(this,"size: " + String.valueOf(patients.size()),Toast.LENGTH_SHORT).show();
-        }
+        populateSpinnerView();
+
+//        if(flag_login == 1){
+//            patients = new ArrayList<String>();
+//            flag_login = 0;
+//            patients.add( "e " + " a");
+//            patients.add("דוד מזרחי");
+//            patients.add("שלמה כהן");
+//        }
+
+
     }
 
     // ------------ Select Patient --------------------------------------------
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l){
-        s_patient = adapterView.getItemAtPosition(position).toString();
+//        Cursor c = my_dbHelper_patients.show_patients();
+//        c.moveToPosition(position);
+//        id_patient = c.getString(0);
+        if(!first_entry){
+            id_patient = adapterView.getItemAtPosition(position).toString();
 
-        if(patients.size() == 1 && flag_newUser == 1){
-            Intent i;
-            i = new Intent(this, EditPatient.class);
-            i.putExtra("PATIENT",s_patient);
+            Intent i = new Intent(this, Display_rama1.class);
+            i.putExtra("ID_PATIENT", id_patient);
+            i.putExtra("ID_ONLY", id_therapist_to_displayAct);
             startActivity(i);
-            flag_newUser = 0;
-        }
-
-       else{
-            Intent i;
-            i = new Intent(this, Display_Patient.class);
-            i.putExtra("PATIENT",s_patient);
-            startActivity(i);
+        }else{
+            first_entry = false;
         }
     }
     @Override
@@ -115,44 +112,80 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
     }
 
 
-
     // ---------------------------------------------------------------------
     // --------------------- Add Patient ----------------------------------
-    public void addPatient(View view){
-        // Dialog and show spinner
-        AlertDialog.Builder builder = new AlertDialog.Builder(AreaPersonalActivity.this);
-        builder.setTitle(R.string.newPtnt_tittle);
-        builder.setIcon(android.R.drawable.ic_menu_edit);
-        builder.setMessage(R.string.newPtnt_text);
-        input_patient = new EditText(AreaPersonalActivity.this);
-        builder.setView(input_patient);
+    public void addPatient(View v) {
+        View view = LayoutInflater.from(AreaPersonalActivity.this).inflate(R.layout.add_patient_layout, null);
+        final EditText user_id = (EditText) view.findViewById(R.id.newPt_id);
+        final EditText user_name = (EditText) view.findViewById(R.id.newPt_name);
 
-        //builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AreaPersonalActivity.this);
+        builder.setIcon(android.R.drawable.ic_menu_edit);
+        builder.setTitle(R.string.newPtnt_tittle);
+        builder.setView(view);
         builder.setPositiveButton(R.string.newPtnt_ok, new DialogInterface.OnClickListener() {
-            @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(input_patient.getText().toString()!=null ) {
-                    new_patient = input_patient.getText().toString();
-                    patients.add(new_patient);
+                if(user_id.getText().toString() == null || user_name.getText().toString() == null)
+                    Toast.makeText(AreaPersonalActivity.this,R.string.error_fields_required_alert,Toast.LENGTH_SHORT).show();
+
+                else{
+                    idNew_patient = user_id.getText().toString();
+                    nameNew_patient = user_name.getText().toString();
+                    Toast.makeText(AreaPersonalActivity.this,"idPt: " + idNew_patient + "\nnamePt: " + nameNew_patient + "\nidThpt: " + id_therapist,Toast.LENGTH_SHORT).show();
+
+                    if (idNew_patient.matches("\\d+(?:\\.\\d+)?")){  // is a number
+                        long b = my_dbHelper_patients.add_patient(idNew_patient, nameNew_patient, id_therapist);
+                        if (b == -1)
+                            Toast.makeText(AreaPersonalActivity.this, R.string.sign_up_error, Toast.LENGTH_SHORT).show();
+                        else{
+                            Toast.makeText(AreaPersonalActivity.this, R.string.sign_up_successful, Toast.LENGTH_SHORT).show();
+                            populateSpinnerView();
+                            Intent it = new Intent(AreaPersonalActivity.this, Edit_Rama_1.class);
+                            it.putExtra("ID_PATIENT",nameNew_patient + " - " + idNew_patient);
+                            startActivity(it);
+                            flag_newUser = 0;
+                        }
+                    }
+                    else
+                        Toast.makeText(AreaPersonalActivity.this, R.string.id_error_no_int, Toast.LENGTH_SHORT).show();
                 }
-                adapter = new ArrayAdapter<String>(AreaPersonalActivity.this,android.R.layout.simple_spinner_item, patients);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                _spinner_patient.setAdapter(adapter);
             }
         });
-
-        //builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
         builder.setNegativeButton(R.string.newPtnt_cancel, new DialogInterface.OnClickListener() {
-            @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
         });
 
         builder.show();
-        flag_add_one_user = 1;
     }
 
+
+    // -- show data //
+    public void view_db_patients(View v){
+        Cursor res = my_dbHelper_patients.show_patients();
+        if(res.getCount() == 0) {
+            showMessage("Error", "No data found");
+            return;
+        }
+
+        StringBuffer buffer = new StringBuffer();
+        while (res.moveToNext()){
+            buffer.append("Id_Patient: " + res.getString(0) + "\n");
+            buffer.append("Name: " + res.getString(1) + "\n");
+            buffer.append("Id_therapist: " + res.getString(2) + "\n\n");
+        }
+        showMessage("Data", buffer.toString());
+    }
+
+    public void showMessage(String tittle, String Message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(tittle);
+        builder.setMessage(Message);
+        builder.show();
+    }
+    //--- END View all ----
 
 
     // ---------------------------------------------------------------------
@@ -200,6 +233,31 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
+
+    // SPINNER VIEW
+    public void populateSpinnerView(){
+        Cursor cursor = my_dbHelper_patients.show_patients();
+        if(cursor.getCount() != 0) {
+            list_patients = new ArrayList<String>();
+            Toast.makeText(this,"id: "+id_therapist, Toast.LENGTH_SHORT).show();
+
+            while (cursor.moveToNext()) {
+                if(cursor.getString(2).equals(id_therapist)){
+                    id_therapist_to_displayAct = cursor.getString(2);
+                    list_patients.add(cursor.getString(1) + " - " + cursor.getString(0));
+                }
+            }
+            adapter = new ArrayAdapter<String>(AreaPersonalActivity.this,android.R.layout.simple_spinner_item, list_patients);
+            adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+            _spinner_patient.setAdapter(adapter);
+        }
+
+    }
 }
+
+
+
+
+
 
 

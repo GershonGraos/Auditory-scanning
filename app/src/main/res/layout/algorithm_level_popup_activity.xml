@@ -10,6 +10,16 @@
         android:layout_height="match_parent"
         android:background="@android:color/darker_gray">
 
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:paddingTop="-10dp"
+            android:text="help"
+            app:srcCompat="@mipmap/ic_help3"
+            android:layout_alignParentEnd="true" />
+
         <Button
             android:id="@+id/btn_level_1"
             android:layout_width="80dp"
