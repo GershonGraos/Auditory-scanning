@@ -1,6 +1,7 @@
 package com.graos.auditory_scanning_final_project;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
@@ -16,8 +17,13 @@ import com.mongodb.client.MongoDatabase;
 public class MainActivity extends AppCompatActivity {
     EditText _passLogIn;
     EditText _userLogin;
+
+    DBHelper_Therapists my_dbHelper_Therapist;
+
     View focusView = null;
     boolean cancel = false;
+
+
 
     private MongoClient mongoClient;
 
@@ -27,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //setTitle("Home Screen");
-        //setTitleColor(ge);
+
+        my_dbHelper_Therapist = new DBHelper_Therapists(this);
 
         _passLogIn = (EditText) findViewById(R.id.editText_login_pass);
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
@@ -242,31 +248,63 @@ public class MainActivity extends AppCompatActivity {
     public void press_signIn(View view) {
         String password = _passLogIn.getText().toString();
         String user = _userLogin.getText().toString();
-        int flag = 0;
 
-        if(user.length() == 0){
-            _userLogin.setError(getString(R.string.error_field_required));
-            focusView = _userLogin;
-            cancel = true;
-            flag++;
+        if(!password.equals("") && !user.equals("")){
+            Cursor cursor = my_dbHelper_Therapist.show_data_therapists();
+            if(cursor.getCount() != 0){
+                while (cursor.moveToNext()){
+                    if(cursor.getString(2).equals(user)){
+                        if(cursor.getString(3).equals(password)){
+                            String id_the = cursor.getString(0);
+                            Intent i = new Intent(this, AreaPersonalActivity.class);
+                            i.putExtra("ID_REGISTER",id_the);
+                            i.putExtra("USER_SIGN_IN",user);
+                            startActivity(i);
+                        }
+                        else{
+                            Toast.makeText(this,R.string.error_pass,Toast.LENGTH_SHORT).show();
+                            _passLogIn.setText("");
+                        }
+                    }
+                    else
+                        Toast.makeText(this,R.string. error_user_not_exists,Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+                Toast.makeText(this,R.string.error_user_pass,Toast.LENGTH_SHORT).show();
+
         }
-
-        else if(password.length() == 0){
-            _passLogIn.setError(getString(R.string.error_field_required));
-            focusView = _passLogIn;
-            cancel = true;
-            flag++;
-        }
-
-        if(flag == 0)
-        {
-            Intent i = new Intent(this, AreaPersonalActivity.class);
-            i.putExtra("USER_SIGN_IN",user);
-            startActivity(i);
-        }
-
-        else{
+        else
             Toast.makeText(this,R.string.error_field_pass_user,Toast.LENGTH_SHORT).show();
-        }
+
     }
+
+
+//        int flag = 0;
+//
+//        if(user.length() == 0){
+//            _userLogin.setError(getString(R.string.error_field_required));
+//            focusView = _userLogin;
+//            cancel = true;
+//            flag++;
+//        }
+//
+//        else if(password.length() == 0){
+//            _passLogIn.setError(getString(R.string.error_field_required));
+//            focusView = _passLogIn;
+//            cancel = true;
+//            flag++;
+//        }
+//
+//        if(flag == 0)
+//        {
+//            Intent i = new Intent(this, AreaPersonalActivity.class);
+//            i.putExtra("USER_SIGN_IN",user);
+//            startActivity(i);
+//        }
+//
+//        else{
+//            Toast.makeText(this,R.string.error_field_pass_user,Toast.LENGTH_SHORT).show();
+//        }
+
 }

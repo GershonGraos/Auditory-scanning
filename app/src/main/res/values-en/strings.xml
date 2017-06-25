@@ -17,6 +17,9 @@
     <string name="app_textButtonSignUp">Sign up</string>
     <string name="app_textButtonLogin">Sign in</string>
     <string name="tittle_help_main">Instruction</string>
+    <string name="error_user_pass">There are no users in the database, please register</string>
+    <string name="error_user_not_exists">The User Name not exist</string>
+    <string name="error_pass">Error! Invalid password, please enter a valid password</string>
     <string name="text_help_main">In this screen, the therapist will be able to connect to the system by entering his ID/passport number and password</string>
 
     <!-- Strings related to SignUp -->
@@ -36,6 +39,7 @@
     <string name="sign_in_check">Please try to login to your account</string>
     <string name="sign_up_error">Error, please try again</string>
     <string name="id_error_no_int">ID or Passport Error</string>
+    <string name="error_user_exist">Username is already exists in the system, please enter a different username</string>
     <string name="error_field_pass_user">Need enter user name and password!</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions"

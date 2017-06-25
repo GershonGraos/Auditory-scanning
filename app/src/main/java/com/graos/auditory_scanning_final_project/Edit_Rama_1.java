@@ -202,9 +202,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp){
                 // invoke your activity here
                 Button record_yes = (Button) findViewById(R.id.button4);
-                Button record_no = (Button) findViewById(R.id.button5);
                 record_yes.setVisibility(View.VISIBLE);
-                record_no.setVisibility(View.VISIBLE);
                 VideoContainer.setVisibility(View.INVISIBLE);
             }
         });
@@ -295,7 +293,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
         if(!request.equals("")){
             Cursor cursor = my_dbHelper_requests.show_requests();
             while (cursor.moveToNext()){
-                if(cursor.getString(3). equals(request)){
+                if(cursor.getString(0). equals(id_patient) && cursor.getString(3). equals(request)){
                     Toast.makeText(this, R.string.same_request, Toast.LENGTH_SHORT).show();
                     flag = 1;
                 }
@@ -490,9 +488,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
         VideoContainer.setLayoutParams(params);
 
         Button record_yes = (Button) findViewById(R.id.button4);
-        Button record_no = (Button) findViewById(R.id.button5);
         record_yes.setVisibility(View.INVISIBLE);
-        record_no.setVisibility(View.INVISIBLE);
 
         patient_video.setVideoURI(video_uri);
         patient_video.requestFocus();

@@ -62,6 +62,7 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
 
     // To save the DB //
     DBHelper_Therapists my_db_new_therapist;
+    int flag_user_exist = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,89 +151,104 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
 
     // ------- ATTEMPT TO REGISTER ---------- //
     public void attemptRegister() {
-        Intent i = new Intent(this, AreaPersonalActivity.class);
-        String id = idRegister.getText().toString();
-        i.putExtra("ID_REGISTER", id);  // put only this data to next activity
-        startActivity(i);
-
-
-//        if (mAuthTask != null) {
-//            return;
-//        }
-//
-//        // Reset errors.
-//        userRegister.setError(null);
-//        mPasswordRegister.setError(null);
-//
-//        // Store values at the time of the login attempt.
-//        String user = userRegister.getText().toString();
-//        String password = mPasswordRegister.getText().toString();
+//        Intent i = new Intent(this, AreaPersonalActivity.class);
 //        String id = idRegister.getText().toString();
-//        String name = nameRegister.getText().toString();
-//
-//
-//
-//        boolean cancel = false;
-//        View focusView = null;
-//
-//        // Check for a valid password, if the user entered one.
-//        if (!isPasswordValid(password)) {
-//            mPasswordRegister.setError(getString(R.string.error_invalid_password));
-//            focusView = mPasswordRegister;
-//            cancel = true;
-//        }
-//
-//        if(TextUtils.isEmpty(password)){
-//            mPasswordRegister.setError(getString(R.string.error_field_required));
-//            focusView = mPasswordRegister;
-//            cancel = true;
-//        }
-//
-//        // Check for a valid user
-//        if (TextUtils.isEmpty(user)) {
-//            userRegister.setError(getString(R.string.error_field_required));
-//            focusView = userRegister;
-//            cancel = true;
-//        }
-//
-//        if (TextUtils.isEmpty(id)) {
-//            idRegister.setError(getString(R.string.error_field_required));
-//            focusView = idRegister;
-//            cancel = true;
-//        }
-//
-//        if (TextUtils.isEmpty(name)) {
-//            nameRegister.setError(getString(R.string.error_field_required));
-//            focusView = nameRegister;
-//            cancel = true;
-//        }
-//
-//
-//        if (cancel)
-//            focusView.requestFocus();
-//
-//        else {
-//            if (id.matches("\\d+(?:\\.\\d+)?")){  // is number
-//                // ***** Save the DB ***** //
-//                long b = my_db_new_therapist.insert_data_therapist(id, name, user, password);
-//                if (b == -1)
-//                    Toast.makeText(this, R.string.sign_up_error, Toast.LENGTH_SHORT).show();
-//                else
-//                    Toast.makeText(this, R.string.sign_up_successful, Toast.LENGTH_SHORT).show();
-//
-//                userRegister.setText("");
-//                mPasswordRegister.setText("");
-//                idRegister.setText("");
-//                nameRegister.setText("");
-//
-//                Intent i = new Intent(this, AreaPersonalActivity.class);
-//                i.putExtra("ID_REGISTER", id);  // put only this data to next activity
-//                i.putExtra("USER_REGISTER", user);
-//                startActivity(i);
-//            }
-//            else
-//                Toast.makeText(this, R.string.id_error_no_int, Toast.LENGTH_SHORT).show();
-//        }
+//        i.putExtra("ID_REGISTER", id);  // put only this data to next activity
+//        startActivity(i);
+
+
+        if (mAuthTask != null) {
+            return;
+        }
+
+        // Reset errors.
+        userRegister.setError(null);
+        mPasswordRegister.setError(null);
+
+        // Store values at the time of the login attempt.
+        String user = userRegister.getText().toString();
+        String password = mPasswordRegister.getText().toString();
+        String id = idRegister.getText().toString();
+        String name = nameRegister.getText().toString();
+
+
+
+        boolean cancel = false;
+        View focusView = null;
+
+        // Check for a valid password, if the user entered one.
+        if (!isPasswordValid(password)) {
+            mPasswordRegister.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordRegister;
+            cancel = true;
+        }
+
+        if(TextUtils.isEmpty(password)){
+            mPasswordRegister.setError(getString(R.string.error_field_required));
+            focusView = mPasswordRegister;
+            cancel = true;
+        }
+
+        // Check for a valid user
+        if (TextUtils.isEmpty(user)) {
+            userRegister.setError(getString(R.string.error_field_required));
+            focusView = userRegister;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(id)) {
+            idRegister.setError(getString(R.string.error_field_required));
+            focusView = idRegister;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(name)) {
+            nameRegister.setError(getString(R.string.error_field_required));
+            focusView = nameRegister;
+            cancel = true;
+        }
+
+
+        if (cancel)
+            focusView.requestFocus();
+
+
+        // ADD THERAPIST:
+        else {
+            if (id.matches("\\d+(?:\\.\\d+)?")){  // is number
+                // ***** Save the DB ***** //
+                Cursor cursor = my_db_new_therapist.show_data_therapists();
+                if(cursor.getCount() != 0){
+                    while(cursor.moveToNext()){
+                        if(cursor.getString(2).equals(user)){
+                            Toast.makeText(this, R.string.error_user_exist, Toast.LENGTH_SHORT).show();
+                            nameRegister.setText("");
+                            flag_user_exist = 1;
+                        }
+                    }
+                }
+
+                if(flag_user_exist == 0){
+                    long b = my_db_new_therapist.insert_data_therapist(id, name, user, password);
+                    if (b == -1)
+                        Toast.makeText(this, R.string.sign_up_error, Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(this, R.string.sign_up_successful, Toast.LENGTH_SHORT).show();
+
+                    userRegister.setText("");
+                    mPasswordRegister.setText("");
+                    idRegister.setText("");
+                    nameRegister.setText("");
+
+                    Intent i = new Intent(this, AreaPersonalActivity.class);
+                    i.putExtra("ID_REGISTER", id);  // put only this data to next activity
+                    i.putExtra("USER_REGISTER", user);
+                    startActivity(i);
+                }
+            }
+            else
+                Toast.makeText(this, R.string.id_error_no_int, Toast.LENGTH_SHORT).show();
+        }
     }
 
 
