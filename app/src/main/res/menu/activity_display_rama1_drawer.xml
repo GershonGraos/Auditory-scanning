@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/nav_menu">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="all">
         <item
             android:id="@+id/nav_edit"
             android:icon="@mipmap/ic_op_edit"
-            android:title="@string/option_edit" />
+            android:title="@string/option_edit"
+            android:checkable="true"/>
         <item
             android:id="@+id/nav_personal_area"
             android:icon="@mipmap/ic_area_op"
-            android:title="@string/option_personal_area" />
+            android:title="@string/option_personal_area"
+            android:checkable="true"/>
         <item
             android:id="@+id/nav_voice_recognize"
             android:icon="@mipmap/ic_voice_recognize"
-            android:title="@string/option_voice_recognize_active" />
+            android:title="@string/option_voice_recognize_active"
+            android:checkable="true"/>
         <item
             android:id="@+id/nav_sort_list_by_statistic"
             android:icon="@mipmap/ic_sort_list_by_statistic"
-            android:title="@string/option_sort_list_by_statistic_active" />
+            android:title="@string/option_sort_list_by_statistic_active"
+            android:checkable="true"/>
         <item
             android:id="@+id/nav_logout"
             android:icon="@mipmap/ic_logout_op"
-            android:title="@string/option_log_out" />
+            android:title="@string/option_log_out"
+            android:checkable="true"/>
     </group>
 
 </menu>

@@ -379,11 +379,6 @@ public class Display_rama1 extends AppCompatActivity
                 t.setTitle(R.string.option_sort_list_by_statistic_inactive);
                 mApp.statistic_sort = true;
             }
-
-            if(mApp.auto_recognize){
-                mSpeechRecognizer.stopListening();
-                customHandler.removeCallbacks(updateTimerThread);
-            }
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
