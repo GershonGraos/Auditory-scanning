@@ -40,6 +40,8 @@
     <string name="sign_up_error">בעיה ברישום, תנסה שוב בבקשה</string>
     <string name="id_error_no_int">טעות בהזנת מספר ת.ז. דרכון</string>
     <string name="error_field_pass_user">יש להאזין שם וסיסמא</string>
+    <string name="tittle_button_next">המשך</string>
+    <string name="tittle_button_add">הוסף</string>
     <string name="error_user_exist">שם משתמש כבר קיים במערכת, נא להזין שם משתמש אחר</string>
     <string name="permission_rationale">"הרשאות אנשי קשר נדרשות לקבלת אימייל."</string>
 
