@@ -1,5 +1,6 @@
 package com.graos.auditory_scanning_final_project;
 
+import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,9 +17,11 @@ public class DBHelper_Therapists extends SQLiteOpenHelper {
     public static final String COL_3 = "user_name";
     public static final String COL_4 = "password";
 
+    private Context thisContext;
 
     public DBHelper_Therapists(Context context) {
         super(context, DATABASE_NAME, null, 1);
+        thisContext = context;
     }
 
     @Override
@@ -39,6 +42,7 @@ public class DBHelper_Therapists extends SQLiteOpenHelper {
         contentValues.put(COL_3, user_name);
         contentValues.put(COL_4, password);
         long result_add = db.insert(TABLE_NAME, null, contentValues); // add the db
+        log_this_action_for_mongo();
         return result_add;
     }
 
@@ -56,12 +60,18 @@ public class DBHelper_Therapists extends SQLiteOpenHelper {
         contentValues.put(COL_3, user_name);
         contentValues.put(COL_4, password);
         db.update(TABLE_NAME, contentValues, "id = ?", new String[] { id_user } );
+        log_this_action_for_mongo();
         return true;
     }
 
     public Integer delete_data(String id_user){
         SQLiteDatabase db = this.getWritableDatabase();
+        log_this_action_for_mongo();
         return db.delete(TABLE_NAME, "id = ?", new String[] { id_user } );
+    }
+    private void log_this_action_for_mongo(){
+        DBHelper_MongoDB_Data dbHelper_mongoDB_data = new DBHelper_MongoDB_Data(thisContext);
+        dbHelper_mongoDB_data.update_mongo_data("","1","","");
     }
 }
 

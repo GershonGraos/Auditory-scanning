@@ -14,8 +14,11 @@ public class DBHelper_Patients_Data extends SQLiteOpenHelper {
     public static final String COL_3 = "yes_audio";
     public static final String COL_4 = "words_list";
 
+    private Context thisContext;
+
     public DBHelper_Patients_Data(Context context) {
         super(context, DATABASE_NAME, null, 1);
+        thisContext = context;
     }
 
     @Override
@@ -28,6 +31,12 @@ public class DBHelper_Patients_Data extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public Cursor get_patient_data(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME , null);
+        return res;
+    }
+
     public long insert_patient_data(String patient_id, String yes_video, String yes_audio, String words_list){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();;
@@ -36,6 +45,7 @@ public class DBHelper_Patients_Data extends SQLiteOpenHelper {
         contentValues.put(COL_3, yes_audio);
         contentValues.put(COL_4, words_list);
         long result_add = db.insert(TABLE_NAME, null, contentValues); // add the db
+        log_this_action_for_mongo();
         return result_add;
     }
 
@@ -47,6 +57,7 @@ public class DBHelper_Patients_Data extends SQLiteOpenHelper {
         contentValues.put(COL_3, yes_audio);
         contentValues.put(COL_4, words_list);
         db.update(TABLE_NAME, contentValues, "patient_id = ?", new String[] { patient_id } );
+        log_this_action_for_mongo();
         return true;
     }
 
@@ -58,7 +69,13 @@ public class DBHelper_Patients_Data extends SQLiteOpenHelper {
 
     public boolean delete_patient_data_by_id(String patient_id){
         SQLiteDatabase db = this.getWritableDatabase();
+        log_this_action_for_mongo();
         return db.delete(TABLE_NAME, "patient_id = ?", new String[] { patient_id } )>0;
+    }
+
+    private void log_this_action_for_mongo(){
+        DBHelper_MongoDB_Data dbHelper_mongoDB_data = new DBHelper_MongoDB_Data(thisContext);
+        dbHelper_mongoDB_data.update_mongo_data("","","","1");
     }
 }
 
