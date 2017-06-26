@@ -101,34 +101,46 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
 
 
 
-    // ---------------- NEXT ----------------------
+    // ---------------- PRESS NEXT ----------------------
     public void press_next(View view){
-        Intent i = new Intent(this, Display_Rama_1.class);
-        i.putExtra("ID_PATIENT", id_patient);
-        i.putExtra("ID_ONLY", id_therapist_to_displayAct);
+        DBHelper_Requests temp_db_request = new DBHelper_Requests(this);
+        Cursor c = temp_db_request.show_requests_by_patient_id(id_patient);
 
-        DBHelper_Patients_Data dbHelper_patients_data = new DBHelper_Patients_Data(AreaPersonalActivity.this);
-        Cursor cursor = dbHelper_patients_data.get_patient_data_by_id(id_patient);
-        while(cursor.moveToNext()){
-            mApp.setUriYesVideo(Uri.fromFile(new File(cursor.getString(0))));
-            mApp.setAudioPath(cursor.getString(1));
-            try {
-                ArrayList<String> listdata = new ArrayList<String>();
-                JSONArray jArray  = new JSONArray(cursor.getString(2));
-                if (jArray != null)
-                    for (int j=0;j<jArray.length();j++)
-                        listdata.add(jArray.getString(j));
-                mApp.setMatchesList(listdata);
-            } catch (JSONException e) {
-            }
+        if(c.getCount() == 0){
+            Intent it = new Intent(AreaPersonalActivity.this, Edit_Rama_1.class);
+            it.putExtra("ID_PATIENT",id_patient);
+            startActivity(it);
         }
-        startActivity(i);
+        else{
+            Intent i = new Intent(this, Display_Rama_1.class);
+            i.putExtra("ID_PATIENT", id_patient);
+            i.putExtra("ID_ONLY", id_therapist_to_displayAct);
+
+            // get audio data
+            DBHelper_Patients_Data dbHelper_patients_data = new DBHelper_Patients_Data(AreaPersonalActivity.this);
+            Cursor cursor = dbHelper_patients_data.get_patient_data_by_id(id_patient);
+            while(cursor.moveToNext()){
+                mApp.setUriYesVideo(Uri.fromFile(new File(cursor.getString(0))));
+                mApp.setAudioPath(cursor.getString(1));
+                try {
+                    ArrayList<String> listdata = new ArrayList<String>();
+                    JSONArray jArray  = new JSONArray(cursor.getString(2));
+                    if (jArray != null)
+                        for (int j=0;j<jArray.length();j++)
+                            listdata.add(jArray.getString(j));
+                    mApp.setMatchesList(listdata);
+                } catch (JSONException e) {
+                }
+            }
+
+            startActivity(i);
+        }
     }
 
 
 
     // ---------------------------------------------------------------------
-    // --------------------- Add Patient ----------------------------------
+    // --------------------- Add Patient -----------------------------------
     public void addPatient(View v) {
         View view = LayoutInflater.from(AreaPersonalActivity.this).inflate(R.layout.add_patient_layout, null);
         final EditText user_id = (EditText) view.findViewById(R.id.newPt_id);
@@ -269,6 +281,8 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
 
     }
 
+
+    // HELP ICON
     public void help_personal_area_activity(View view){
         final AlertDialog.Builder builder = new AlertDialog.Builder(AreaPersonalActivity.this);
         builder.setTitle(R.string.tittle_help_main);

@@ -5,10 +5,9 @@
 
     <Button
         android:id="@+id/button_edi"
-        android:layout_marginTop="15dp"
-        android:layout_width="290dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/edit_button_style"
         android:onClick="button_edit_request"
         android:text="@string/edit_button"
@@ -17,9 +16,8 @@
     <Button
         android:id="@+id/button_dele"
         android:layout_marginTop="5dp"
-        android:layout_width="290dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:background="@drawable/edit_button_style"
         android:textAllCaps="false"
         android:onClick="button_delete_request"

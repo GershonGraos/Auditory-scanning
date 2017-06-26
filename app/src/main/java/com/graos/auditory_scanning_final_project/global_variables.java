@@ -18,6 +18,8 @@ public class global_variables extends Application {
     public boolean auto_recognize = false;
     public boolean statistic_sort = false;
 
+    public boolean flag_no_dataPatient = false; //to refer it to activity appropriate
+
     private Uri UriYesVideo;
     public Uri getUriYesVideo() {
         return UriYesVideo;

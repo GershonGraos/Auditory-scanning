@@ -122,7 +122,6 @@ public class Display_Rama_1 extends AppCompatActivity
         i_result_patient = getIntent();
         my_id_patient = i_result_patient.getStringExtra("ID_PATIENT");
         my_only_id_therapist = i_result_patient.getStringExtra("ID_ONLY");
-        Toast.makeText(this,"id: " + my_id_patient,Toast.LENGTH_SHORT).show();
         _name.setText(my_id_patient);
         //simple_list_item_checked , simple_list_item_single_choice
         /*adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_activated_1, android.R.id.text1, values);
@@ -342,10 +341,12 @@ public class Display_Rama_1 extends AppCompatActivity
             if(t.isChecked()) {
                 t.setChecked(false);
                 t.setTitle(R.string.option_voice_recognize_active);
+                Toast.makeText(this,R.string.voice_stop,Toast.LENGTH_SHORT).show();
                 mApp.auto_recognize = false;
             }else{
                 t.setChecked(true);
                 t.setTitle(R.string.option_voice_recognize_inactive);
+                Toast.makeText(this,R.string.voice_start,Toast.LENGTH_SHORT).show();
                 mApp.auto_recognize = true;
             }
             if(items_count>0) {
@@ -363,10 +364,12 @@ public class Display_Rama_1 extends AppCompatActivity
             if(t.isChecked()) {
                 t.setChecked(false);
                 t.setTitle(R.string.option_sort_list_by_statistic_active);
+                Toast.makeText(this,R.string.statistic_stop,Toast.LENGTH_SHORT).show();
                 mApp.statistic_sort = false;
             }else{
                 t.setChecked(true);
                 t.setTitle(R.string.option_sort_list_by_statistic_inactive);
+                Toast.makeText(this,R.string.statistic_start,Toast.LENGTH_SHORT).show();
                 mApp.statistic_sort = true;
             }
             if(items_count>0) {
