@@ -485,5 +485,11 @@ public class SignUpActivity extends AppCompatActivity implements LoaderCallbacks
             showProgress(false);
         }
     }
-
+    public void help_sign_up_activity(View view){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+        builder.setTitle(R.string.tittle_help_main);
+        builder.setIcon(R.mipmap.ic_help3);
+        builder.setMessage(R.string.help_sign_up_activity);
+        builder.show();
+    }
 }

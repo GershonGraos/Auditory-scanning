@@ -73,6 +73,8 @@
     <string name="title_activity_display_patient">הצגת מטופל</string>
 
     <!-- Strings related to Edit List Patient -->
+    <string name="delete_record_msg">ההקלטה נמחקה בהצלחה!</string>
+    <string name="delete_record">מחק הקלטה</string>
     <string name="text_hint_edit">הוסף פריט</string>
     <string name="insert_item">נא להכניס פריט</string>
     <string name="show_yes_record">הצג "כן"</string>
@@ -105,11 +107,11 @@
     <string name="your_position_header">המיקום שלך</string>
 
     <!--helps -->
-    <string name="help_main_activity">במסך זה המטפל יוכל להתחבר למערכת ע"י הקשת מס' תעודת הזהות/דרכון שלו והסיסמה שלו, במידה והוא משתמש חדש יוכל הוא לעבור למסך הרישום.</string>
+    <string name="help_main_activity">במסך זה המטפל יוכל להתחבר למערכת ע\"י הקשת מס\' תעודת הזהות/דרכון שלו והסיסמה שלו, במידה והוא משתמש חדש יוכל הוא לעבור למסך הרישום.</string>
     <string name="help_sign_up_activity">במסך זה יש לרשום משתמש חדש, חשוב לזכור את שם המשתמש והסיסמא לצורך כניסה לחשבון בעתיד.</string>
     <string name="help_personal_area_activity">במסך זה ניתן להוסיף מטופל חדש או לבחור מטופל קיים בתיבה המשולבת ומשם לעבור למסך הנדרש (מסך עריכה - מטופל חדש, מסך תצוגה - מטופל קיים).</string>
-    <string name="help_edit_patient_activity">במסך זה ניתן: להקליט את-/לצפות ב-/למחוק את- הוידאו של פקודת ה-"כן" של המטופל ,כמו כן ניתן להוסיף/לערוך/למחוק בקשות של המטופל וכן קיימת האופציה להוספת בקשות עד ל-4 רמות פנימיות.</string>
-    <string name="help_display_patient_activity">במסך זה ניתן לעיין בתפריט האודיטורי באופן ידני או לעבור למצב זיהוי קולי באופן המאפשר דפדוף אוטומטי והאזנה לפקודת ה-"כן" של המטופל, כמו כן ניתן לעבור למצב 'עריכה' או 'איזור האישי' ולסדר את הרשימות באופן סטטיסטי.</string>
+    <string name="help_edit_patient_activity">במסך זה ניתן: להקליט את-/לצפות ב-/למחוק את- הוידאו של פקודת ה-\'כן\' של המטופל ,כמו כן ניתן להוסיף/לערוך/למחוק בקשות של המטופל וכן קיימת האופציה להוספת בקשות עד ל-4 רמות פנימיות.</string>
+    <string name="help_display_patient_activity">במסך זה ניתן לעיין בתפריט האודיטורי באופן ידני או לעבור למצב זיהוי קולי באופן המאפשר דפדוף אוטומטי והאזנה לפקודת ה-\'כן\' של המטופל, כמו כן ניתן לעבור למצב \'עריכה\' או \'איזור האישי\' ולסדר את הרשימות באופן סטטיסטי.</string>
     <string name="help_algorithm_level_activity">במסך זה המטפל והמטופל יוכלו לדעת באיזה שלב היררכי הם נמצאים בתפריטי הרשימות האודיטוריות.</string>
 
     <!-- Strings related to Slide Menu -->

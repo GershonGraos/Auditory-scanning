@@ -2,6 +2,7 @@ package com.graos.auditory_scanning_final_project;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -23,19 +24,41 @@ public class DBHelper_Patients_Data extends SQLiteOpenHelper {
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS" + TABLE_NAME);
+        onCreate(db);
     }
 
-    public long insert_patient_data(String id_user, String name, String user_name, String password){
+    public long insert_patient_data(String patient_id, String yes_video, String yes_audio, String words_list){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();;
-        contentValues.put(COL_1, id_user);
-        contentValues.put(COL_2, name);
-        contentValues.put(COL_3, user_name);
-        contentValues.put(COL_4, password);
+        contentValues.put(COL_1, patient_id);
+        contentValues.put(COL_2, yes_video);
+        contentValues.put(COL_3, yes_audio);
+        contentValues.put(COL_4, words_list);
         long result_add = db.insert(TABLE_NAME, null, contentValues); // add the db
         return result_add;
     }
 
+    public boolean update_patient_data(String patient_id, String yes_video, String yes_audio, String words_list){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1, patient_id);
+        contentValues.put(COL_2, yes_video);
+        contentValues.put(COL_3, yes_audio);
+        contentValues.put(COL_4, words_list);
+        db.update(TABLE_NAME, contentValues, "patient_id = ?", new String[] { patient_id } );
+        return true;
+    }
+
+    public Cursor get_patient_data_by_id(String patient_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select yes_video,yes_audio,words_list from " + TABLE_NAME + " where patient_id = '" + patient_id + "'", null);
+        return res;
+    }
+
+    public boolean delete_patient_data_by_id(String patient_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, "patient_id = ?", new String[] { patient_id } )>0;
+    }
 }
 

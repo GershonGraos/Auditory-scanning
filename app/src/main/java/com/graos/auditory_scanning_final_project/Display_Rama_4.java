@@ -196,12 +196,16 @@ public class Display_Rama_4 extends AppCompatActivity {
 
 
     public void populateListViews(){
-        Cursor cursor = my_db_requests.show_requests();
+        Cursor cursor = null;
+        if(mApp.statistic_sort)
+            cursor = my_db_requests.show_requests_level_2_3_4_sorted_statistically(id_patient,i_parent,"4");
+        else
+            cursor = my_db_requests.show_requests_level_2_3_4(id_patient,i_parent,"4");
+
         if(cursor.getCount() != 0) {
             ArrayList<String> listRequests = new ArrayList<String >();
             while (cursor.moveToNext()) {
-                if(cursor.getString(0).equals(id_patient) && cursor.getString(1).equals(i_parent) && cursor.getString(2).equals("4"))
-                    listRequests.add(cursor.getString(3));
+                listRequests.add(cursor.getString(0));
             }
             my_list_adapter = new MyListAdapter(this, listRequests);
             _my_list_view.setAdapter(my_list_adapter);

@@ -39,6 +39,8 @@ import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
 
+import org.json.JSONArray;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,7 +62,8 @@ public class Edit_Rama_1 extends AppCompatActivity {
     private global_variables mApp;
     private Context thisContext;
     private Button rec_yes_btn;
-
+    private Button rec_del_btn;
+    DBHelper_Patients_Data dbHelper_patients_data;
 
 
     DBHelper_Requests my_dbHelper_requests;
@@ -82,10 +85,21 @@ public class Edit_Rama_1 extends AppCompatActivity {
         setContentView(R.layout.activity_edit__rama_1);
         setTitle(R.string.nameActivity_edit_pattient);
         thisContext = this;
+        mApp = ((global_variables)getApplicationContext());
 
         //help = (ImageView) findViewById(R.id.imageView8);
         //help.bringToFront();
+        rec_yes_btn = (Button) findViewById(R.id.button4);
+        rec_del_btn = (Button) findViewById(R.id.btn_delete_record);
 
+        if(mApp.getAudioPath()!=null){
+            UriYesVideo = mApp.getUriYesVideo();
+            audio_path = mApp.getAudioPath();
+            abs_path = audio_path.substring(0,audio_path.lastIndexOf(".flac")+1) + "mp4";
+            btn_rec_yes_mode = true;
+            rec_yes_btn.setText(R.string.button_watch_record);
+            rec_del_btn.setVisibility(View.VISIBLE);
+        }
         // ----- DB -------
         my_dbHelper_requests = new DBHelper_Requests(Edit_Rama_1.this);
 
@@ -193,7 +207,6 @@ public class Edit_Rama_1 extends AppCompatActivity {
             }
         }
 
-        mApp = ((global_variables)getApplicationContext());
 
         patient_video =  (VideoView) findViewById(R.id.PatientVideoView);
         VideoContainer = (RelativeLayout) findViewById(R.id.VideoContainer);
@@ -447,6 +460,11 @@ public class Edit_Rama_1 extends AppCompatActivity {
                         mApp.setUriYesVideo(UriYesVideo);
                         mApp.setAudioPath(audio_path);
                         mApp.setMatchesList(matches);
+
+                        dbHelper_patients_data = new DBHelper_Patients_Data(Edit_Rama_1.this);
+                        JSONArray mJSONArray = new JSONArray(matches);
+                        dbHelper_patients_data.insert_patient_data(id_patient,abs_path,audio_path,mJSONArray.toString());
+                        rec_del_btn.setVisibility(View.VISIBLE);
                     }
                     @Override
                     public void onFinish() {
@@ -471,11 +489,35 @@ public class Edit_Rama_1 extends AppCompatActivity {
             rec_yes_btn.setText(R.string.button_watch_record);
         }else{
             start_video_and_hide_button(UriYesVideo);
-        }    }
+        }
+    }
 
     public void onClick_delete_record_yes(View view){
-        //rec_yes_btn.setText("Recorder YES");
-        //btn_rec_yes_mode = false;
+        dbHelper_patients_data = new DBHelper_Patients_Data(Edit_Rama_1.this);
+        if(!dbHelper_patients_data.delete_patient_data_by_id(id_patient)){
+            mApp.alertMessage(thisContext,"Error in Data Base","Error record not found in Data Base");
+            finish();
+            return;
+        }
+
+        File file = new File(abs_path);
+        boolean deleted = file.delete();
+        file = new File(audio_path);
+        deleted = file.delete();
+
+        mApp.setAudioPath(null);
+        mApp.setUriYesVideo(null);
+        mApp.setMatchesList(null);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Edit_Rama_1.this);
+        builder.setTitle(R.string.delete_record);
+        builder.setIcon(R.mipmap.ic_remove);
+        builder.setMessage(R.string.delete_record_msg);
+        builder.show();
+
+        view.setVisibility(View.INVISIBLE);
+        rec_yes_btn.setText(R.string.button_yes);
+        btn_rec_yes_mode = false;
     }
 
     private void start_video_and_hide_button(Uri video_uri){
@@ -509,4 +551,13 @@ public class Edit_Rama_1 extends AppCompatActivity {
             }
         }
     }
+
+    public void help_edit_patient_activity(View view){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Edit_Rama_1.this);
+        builder.setTitle(R.string.tittle_help_main);
+        builder.setIcon(R.mipmap.ic_help3);
+        builder.setMessage(R.string.help_edit_patient_activity);
+        builder.show();
+    }
+
 }

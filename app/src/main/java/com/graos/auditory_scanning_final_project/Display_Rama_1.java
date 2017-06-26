@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -136,7 +137,6 @@ public class Display_Rama_1 extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // ListView Clicked item value
                 request_click = (String)_my_list.getItemAtPosition(position);
-
                 Cursor cursor = my_dbHelper_requests.show_requests();
                 while(cursor.moveToNext()){
                     if(cursor.getString(3).equals(request_click)){
@@ -207,7 +207,6 @@ public class Display_Rama_1 extends AppCompatActivity
                                 _name.setText(matches.get(i));
                                 patient_said_yes_or_no = true;
                                 //_my_list.getSelectedView().setBackgroundColor(Color.GREEN);
-                                btn_yes.setBackgroundColor(Color.GREEN);
                                 //btn_no.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_style));
                                 mSpeechRecognizer.stopListening();
                                 customHandler.removeCallbacks(updateTimerThread);
@@ -223,7 +222,6 @@ public class Display_Rama_1 extends AppCompatActivity
                                     _name.setText(STT_matches.get(j));
                                     patient_said_yes_or_no = true;
                                     //_my_list.getSelectedView().setBackgroundColor(Color.GREEN);
-                                    btn_yes.setBackgroundColor(Color.GREEN);
                                     //btn_no.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_style));
                                     mSpeechRecognizer.stopListening();
                                     customHandler.removeCallbacks(updateTimerThread);
@@ -255,7 +253,6 @@ public class Display_Rama_1 extends AppCompatActivity
                                 _name.setText(matches.get(i));
                                 patient_said_yes_or_no = true;
                                 //_my_list.getSelectedView().setBackgroundColor(Color.GREEN);
-                                btn_yes.setBackgroundColor(Color.GREEN);
                                 //btn_no.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_style));
                                 mSpeechRecognizer.stopListening();
                                 customHandler.removeCallbacks(updateTimerThread);
@@ -372,6 +369,10 @@ public class Display_Rama_1 extends AppCompatActivity
                 t.setTitle(R.string.option_sort_list_by_statistic_inactive);
                 mApp.statistic_sort = true;
             }
+            if(items_count>0) {
+                startActivity(getIntent());
+                finish();
+            }
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -381,12 +382,16 @@ public class Display_Rama_1 extends AppCompatActivity
 
     // SHOW THE STRING ARRAY REQUESTS INTO LAYOUT //
     public void populateListViews(){
-        Cursor cursor = my_dbHelper_requests.show_requests();
+        Cursor cursor = null;
+        if(mApp.statistic_sort)
+            cursor = my_dbHelper_requests.show_requests_level_1_sorted_statistically(my_id_patient);
+        else
+            cursor = my_dbHelper_requests.show_requests_level_1(my_id_patient);
+
         if(cursor.getCount() != 0) {
             ArrayList<String> listRequests = new ArrayList<String >();
             while (cursor.moveToNext()) {
-                if(cursor.getString(0).equals(my_id_patient) && cursor.getString(1).equals("-1") && cursor.getString(2).equals("1"))
-                    listRequests.add(cursor.getString(3));
+                listRequests.add(cursor.getString(0));
             }
             my_list_adapter = new MyListAdapter(this, listRequests);
 
@@ -448,5 +453,13 @@ public class Display_Rama_1 extends AppCompatActivity
         if(the_distance>threshold)
             return false;
         return true;
+    }
+
+    public void help_display_patient_activity(View view){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Display_Rama_1.this);
+        builder.setTitle(R.string.tittle_help_main);
+        builder.setIcon(R.mipmap.ic_help3);
+        builder.setMessage(R.string.help_display_patient_activity);
+        builder.show();
     }
 }

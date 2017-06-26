@@ -12,6 +12,7 @@
 
         <ImageView
             android:id="@+id/imageView6"
+            android:onClick="help_algorithm_level_activity"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_gravity="right"

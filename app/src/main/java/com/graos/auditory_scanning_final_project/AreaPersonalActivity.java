@@ -19,6 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.File;
 import java.util.ArrayList;
 //public class AreaPersonalActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -43,11 +47,18 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
     int flag_add_one_user = 0;
     DBHelper_Patients my_dbHelper_patients;
     private boolean first_entry = false;
+
+    private global_variables mApp;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_area_personal);
         setTitle(R.string.nameActivity_area_personal);
+
+        mApp = ((global_variables)getApplicationContext());
+
         first_entry = true;
         my_dbHelper_patients = new DBHelper_Patients(this);
 
@@ -100,6 +111,22 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
             Intent i = new Intent(this, Display_Rama_1.class);
             i.putExtra("ID_PATIENT", id_patient);
             i.putExtra("ID_ONLY", id_therapist_to_displayAct);
+
+            DBHelper_Patients_Data dbHelper_patients_data = new DBHelper_Patients_Data(AreaPersonalActivity.this);
+            Cursor cursor = dbHelper_patients_data.get_patient_data_by_id(id_patient);
+            while(cursor.moveToNext()){
+                mApp.setUriYesVideo(Uri.fromFile(new File(cursor.getString(0))));
+                mApp.setAudioPath(cursor.getString(1));
+                try {
+                    ArrayList<String> listdata = new ArrayList<String>();
+                    JSONArray jArray  = new JSONArray(cursor.getString(2));
+                    if (jArray != null)
+                        for (int j=0;j<jArray.length();j++)
+                            listdata.add(jArray.getString(j));
+                    mApp.setMatchesList(listdata);
+                } catch (JSONException e) {
+                }
+            }
             startActivity(i);
         }else{
             first_entry = false;
@@ -251,6 +278,14 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
             _spinner_patient.setAdapter(adapter);
         }
 
+    }
+
+    public void help_personal_area_activity(View view){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(AreaPersonalActivity.this);
+        builder.setTitle(R.string.tittle_help_main);
+        builder.setIcon(R.mipmap.ic_help3);
+        builder.setMessage(R.string.help_personal_area_activity);
+        builder.show();
     }
 }
 

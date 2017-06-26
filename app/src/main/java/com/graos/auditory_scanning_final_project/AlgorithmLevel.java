@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -96,5 +97,13 @@ public class AlgorithmLevel extends AppCompatActivity {
                 // Statements
         }
 
+    }
+
+    public void help_algorithm_level_activity(View view){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(AlgorithmLevel.this);
+        builder.setTitle(R.string.tittle_help_main);
+        builder.setIcon(R.mipmap.ic_help3);
+        builder.setMessage(R.string.help_algorithm_level_activity);
+        builder.show();
     }
 }

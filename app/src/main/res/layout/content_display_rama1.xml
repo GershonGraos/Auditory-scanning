@@ -50,6 +50,7 @@
 
                 <ImageView
                     android:id="@+id/imageView9"
+                    android:onClick="help_display_patient_activity"
                     android:layout_width="80dp"
                     android:layout_height="45dp"
                     android:layout_marginTop="42dp"

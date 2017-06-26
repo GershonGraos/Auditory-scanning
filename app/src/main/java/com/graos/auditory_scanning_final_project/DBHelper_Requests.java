@@ -76,4 +76,28 @@ public class DBHelper_Requests extends SQLiteOpenHelper {
         db.update(TABLE_NAME, contentValues, "id = ?", new String[] { i } );
         return true;
     }
+
+    public Cursor show_requests_level_1_sorted_statistically(String patient_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select request from " + TABLE_NAME + " where id_patient = '" + patient_id + "' AND parent_id = '-1' AND stage = '1' order by counter DESC", null);
+        return res;
+    }
+
+    public Cursor show_requests_level_1(String patient_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select request from " + TABLE_NAME + " where id_patient = '" + patient_id + "' AND parent_id = '-1' AND stage = '1'", null);
+        return res;
+    }
+
+    public Cursor show_requests_level_2_3_4_sorted_statistically(String patient_id,String parent_id,String stage){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select request from " + TABLE_NAME + " where id_patient = '" + patient_id + "' AND parent_id = '" + parent_id + "' AND stage = '" + stage + "' order by counter DESC", null);
+        return res;
+    }
+
+    public Cursor show_requests_level_2_3_4(String patient_id,String parent_id,String stage){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select request from " + TABLE_NAME + " where id_patient = '" + patient_id + "' AND parent_id = '" + parent_id + "' AND stage = '" + stage + "'", null);
+        return res;
+    }
 }
