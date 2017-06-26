@@ -95,7 +95,8 @@
     <string name="edit_exit_option">יציאה</string>
     <string name="same_request">הבקשה כבר קיימת במערכת, נא להזין בקשה שונה</string>
     <string name="text_press_item">בקשה</string>
-
+    <string name="error_record_not_found_head">שגיאה בבסיס הנתונים</string>
+    <string name="error_record_not_found_body">שגיאה ,הרשומה לא נמצאה בבסיס הנתונים</string>
 
     <!-- Strings related to Demo Screen -->
     <string name="button_get_yes">כן</string>

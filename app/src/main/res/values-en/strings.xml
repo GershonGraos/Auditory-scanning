@@ -95,6 +95,8 @@
     <string name="edit_exit_option">Exit</string>
     <string name="same_request">The request is already exists in the system, please enter a different request</string>
     <string name="text_press_item">Request</string>
+    <string name="error_record_not_found_head">Error in dataBase</string>
+    <string name="error_record_not_found_body">Error record not found in dataBase</string>
 
     <!-- Strings related to Algorithm Level Screen -->
     <string name="level_1">Level 1</string>

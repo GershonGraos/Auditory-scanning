@@ -495,8 +495,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
     public void onClick_delete_record_yes(View view){
         dbHelper_patients_data = new DBHelper_Patients_Data(Edit_Rama_1.this);
         if(!dbHelper_patients_data.delete_patient_data_by_id(id_patient)){
-            mApp.alertMessage(thisContext,"Error in Data Base","Error record not found in Data Base");
-            finish();
+            mApp.alertMessage(thisContext ,thisContext.getResources().getString(R.string.error_record_not_found_head) , thisContext.getResources().getString(R.string.error_record_not_found_body));
             return;
         }
 

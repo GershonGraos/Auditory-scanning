@@ -45,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
 
 //        //------Doron's Shortcat-------
-//        _userLogin.setText("121");
-//        _passLogIn.setText("123456");
+        _userLogin.setText("121");
+        _passLogIn.setText("123456");
         //---------------------------
 
         //------Gershon's Shortcat-------
-        _userLogin.setText("moshe123");
-        _passLogIn.setText("12345");
+//        _userLogin.setText("moshe123");
+//        _passLogIn.setText("12345");
 //        ---------------------------
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
