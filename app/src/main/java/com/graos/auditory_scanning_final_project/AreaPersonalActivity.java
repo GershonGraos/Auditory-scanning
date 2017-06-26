@@ -84,58 +84,47 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         if(flag_newUser == 1){
             addPatient(_user_view);
         }
-
-
         populateSpinnerView();
-
-//        if(flag_login == 1){
-//            patients = new ArrayList<String>();
-//            flag_login = 0;
-//            patients.add( "e " + " a");
-//            patients.add("דוד מזרחי");
-//            patients.add("שלמה כהן");
-//        }
-
-
     }
+
 
     // ------------ Select Patient --------------------------------------------
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l){
-//        Cursor c = my_dbHelper_patients.show_patients();
-//        c.moveToPosition(position);
-//        id_patient = c.getString(0);
-        if(!first_entry){
-            id_patient = adapterView.getItemAtPosition(position).toString();
-
-            Intent i = new Intent(this, Display_Rama_1.class);
-            i.putExtra("ID_PATIENT", id_patient);
-            i.putExtra("ID_ONLY", id_therapist_to_displayAct);
-
-            DBHelper_Patients_Data dbHelper_patients_data = new DBHelper_Patients_Data(AreaPersonalActivity.this);
-            Cursor cursor = dbHelper_patients_data.get_patient_data_by_id(id_patient);
-            while(cursor.moveToNext()){
-                mApp.setUriYesVideo(Uri.fromFile(new File(cursor.getString(0))));
-                mApp.setAudioPath(cursor.getString(1));
-                try {
-                    ArrayList<String> listdata = new ArrayList<String>();
-                    JSONArray jArray  = new JSONArray(cursor.getString(2));
-                    if (jArray != null)
-                        for (int j=0;j<jArray.length();j++)
-                            listdata.add(jArray.getString(j));
-                    mApp.setMatchesList(listdata);
-                } catch (JSONException e) {
-                }
-            }
-            startActivity(i);
-        }else{
-            first_entry = false;
-        }
+        id_patient = adapterView.getItemAtPosition(position).toString();
     }
+
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
         Toast.makeText(this,"Select/Add Patient",Toast.LENGTH_SHORT).show();
     }
+
+
+
+    // ---------------- NEXT ----------------------
+    public void press_next(View view){
+        Intent i = new Intent(this, Display_Rama_1.class);
+        i.putExtra("ID_PATIENT", id_patient);
+        i.putExtra("ID_ONLY", id_therapist_to_displayAct);
+
+        DBHelper_Patients_Data dbHelper_patients_data = new DBHelper_Patients_Data(AreaPersonalActivity.this);
+        Cursor cursor = dbHelper_patients_data.get_patient_data_by_id(id_patient);
+        while(cursor.moveToNext()){
+            mApp.setUriYesVideo(Uri.fromFile(new File(cursor.getString(0))));
+            mApp.setAudioPath(cursor.getString(1));
+            try {
+                ArrayList<String> listdata = new ArrayList<String>();
+                JSONArray jArray  = new JSONArray(cursor.getString(2));
+                if (jArray != null)
+                    for (int j=0;j<jArray.length();j++)
+                        listdata.add(jArray.getString(j));
+                mApp.setMatchesList(listdata);
+            } catch (JSONException e) {
+            }
+        }
+        startActivity(i);
+    }
+
 
 
     // ---------------------------------------------------------------------

@@ -39,6 +39,8 @@
     <string name="sign_in_check">Please try to login to your account</string>
     <string name="sign_up_error">Error, please try again</string>
     <string name="id_error_no_int">ID or Passport Error</string>
+    <string name="tittle_button_next">next</string>
+    <string name="tittle_button_add">add</string>
     <string name="error_user_exist">Username is already exists in the system, please enter a different username</string>
     <string name="error_field_pass_user">Need enter user name and password!</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email

@@ -13,19 +13,19 @@
     android:weightSum="1">
 
     <!-- Login progress -->
-    <ScrollView
-        android:id="@+id/ScrollView01"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<ScrollView-->
+        <!--android:id="@+id/ScrollView01"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <pl.polidea.view.ZoomView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--<pl.polidea.view.ZoomView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
             <LinearLayout
                 android:id="@+id/email_login_form"
                 android:layout_width="match_parent"
-                android:layout_height="456dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -127,29 +127,6 @@
                         android:textStyle="bold" />
                 </android.support.design.widget.TextInputLayout>
 
-                <!--<Button-->
-                <!--android:id="@+id/button_view_all"-->
-                <!--android:layout_width="146dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:onClick="view_all_function"-->
-                <!--android:text="View db"-->
-                <!--android:textAllCaps="false" />-->
-
-                <!--<Button-->
-                <!--android:id="@+id/button2"-->
-                <!--android:layout_width="151dp"-->
-                <!--android:layout_height="38dp"-->
-                <!--android:onClick="update_d"-->
-                <!--android:text="Update"-->
-                <!--android:textAllCaps="false" />-->
-
-                <!--<Button-->
-                <!--android:id="@+id/button3"-->
-                <!--android:layout_width="147dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="delete"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:onClick="delete_d"/>-->
 
                 <Button
                     android:id="@+id/button_register"
@@ -167,8 +144,8 @@
 
             </LinearLayout>
 
-        </pl.polidea.view.ZoomView>
-    </ScrollView>
+        <!--</pl.polidea.view.ZoomView>-->
+    <!--</ScrollView>-->
 
 
 </LinearLayout>
