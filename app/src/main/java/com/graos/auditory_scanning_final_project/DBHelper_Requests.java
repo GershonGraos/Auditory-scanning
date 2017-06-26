@@ -55,7 +55,11 @@ public class DBHelper_Requests extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
         return res;
     }
-
+    public Cursor show_requests_by_patient_id(String id_of_patient){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME + " where id_patient = '"+id_of_patient+"'", null);
+        return res;
+    }
     public Integer delete_data(String id_counter){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "id = ?", new String[] { id_counter } );

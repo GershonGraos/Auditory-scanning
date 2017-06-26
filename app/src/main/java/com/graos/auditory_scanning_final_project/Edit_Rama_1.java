@@ -64,6 +64,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
     private Button rec_yes_btn;
     private Button rec_del_btn;
     DBHelper_Patients_Data dbHelper_patients_data;
+    boolean flag_delete_video = false;
 
 
     DBHelper_Requests my_dbHelper_requests;
@@ -492,32 +493,44 @@ public class Edit_Rama_1 extends AppCompatActivity {
         }
     }
 
-    public void onClick_delete_record_yes(View view){
+    public void onClick_delete_record_yes(final View view){
         dbHelper_patients_data = new DBHelper_Patients_Data(Edit_Rama_1.this);
-        if(!dbHelper_patients_data.delete_patient_data_by_id(id_patient)){
-            mApp.alertMessage(thisContext,"Error in Data Base","Error record not found in Data Base");
-            finish();
-            return;
-        }
-
-        File file = new File(abs_path);
-        boolean deleted = file.delete();
-        file = new File(audio_path);
-        deleted = file.delete();
-
-        mApp.setAudioPath(null);
-        mApp.setUriYesVideo(null);
-        mApp.setMatchesList(null);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(Edit_Rama_1.this);
-        builder.setTitle(R.string.delete_record);
+        builder.setTitle(R.string.delete_video_tittle);
         builder.setIcon(R.mipmap.ic_remove);
-        builder.setMessage(R.string.delete_record_msg);
-        builder.show();
+        builder.setMessage(R.string.delete_item_quetion)
 
-        view.setVisibility(View.INVISIBLE);
-        rec_yes_btn.setText(R.string.button_yes);
-        btn_rec_yes_mode = false;
+                .setPositiveButton(R.string.button_get_yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if(dbHelper_patients_data.delete_patient_data_by_id(id_patient)){
+                            Toast.makeText(Edit_Rama_1.this, R.string.delete_record_msg, Toast.LENGTH_SHORT).show();
+                            flag_delete_video = true;
+                            File file = new File(abs_path);
+                            boolean deleted = file.delete();
+                            file = new File(audio_path);
+                            deleted = file.delete();
+
+                            mApp.setAudioPath(null);
+                            mApp.setUriYesVideo(null);
+                            mApp.setMatchesList(null);
+
+                            view.setVisibility(View.INVISIBLE);
+                            rec_yes_btn.setText(R.string.button_yes);
+                            btn_rec_yes_mode = false;
+                        }
+                        else{
+                            mApp.alertMessage(thisContext,"Error in Data Base","Error record not found in Data Base");
+                            return;
+                        }
+                    }
+                })
+
+                .setNegativeButton(R.string.button_get_no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        builder.show();
     }
 
     private void start_video_and_hide_button(Uri video_uri){

@@ -73,6 +73,10 @@
     <string name="option_sort_list_by_statistic_inactive">Sort List By Statistic - Off</string>
     <string name="option_log_out">Logout</string>
     <string name="title_activity_display_patient">Display Patient</string>
+    <string name="voice_start">Voice Recognition - On</string>
+    <string name="voice_stop">Voice Recognition - Off</string>
+    <string name="statistic_start">Sort List By Statistic - On</string>
+    <string name="statistic_stop">Sort List By Statistic - Off</string>
 
     <!-- Strings related to Edit List Patient -->
     <string name="delete_record_msg">The record was deleted successfully!</string>
@@ -95,6 +99,7 @@
     <string name="edit_exit_option">Exit</string>
     <string name="same_request">The request is already exists in the system, please enter a different request</string>
     <string name="text_press_item">Request</string>
+    <string name="delete_video_tittle">Video remove</string>
 
     <!-- Strings related to Algorithm Level Screen -->
     <string name="level_1">Level 1</string>
@@ -107,7 +112,7 @@
     <string name="help_main_activity">In this screen, the therapist will be able to connect to the system by entering his ID/passport number and password.</string>
     <string name="help_sign_up_activity">In this screen the therapist can be register as a new user. It is important to him to remember his username and his password for future login.</string>
     <string name="help_personal_area_activity">In this screen, the therapist can add a new patient or select an existing patient from the combo box and then switch to the desired screen (screen editing - new patient, display screen - an existing patient).</string>
-    <string name="help_edit_patient_activity">In this screen the therapist can: record / watch / delete the video of  the \'Yes\' command of the patient, he can also add / edit / delete the patient\'s requests and the option to add requests up to 4 internal levels.</string>
+    <string name="help_edit_patient_activity">In this screen the therapist can: record / watch / delete the video of  the \'Yes\' command of the patient, he can also add and edit / delete the patient\'s requests by long-click, and the option to add requests up to 4 internal levels.</string>
     <string name="help_display_patient_activity">In this screen, the therapist can view the auditory menu manually or switch to voice recognition mode so that he can automatically browse and listen to the patient\'s \'Yes\' command. You can also switch to \'Edit\' or \'Personal Area\' and arrange the lists statistically.</string>
     <string name="help_algorithm_level_activity">In this screen, the therapist and the patient will be able to know at what stage they are in the auditory lists.</string>
 
