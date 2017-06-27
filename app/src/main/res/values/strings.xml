@@ -35,7 +35,7 @@
     <string name="error_incorrect_password">הסיסמה אינה נכונה</string>
     <string name="error_field_required">שדה זה הינו שדה חובה</string>
     <string name="error_field_required_id">נא להזין 9 ספרות</string>
-    <string name="sign_up_successful">רישום בוצה בהצלחה!</string>
+    <string name="sign_up_successful">רישום בוצע בהצלחה!</string>
     <string name="sign_in_check">בבקשה תנסה להכנס לחשבונך</string>
     <string name="sign_up_error">בעיה ברישום, תנסה שוב בבקשה</string>
     <string name="id_error_no_int">טעות בהזנת מספר ת.ז. דרכון</string>
