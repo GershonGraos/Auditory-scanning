@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         //---------------------------
 
 //        ------Gershon's Shortcut-------
-//        _userLogin.setText("moshe123");
-//        _passLogIn.setText("12345");
+        _userLogin.setText("moshe123");
+        _passLogIn.setText("12345");
 //        ---------------------------
 
         if (android.os.Build.VERSION.SDK_INT > 9) {

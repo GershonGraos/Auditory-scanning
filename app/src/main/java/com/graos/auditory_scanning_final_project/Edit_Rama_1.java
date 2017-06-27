@@ -225,6 +225,8 @@ public class Edit_Rama_1 extends AppCompatActivity {
                 ImageView record_yes = (ImageView) findViewById(R.id.button4);
                 record_yes.setVisibility(View.VISIBLE);
                 VideoContainer.setVisibility(View.INVISIBLE);
+                rec_del_btn.setVisibility(View.VISIBLE);
+                text_delete_video.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -554,12 +556,14 @@ public class Edit_Rama_1 extends AppCompatActivity {
         DisplayMetrics metrics = new DisplayMetrics(); getWindowManager().getDefaultDisplay().getMetrics(metrics);
         android.widget.RelativeLayout.LayoutParams params = (android.widget.RelativeLayout.LayoutParams) VideoContainer.getLayoutParams();
         params.width =  metrics.widthPixels;
-        params.height = metrics.heightPixels;
+        params.height = metrics.heightPixels-400;
         params.leftMargin = 0;
         VideoContainer.setLayoutParams(params);
 
         ImageView record_yes = (ImageView) findViewById(R.id.button4);
         record_yes.setVisibility(View.INVISIBLE);
+        rec_del_btn.setVisibility(View.INVISIBLE);
+        text_delete_video.setVisibility(View.INVISIBLE);
 
         patient_video.setVideoURI(video_uri);
         patient_video.requestFocus();
