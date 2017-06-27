@@ -102,6 +102,7 @@
     <string name="error_record_not_found_head">Error in dataBase</string>
     <string name="error_record_not_found_body">Error record not found in dataBase</string>
     <string name="delete_video_tittle">Video remove</string>
+    <string name="button_go_display">Switch to Display screen</string>
     <string name="progress_dialog_msg">Processing video. Please wait...</string>
 
     <!-- Strings related to Algorithm Level Screen -->

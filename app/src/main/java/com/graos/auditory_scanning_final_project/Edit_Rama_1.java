@@ -62,8 +62,10 @@ public class Edit_Rama_1 extends AppCompatActivity {
     private RelativeLayout VideoContainer;
     private global_variables mApp;
     private Context thisContext;
-    private Button rec_yes_btn;
-    private Button rec_del_btn;
+    private TextView text_delete_video;
+    private TextView text_video;
+    private ImageView rec_yes_btn;
+    private ImageView rec_del_btn;
     DBHelper_Patients_Data dbHelper_patients_data;
     boolean flag_delete_video = false;
     private ProgressDialog dialog;
@@ -92,15 +94,18 @@ public class Edit_Rama_1 extends AppCompatActivity {
 
         //help = (ImageView) findViewById(R.id.imageView8);
         //help.bringToFront();
-        rec_yes_btn = (Button) findViewById(R.id.button4);
-        rec_del_btn = (Button) findViewById(R.id.btn_delete_record);
+        rec_yes_btn = (ImageView) findViewById(R.id.button4);
+        rec_del_btn = (ImageView) findViewById(R.id.btn_delete_record);
+        text_delete_video = (TextView) findViewById(R.id.textView_delete_video);
+        text_video = (TextView) findViewById(R.id.textView_video);
 
         if(mApp.getAudioPath()!=null){
             UriYesVideo = mApp.getUriYesVideo();
             audio_path = mApp.getAudioPath();
             abs_path = audio_path.substring(0,audio_path.lastIndexOf(".flac")+1) + "mp4";
             btn_rec_yes_mode = true;
-            rec_yes_btn.setText(R.string.button_watch_record);
+            text_delete_video.setVisibility(View.VISIBLE);
+            text_video.setText(R.string.button_watch_record);
             rec_del_btn.setVisibility(View.VISIBLE);
         }
         // ----- DB -------
@@ -217,7 +222,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
             @Override
             public void onCompletion(MediaPlayer mp){
                 // invoke your activity here
-                Button record_yes = (Button) findViewById(R.id.button4);
+                ImageView record_yes = (ImageView) findViewById(R.id.button4);
                 record_yes.setVisibility(View.VISIBLE);
                 VideoContainer.setVisibility(View.INVISIBLE);
             }
@@ -452,7 +457,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
                             file = new File(audio_path);
                             deleted = file.delete();
                             btn_rec_yes_mode = false;
-                            rec_yes_btn.setText(R.string.button_yes);
+                            text_video.setText(R.string.button_yes);
                             return;
                         }
                         if(matches.size()==0) {
@@ -462,7 +467,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
                             file = new File(audio_path);
                             deleted = file.delete();
                             btn_rec_yes_mode = false;
-                            rec_yes_btn.setText(R.string.button_yes);
+                            text_video.setText(R.string.button_yes);
                             return;
                         }
                         mApp.setUriYesVideo(UriYesVideo);
@@ -473,8 +478,9 @@ public class Edit_Rama_1 extends AppCompatActivity {
                         JSONArray mJSONArray = new JSONArray(matches);
                         dbHelper_patients_data.insert_patient_data(id_patient,abs_path,audio_path,mJSONArray.toString());
                         rec_del_btn.setVisibility(View.VISIBLE);
+                        text_delete_video.setVisibility(View.VISIBLE);
+
                         btn_rec_yes_mode = true;
-                        rec_yes_btn.setText(R.string.button_watch_record);
                         dialog.cancel();
                     }
                     @Override
@@ -491,12 +497,13 @@ public class Edit_Rama_1 extends AppCompatActivity {
     }
 
     public void onClick_record_yes(View view){
-        rec_yes_btn = (Button) view;
+        rec_yes_btn = (ImageView) view;
         if(!btn_rec_yes_mode) {
             Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
             if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
             }
+            text_video.setText(R.string.button_watch_record);
         }else{
             start_video_and_hide_button(UriYesVideo);
         }
@@ -524,7 +531,8 @@ public class Edit_Rama_1 extends AppCompatActivity {
                             mApp.setMatchesList(null);
 
                             view.setVisibility(View.INVISIBLE);
-                            rec_yes_btn.setText(R.string.button_yes);
+                            text_video.setText(R.string.button_yes);
+                            text_delete_video.setVisibility(View.INVISIBLE);
                             btn_rec_yes_mode = false;
                         }
                         else{
@@ -550,7 +558,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
         params.leftMargin = 0;
         VideoContainer.setLayoutParams(params);
 
-        Button record_yes = (Button) findViewById(R.id.button4);
+        ImageView record_yes = (ImageView) findViewById(R.id.button4);
         record_yes.setVisibility(View.INVISIBLE);
 
         patient_video.setVideoURI(video_uri);

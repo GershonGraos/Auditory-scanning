@@ -44,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
         _passLogIn = (EditText) findViewById(R.id.editText_login_pass);
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
 
-//        //------Doron's Shortcat-------
-        _userLogin.setText("121");
-        _passLogIn.setText("123456");
+//        //------Doron's Shortcut-------
+//        _userLogin.setText("121");
+//        _passLogIn.setText("123456");
         //---------------------------
 
-        //------Gershon's Shortcat-------
+//        ------Gershon's Shortcut-------
 //        _userLogin.setText("moshe123");
 //        _passLogIn.setText("12345");
 //        ---------------------------

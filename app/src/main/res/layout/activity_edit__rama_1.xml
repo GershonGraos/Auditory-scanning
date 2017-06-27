@@ -17,7 +17,7 @@
             <RelativeLayout
                 android:id="@+id/activity_edit_patient"
                 android:layout_width="match_parent"
-                android:layout_height="565dp"
+                android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
@@ -26,16 +26,16 @@
 
                 <ImageView
                     android:id="@+id/imageView6"
-                    android:onClick="help_edit_patient_activity"
-                    android:layout_width="50dp"
+                    android:layout_width="32dp"
                     android:layout_height="40dp"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="-5dp"
-                    android:paddingTop="-10dp"
-                    android:text="help"
-                    app:srcCompat="@mipmap/ic_help3"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_gravity="right"
+                    android:layout_marginRight="-3dp"
+                    android:layout_marginTop="-5dp"
+                    android:onClick="help_edit_patient_activity"
+                    android:paddingTop="-10dp"
+                    app:srcCompat="@mipmap/ic_help3" />
 
                 <TextView
                     android:id="@+id/textViewHiPatient"
@@ -43,89 +43,88 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:paddingTop="20dp"
                     android:textAllCaps="false"
-                    android:textSize="22sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/listItems"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="18dp"
-                    android:layout_marginRight="18dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_height="40dp"
                     android:onClick="press_addItem"
-                    app:srcCompat="@mipmap/ic_add" />
+                    android:layout_marginBottom="4dp"
+                    app:srcCompat="@mipmap/ic_add"
+                    android:layout_alignTop="@+id/editText"
+                    android:layout_alignEnd="@+id/textView_delete_video" />
 
                 <EditText
                     android:id="@+id/editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/textViewHiPatient"
                     android:layout_gravity="center"
-                    android:layout_marginTop="24dp"
-                    android:layout_toStartOf="@+id/imageView2"
+                    android:layout_marginTop="28dp"
                     android:ems="10"
                     android:gravity="center"
                     android:hint="@string/text_hint_edit"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:layout_below="@+id/textViewHiPatient"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/imageView2" />
 
                 <ListView
                     android:id="@+id/listItems"
                     android:layout_width="350dp"
-                    android:layout_height="300dp"
-                    android:layout_above="@+id/button4"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
+                    android:layout_height="250dp"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/editText"
-                    android:layout_marginTop="26dp" />
+                    android:layout_marginTop="12dp" />
 
-                <Button
+                <ImageView
                     android:id="@+id/button4"
-                    android:layout_width="135dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginEnd="98dp"
-                    android:background="@drawable/button_style"
+                    android:layout_width="100dp"
+                    android:layout_height="65dp"
                     android:onClick="onClick_record_yes"
-                    android:text="@string/button_yes"
-                    android:textAllCaps="false"
-                    android:textSize="16sp" />
-                <Button
-                    android:id="@+id/btn_delete_record"
-                    android:layout_width="70dp"
+                    app:srcCompat="@mipmap/ic_video"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="39dp"
+                    android:layout_below="@+id/listItems"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/textView_video"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_style"
+                    android:gravity="center"
+                    android:text="@string/button_yes"
+                    android:layout_alignBaseline="@+id/textView_delete_video"
+                    android:layout_alignBottom="@+id/textView_delete_video"
+                    android:layout_alignStart="@+id/button4"
+                    android:layout_alignEnd="@+id/button4" />
+
+                <ImageView
+                    android:id="@+id/btn_delete_record"
+                    android:layout_width="100dp"
+                    android:layout_height="52dp"
                     android:onClick="onClick_delete_record_yes"
-                    android:text="@string/delete_record"
-                    android:textAllCaps="false"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
+                    app:srcCompat="@mipmap/ic_delete_video"
                     android:visibility="invisible"
-                    android:textSize="16sp" />
-                <!--<Button-->
-                <!--android:id="@+id/button5"-->
-                <!--android:layout_width="135dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@drawable/button_style"-->
-                <!--android:layout_marginBottom="14dp"-->
-                <!--android:text="@string/button_no"-->
-                <!--android:textAllCaps="false"-->
-                <!--android:textSize="16sp"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:layout_alignParentEnd="true" />-->
+                    android:layout_marginEnd="22dp"
+                    android:layout_alignTop="@+id/button4"
+                    android:layout_alignParentEnd="true" />
+
+                <TextView
+                    android:id="@+id/textView_delete_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/btn_delete_record"
+                    android:layout_alignEnd="@+id/btn_delete_record"
+                    android:layout_alignStart="@+id/btn_delete_record"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:text="@string/delete_record" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -135,28 +134,14 @@
                     android:layout_alignParentBottom="true">
 
                     <VideoView
-                        android:id="@+id/PatientVideoView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginTop="39dp" />
+                    android:id="@+id/PatientVideoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true" />
 
                 </RelativeLayout>
 
-                <!--<Button-->
-                <!--android:id="@+id/button"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_above="@+id/editText"-->
-                <!--android:layout_alignEnd="@+id/button4"-->
-                <!--android:layout_alignRight="@+id/button4"-->
-                <!--android:layout_marginBottom="6dp"-->
-                <!--android:layout_marginEnd="18dp"-->
-                <!--android:layout_marginRight="18dp"-->
-                <!--android:onClick="show_db_requests"-->
-                <!--android:text="view requests DB"-->
-                <!--android:visibility="invisible" />-->
             </RelativeLayout>
         </LinearLayout>
     </pl.polidea.view.ZoomView>

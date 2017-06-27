@@ -208,4 +208,13 @@ public class Edit_Rama_4 extends AppCompatActivity {
                 });
         builder.show();
     }
+
+
+    // GO TO SCREEN DISPLAY
+    public void go_to_display(View view){
+        Intent i = new Intent(this, Display_Rama_1.class);
+        i.putExtra("ID_PATIENT", mApp.idPatient);
+        i.putExtra("ID_ONLY", mApp.idTherapist);
+        startActivity(i);
+    }
 }

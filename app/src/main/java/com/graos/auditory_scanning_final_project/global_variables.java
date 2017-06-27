@@ -19,7 +19,8 @@ public class global_variables extends Application {
     public boolean statistic_sort = false;
     public boolean first_listening = false;
 
-    public boolean flag_no_dataPatient = false; //to refer it to activity appropriate
+    public String idPatient = "";
+    public String idTherapist = "";
 
     private Uri UriYesVideo;
     public Uri getUriYesVideo() {
