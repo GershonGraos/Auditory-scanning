@@ -28,10 +28,10 @@
                 <ListView
                     android:id="@+id/listView"
                     android:layout_width="290dp"
-                    android:layout_height="320dp"
+                    android:layout_height="300dp"
                     android:choiceMode="singleChoice"
                     android:listSelector="@android:color/holo_blue_dark"
-                    android:layout_marginTop="37dp"
+                    android:layout_marginTop="30dp"
                     android:layout_below="@+id/textViewName"
                     android:layout_centerHorizontal="true" />
 
@@ -39,20 +39,20 @@
                     android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/imageView9"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15dp"
                     android:text="TextView"
                     android:textAllCaps="false"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
+                    android:layout_below="@+id/imageView9"
+                    android:layout_centerHorizontal="true" />
 
 
                 <ImageView
                     android:id="@+id/imageView9"
                     android:onClick="help_display_patient_activity"
-                    android:layout_width="80dp"
-                    android:layout_height="45dp"
+                    android:layout_width="32dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="42dp"
                     app:srcCompat="@mipmap/ic_help3"
                     android:layout_alignParentTop="true"
@@ -61,11 +61,14 @@
                 <Button
                     android:id="@+id/button"
                     android:text="Visual View"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
+                    android:textAllCaps="false"
+                    android:background="@drawable/button_style"
+                    android:layout_width="120dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
                     android:onClick="press_show_algo_level_btn"
-                    android:layout_alignTop="@+id/imageView9" />
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
 
             </RelativeLayout>
         </LinearLayout>

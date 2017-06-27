@@ -320,6 +320,7 @@ public class Display_Rama_1 extends AppCompatActivity
             i.putExtra("ID_PATIENT",my_id_patient);
             startActivity(i);
         }
+
         else if (id == R.id.nav_personal_area) {
             if(mApp.auto_recognize){
                 mSpeechRecognizer.stopListening();
@@ -329,13 +330,18 @@ public class Display_Rama_1 extends AppCompatActivity
             i.putExtra("ID_REGISTER",my_only_id_therapist);
             startActivity(i);
         }
+
         else if (id == R.id.nav_logout) {
             if(mApp.auto_recognize){
                 mSpeechRecognizer.stopListening();
                 customHandler.removeCallbacks(updateTimerThread);
             }
-            Toast.makeText(this,"logout",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
+
         else if (id == R.id.nav_voice_recognize) {
             MenuItem t = navigationView.getMenu().getItem(2);
             if(t.isChecked()) {
@@ -359,6 +365,7 @@ public class Display_Rama_1 extends AppCompatActivity
             }
             //super.recreate();
         }
+
         else if (id == R.id.nav_sort_list_by_statistic) {
             MenuItem t = navigationView.getMenu().getItem(3);
             if(t.isChecked()) {

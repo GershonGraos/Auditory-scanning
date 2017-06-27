@@ -109,10 +109,13 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         if(c.getCount() == 0){
             Intent it = new Intent(AreaPersonalActivity.this, Edit_Rama_1.class);
             it.putExtra("ID_PATIENT",id_patient);
+            mApp.idPatient = id_patient;
             startActivity(it);
         }
         else{
             Intent i = new Intent(this, Display_Rama_1.class);
+            mApp.idPatient = id_patient;
+            mApp.idTherapist = id_therapist_to_displayAct;
             i.putExtra("ID_PATIENT", id_patient);
             i.putExtra("ID_ONLY", id_therapist_to_displayAct);
 

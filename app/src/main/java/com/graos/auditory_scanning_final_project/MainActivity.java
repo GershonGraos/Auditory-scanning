@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
         _passLogIn = (EditText) findViewById(R.id.editText_login_pass);
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
 
-//        //------Doron's Shortcat-------
-        _userLogin.setText("121");
-        _passLogIn.setText("123456");
+//        //------Doron's Shortcut-------
+//        _userLogin.setText("121");
+//        _passLogIn.setText("123456");
         //---------------------------
 
-        //------Gershon's Shortcat-------
-//        _userLogin.setText("moshe123");
-//        _passLogIn.setText("12345");
+//        ------Gershon's Shortcut-------
+        _userLogin.setText("moshe123");
+        _passLogIn.setText("12345");
 //        ---------------------------
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -185,8 +185,6 @@ public class MainActivity extends AppCompatActivity {
                             _passLogIn.setText("");
                         }
                     }
-                    else
-                        Toast.makeText(this,R.string. error_user_not_exists,Toast.LENGTH_SHORT).show();
                 }
             }
             else

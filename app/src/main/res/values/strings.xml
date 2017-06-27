@@ -70,7 +70,7 @@
     <string name="option_voice_recognize_inactive">כבה זיהוי קולי</string>
     <string name="option_sort_list_by_statistic_active">סטטיסטקה-הפעל סידור רשימות</string>
     <string name="option_sort_list_by_statistic_inactive">סטטיסטיקה-כבה סידור רשימות</string>
-    <string name="option_log_out">התנתקות</string>
+    <string name="option_log_out">יציאה</string>
     <string name="title_activity_display_patient">הצגת מטופל</string>
     <string name="voice_start">זיהוי קולי הופעל</string>
     <string name="voice_stop">זיהוי קולי הופסק</string>
@@ -101,6 +101,7 @@
     <string name="error_record_not_found_head">שגיאה בבסיס הנתונים</string>
     <string name="error_record_not_found_body">שגיאה ,הרשומה לא נמצאה בבסיס הנתונים</string>
     <string name="delete_video_tittle">מחיקת סרטון</string>
+    <string name="button_go_display">לעבור למסך התצוגה</string>
 
     <!-- Strings related to Demo Screen -->
     <string name="button_get_yes">כן</string>
