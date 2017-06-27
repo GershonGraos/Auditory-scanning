@@ -110,6 +110,7 @@
                     android:layout_height="52dp"
                     android:onClick="onClick_delete_record_yes"
                     app:srcCompat="@mipmap/ic_delete_video"
+                    android:visibility="invisible"
                     android:layout_marginEnd="22dp"
                     android:layout_alignTop="@+id/button4"
                     android:layout_alignParentEnd="true" />
@@ -122,6 +123,7 @@
                     android:layout_alignEnd="@+id/btn_delete_record"
                     android:layout_alignStart="@+id/btn_delete_record"
                     android:gravity="center"
+                    android:visibility="invisible"
                     android:text="@string/delete_record" />
 
                 <RelativeLayout

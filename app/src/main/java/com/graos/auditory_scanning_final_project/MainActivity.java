@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         //---------------------------
 
 //        ------Gershon's Shortcut-------
-        _userLogin.setText("moshe123");
-        _passLogIn.setText("12345");
+//        _userLogin.setText("moshe123");
+//        _passLogIn.setText("12345");
 //        ---------------------------
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(!password.equals("") && !user.equals("")){
             Cursor cursor = my_dbHelper_Therapist.show_data_therapists();
+            boolean user_found = false;
             if(cursor.getCount() != 0){
                 while (cursor.moveToNext()){
                     if(cursor.getString(2).equals(user)){
@@ -179,6 +180,8 @@ public class MainActivity extends AppCompatActivity {
                             i.putExtra("ID_REGISTER",id_the);
                             i.putExtra("USER_SIGN_IN",user);
                             startActivity(i);
+                            user_found = true;
+                            break;
                         }
                         else{
                             Toast.makeText(this,R.string.error_pass,Toast.LENGTH_SHORT).show();
@@ -186,6 +189,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }
+                if(!user_found)
+                    Toast.makeText(this,R.string. error_user_not_exists,Toast.LENGTH_SHORT).show();
             }
             else
                 Toast.makeText(this,R.string.error_user_pass,Toast.LENGTH_SHORT).show();

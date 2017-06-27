@@ -103,39 +103,42 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
 
     // ---------------- PRESS NEXT ----------------------
     public void press_next(View view){
+
+        // get audio data
+        DBHelper_Patients_Data dbHelper_patients_data = new DBHelper_Patients_Data(AreaPersonalActivity.this);
+        Cursor cursor = dbHelper_patients_data.get_patient_data_by_id(id_patient);
+        if(cursor.getCount()>0) {
+            while (cursor.moveToNext()) {
+                mApp.setUriYesVideo(Uri.fromFile(new File(cursor.getString(0))));
+                mApp.setAudioPath(cursor.getString(1));
+                try {
+                    ArrayList<String> listdata = new ArrayList<String>();
+                    JSONArray jArray = new JSONArray(cursor.getString(2));
+                    if (jArray != null)
+                        for (int j = 0; j < jArray.length(); j++)
+                            listdata.add(jArray.getString(j));
+                    mApp.setMatchesList(listdata);
+                } catch (JSONException e) {
+                }
+            }
+        }else {
+            mApp.setUriYesVideo(null);
+            mApp.setAudioPath(null);
+            mApp.setMatchesList(null);
+        }
+
         DBHelper_Requests temp_db_request = new DBHelper_Requests(this);
         Cursor c = temp_db_request.show_requests_by_patient_id(id_patient);
 
         if(c.getCount() == 0){
             Intent it = new Intent(AreaPersonalActivity.this, Edit_Rama_1.class);
             it.putExtra("ID_PATIENT",id_patient);
-            mApp.idPatient = id_patient;
             startActivity(it);
         }
         else{
             Intent i = new Intent(this, Display_Rama_1.class);
-            mApp.idPatient = id_patient;
-            mApp.idTherapist = id_therapist_to_displayAct;
             i.putExtra("ID_PATIENT", id_patient);
             i.putExtra("ID_ONLY", id_therapist_to_displayAct);
-
-            // get audio data
-            DBHelper_Patients_Data dbHelper_patients_data = new DBHelper_Patients_Data(AreaPersonalActivity.this);
-            Cursor cursor = dbHelper_patients_data.get_patient_data_by_id(id_patient);
-            while(cursor.moveToNext()){
-                mApp.setUriYesVideo(Uri.fromFile(new File(cursor.getString(0))));
-                mApp.setAudioPath(cursor.getString(1));
-                try {
-                    ArrayList<String> listdata = new ArrayList<String>();
-                    JSONArray jArray  = new JSONArray(cursor.getString(2));
-                    if (jArray != null)
-                        for (int j=0;j<jArray.length();j++)
-                            listdata.add(jArray.getString(j));
-                    mApp.setMatchesList(listdata);
-                } catch (JSONException e) {
-                }
-            }
-
             startActivity(i);
         }
     }
@@ -161,7 +164,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
                 else{
                     idNew_patient = user_id.getText().toString();
                     nameNew_patient = user_name.getText().toString();
-                    Toast.makeText(AreaPersonalActivity.this,"idPt: " + idNew_patient + "\nnamePt: " + nameNew_patient + "\nidThpt: " + id_therapist,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(AreaPersonalActivity.this,"idPt: " + idNew_patient + "\nnamePt: " + nameNew_patient + "\nidThpt: " + id_therapist,Toast.LENGTH_SHORT).show();
 
                     if (idNew_patient.matches("\\d+(?:\\.\\d+)?")){  // is a number
                         long b = my_dbHelper_patients.add_patient(idNew_patient, nameNew_patient, id_therapist);
@@ -269,7 +272,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         Cursor cursor = my_dbHelper_patients.show_patients();
         if(cursor.getCount() != 0) {
             list_patients = new ArrayList<String>();
-            Toast.makeText(this,"id: "+id_therapist, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"id: "+id_therapist, Toast.LENGTH_SHORT).show();
 
             while (cursor.moveToNext()) {
                 if(cursor.getString(2).equals(id_therapist)){

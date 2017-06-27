@@ -17,6 +17,7 @@ public class global_variables extends Application {
     public String l3="";
     public boolean auto_recognize = false;
     public boolean statistic_sort = false;
+    public boolean first_listening = false;
 
     public String idPatient = "";
     public String idTherapist = "";

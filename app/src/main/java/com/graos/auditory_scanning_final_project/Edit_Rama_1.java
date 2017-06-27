@@ -4,6 +4,7 @@ package com.graos.auditory_scanning_final_project;
  */
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -67,6 +68,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
     private ImageView rec_del_btn;
     DBHelper_Patients_Data dbHelper_patients_data;
     boolean flag_delete_video = false;
+    private ProgressDialog dialog;
 
 
     DBHelper_Requests my_dbHelper_requests;
@@ -393,6 +395,11 @@ public class Edit_Rama_1 extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
+            patient_video.stopPlayback();
+            patient_video.clearFocus();
+            patient_video.setVideoURI(null);
+            dialog = ProgressDialog.show(Edit_Rama_1.this, "",
+                    "Processing video. Please wait...", true);
             UriYesVideo = intent.getData();
             //convert from video to audio
             abs_path = getRealPathFromURI(this,UriYesVideo);
@@ -472,10 +479,14 @@ public class Edit_Rama_1 extends AppCompatActivity {
                         dbHelper_patients_data.insert_patient_data(id_patient,abs_path,audio_path,mJSONArray.toString());
                         rec_del_btn.setVisibility(View.VISIBLE);
                         text_delete_video.setVisibility(View.VISIBLE);
+
+                        btn_rec_yes_mode = true;
+                        dialog.cancel();
                     }
                     @Override
                     public void onFinish() {
                         Log.d("finished", "FFmpeg cmd finished: is FFmpeg process running: " + ffmpeg.isFFmpegCommandRunning());
+                        dialog.cancel();
                     }
                 });
             } catch (FFmpegCommandAlreadyRunningException e) {
@@ -488,7 +499,6 @@ public class Edit_Rama_1 extends AppCompatActivity {
     public void onClick_record_yes(View view){
         rec_yes_btn = (ImageView) view;
         if(!btn_rec_yes_mode) {
-            btn_rec_yes_mode = true;
             Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
             if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);

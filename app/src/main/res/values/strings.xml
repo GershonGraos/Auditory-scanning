@@ -102,6 +102,8 @@
     <string name="error_record_not_found_body">שגיאה ,הרשומה לא נמצאה בבסיס הנתונים</string>
     <string name="delete_video_tittle">מחיקת סרטון</string>
     <string name="button_go_display">לעבור למסך התצוגה</string>
+    <string name="progress_dialog_msg">מעבד וידאו. אנא המתן...</string>
+
 
     <!-- Strings related to Demo Screen -->
     <string name="button_get_yes">כן</string>

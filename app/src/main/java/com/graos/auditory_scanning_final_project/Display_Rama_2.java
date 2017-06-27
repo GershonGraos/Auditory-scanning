@@ -70,6 +70,7 @@ public class Display_Rama_2 extends AppCompatActivity {
         mApp = ((global_variables)getApplicationContext());
         STT_matches = mApp.getMatchesList();
         mApp.l = 2;
+        mApp.first_listening = false;
 
         setTitle(R.string.nameActivity_display_pattient);
 
@@ -168,18 +169,25 @@ public class Display_Rama_2 extends AppCompatActivity {
                     return;
                 ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
                 String current_match;
+                String [] current_matchs;
                 String current_STT_match;
                 for (int i = 0; i < matches.size(); i++) {
                     for (int j = 0; j < STT_matches.size(); j++) {
-                        current_match = matches.get(i).toLowerCase();
-                        current_STT_match = STT_matches.get(j);
-                        if (levenshtein_distance(current_STT_match, current_match,3)) {
-                            _my_lastClick_item.setText(matches.get(i));
-                            patient_said_yes_or_no = true;;
-                            mSpeechRecognizer.stopListening();
-                            customHandler.removeCallbacks(updateTimerThread);
-                            _my_list_view.performItemClick(_my_list_view.getAdapter().getView(selected_item_index, null, null), selected_item_index, _my_list_view.getAdapter().getItemId(selected_item_index));
-                            return;
+                        current_matchs = matches.get(i).toLowerCase().split(" ");
+                        for(int k=0;k<current_matchs.length;k++) {
+                            current_match = current_matchs[k];
+                            current_STT_match = STT_matches.get(j);
+                            //if (levenshtein_distance(current_STT_match, current_match,3)){
+                            if (((current_STT_match.contains(current_match) || current_match.contains(current_STT_match)) && ((((double) Math.min(current_match.length(), current_STT_match.length()) / (double) Math.max(current_match.length(), current_STT_match.length())) * 100) >= 50)) || levenshtein_distance(current_STT_match, matches.get(i).toLowerCase(), 3)) {
+                                //_name.setText(matches.get(i));
+                                patient_said_yes_or_no = true;
+                                //_my_list.getSelectedView().setBackgroundColor(Color.GREEN);
+                                //btn_no.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_style));
+                                mSpeechRecognizer.stopListening();
+                                customHandler.removeCallbacks(updateTimerThread);
+                                _my_list_view.performItemClick(_my_list_view.getAdapter().getView(selected_item_index, null, null), selected_item_index, _my_list_view.getAdapter().getItemId(selected_item_index));
+                                return;
+                            }
                         }
                     }
                 }
