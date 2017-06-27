@@ -89,6 +89,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__rama_1);
         setTitle(R.string.nameActivity_edit_pattient);
+
         thisContext = this;
         mApp = ((global_variables)getApplicationContext());
 
@@ -108,6 +109,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
             text_video.setText(R.string.button_watch_record);
             rec_del_btn.setVisibility(View.VISIBLE);
         }
+
         // ----- DB -------
         my_dbHelper_requests = new DBHelper_Requests(Edit_Rama_1.this);
 
@@ -314,9 +316,9 @@ public class Edit_Rama_1 extends AppCompatActivity {
         int flag = 0;
 
         if(!request.equals("")){
-            Cursor cursor = my_dbHelper_requests.show_requests();
+            Cursor cursor = my_dbHelper_requests.show_requests_by_patient_id(id_patient);
             while (cursor.moveToNext()){
-                if(cursor.getString(0). equals(id_patient) && cursor.getString(3). equals(request)){
+                if(cursor.getString(3). equals(request)){
                     Toast.makeText(this, R.string.same_request, Toast.LENGTH_SHORT).show();
                     flag = 1;
                 }
@@ -371,12 +373,13 @@ public class Edit_Rama_1 extends AppCompatActivity {
 
     // SHOW THE STRING ARRAY REQUESTS INTO LAYOUT //
     public void populateListViews(){
-        Cursor cursor = my_dbHelper_requests.show_requests();
+        Cursor cursor = null;
+        cursor = my_dbHelper_requests.show_requests_level_1(id_patient);
         if(cursor.getCount() != 0) {
             ArrayList<String> listRequests = new ArrayList<String >();
             while (cursor.moveToNext()) {
-                if(cursor.getString(0).equals(id_patient) && cursor.getString(1).equals("-1") && cursor.getString(2).equals("1"))
-                    listRequests.add(cursor.getString(3));
+                // getString(0) because my table now!! there is: request | id | last_update | counter
+                listRequests.add(cursor.getString(0));
             }
             my_list_adapter = new MyListAdapter(this, listRequests);
             _my_list_view.setAdapter(my_list_adapter);

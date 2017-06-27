@@ -132,11 +132,15 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
 
         if(c.getCount() == 0){
             Intent it = new Intent(AreaPersonalActivity.this, Edit_Rama_1.class);
+            mApp.idPatient = id_patient;
+            mApp.idTherapist = id_therapist_to_displayAct;
             it.putExtra("ID_PATIENT",id_patient);
             startActivity(it);
         }
         else{
             Intent i = new Intent(this, Display_Rama_1.class);
+            mApp.idPatient = id_patient;
+            mApp.idTherapist = id_therapist_to_displayAct;
             i.putExtra("ID_PATIENT", id_patient);
             i.putExtra("ID_ONLY", id_therapist_to_displayAct);
             startActivity(i);
@@ -269,16 +273,14 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
 
     // SPINNER VIEW
     public void populateSpinnerView(){
-        Cursor cursor = my_dbHelper_patients.show_patients();
+        Cursor cursor = my_dbHelper_patients.show_patients_by_id(id_therapist);
         if(cursor.getCount() != 0) {
             list_patients = new ArrayList<String>();
             //Toast.makeText(this,"id: "+id_therapist, Toast.LENGTH_SHORT).show();
 
             while (cursor.moveToNext()) {
-                if(cursor.getString(2).equals(id_therapist)){
-                    id_therapist_to_displayAct = cursor.getString(2);
-                    list_patients.add(cursor.getString(1) + " - " + cursor.getString(0));
-                }
+                id_therapist_to_displayAct = cursor.getString(2);
+                list_patients.add(cursor.getString(1) + " - " + cursor.getString(0));
             }
             adapter = new ArrayAdapter<String>(AreaPersonalActivity.this,android.R.layout.simple_spinner_item, list_patients);
             adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);

@@ -76,6 +76,7 @@
     <string name="voice_stop">זיהוי קולי הופסק</string>
     <string name="statistic_start">סידור רשימות הופעל</string>
     <string name="statistic_stop">סידור רשימות הופסק</string>
+    <string name="tittle_ramas">מה המיקום שלי?</string>
 
     <!-- Strings related to Edit List Patient -->
     <string name="delete_record_msg">ההקלטה נמחקה בהצלחה!</string>

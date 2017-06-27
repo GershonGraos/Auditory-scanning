@@ -77,6 +77,8 @@
     <string name="voice_stop">Voice Recognition - Off</string>
     <string name="statistic_start">Sort List By Statistic - On</string>
     <string name="statistic_stop">Sort List By Statistic - Off</string>
+    <string name="tittle_ramas">List position</string>
+
 
     <!-- Strings related to Edit List Patient -->
     <string name="delete_record_msg">The record was deleted successfully!</string>
