@@ -15,11 +15,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-/**
- * Created by Doron on 18/05/2017.
- */
-
-
 public class AlgorithmLevel extends AppCompatActivity {
     // ************* ON CREATE **************************
     private global_variables mApp;
@@ -49,6 +44,10 @@ public class AlgorithmLevel extends AppCompatActivity {
         if (!mApp.l3.isEmpty()) {
             b = (Button) findViewById(R.id.btn_level_3);
             b.setText(mApp.l3);
+        }
+        if (!mApp.l4.isEmpty()) {
+            b = (Button) findViewById(R.id.btn_level_4);
+            b.setText(mApp.l4);
         }
 
         switch(mApp.l) {

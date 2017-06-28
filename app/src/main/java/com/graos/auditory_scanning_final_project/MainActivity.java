@@ -1,12 +1,16 @@
 package com.graos.auditory_scanning_final_project;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     View focusView = null;
     boolean cancel = false;
-
+    Context thisContext;
 
 
     private MongoClient mongoClient;
@@ -38,15 +42,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        thisContext = this;
         my_dbHelper_Therapist = new DBHelper_Therapists(this);
 
         _passLogIn = (EditText) findViewById(R.id.editText_login_pass);
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
 
 //        //------Doron's Shortcut-------
-//        _userLogin.setText("121");
-//        _passLogIn.setText("123456");
+        _userLogin.setText("121");
+        _passLogIn.setText("123456");
         //---------------------------
 
 //        ------Gershon's Shortcut-------
@@ -228,5 +232,57 @@ public class MainActivity extends AppCompatActivity {
 //        else{
 //            Toast.makeText(this,R.string.error_field_pass_user,Toast.LENGTH_SHORT).show();
 //        }
+    public void open_forgot_window(View v) {
+        View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.forgot_password_activity, null);
+        final EditText user_id = (EditText) view.findViewById(R.id.therapist_id);
+        final EditText user_name = (EditText) view.findViewById(R.id.therapist_username);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setIcon(thisContext.getResources().getDrawable(R.mipmap.ic_forgot_password));
+        builder.setTitle(R.string.app_textPassForgot);
+        builder.setView(view);
+        builder.setPositiveButton(R.string.therapist_ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (user_id.getText().toString().isEmpty() || user_name.getText().toString().isEmpty())
+                    Toast.makeText(MainActivity.this, R.string.error_fields_required_alert, Toast.LENGTH_SHORT).show();
+
+                else {
+                    String therapist_id = user_id.getText().toString();
+                    String therapist_username = user_name.getText().toString();
+
+                    if (therapist_id.matches("\\d+(?:\\.\\d+)?")) {  // is a number
+                        Cursor cursor = my_dbHelper_Therapist.show_therapist_data_by_id_and_user_name(therapist_id,therapist_username);
+                        if (cursor.getCount() == 0) {
+                            Toast.makeText(MainActivity.this, R.string.error_therapist_not_exists, Toast.LENGTH_SHORT).show();
+                        }else{
+                            cursor.moveToFirst();
+                            android.app.AlertDialog.Builder builder;
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                builder = new android.app.AlertDialog.Builder(thisContext, android.R.style.Theme_Material_Dialog_Alert);
+                            } else {
+                                builder = new android.app.AlertDialog.Builder(thisContext);
+                            }
+                            builder.setTitle(thisContext.getResources().getString(R.string.therapist_your_password))
+                                    .setMessage(thisContext.getResources().getString(R.string.therapist_your_password_is) + " " + cursor.getString(3))
+                                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    })
+                                    .setIcon(R.mipmap.ic_forgot_password)
+                                    .show();
+                        }
+                    }else{
+                        Toast.makeText(MainActivity.this, R.string.id_error_no_int, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+        builder.setNegativeButton(R.string.newPtnt_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        builder.show();
+    }
 }

@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -98,6 +100,7 @@ public class Display_Rama_4 extends AppCompatActivity {
                 Cursor cursor = my_db_requests.show_requests();
                 while(cursor.moveToNext()){
                     if(cursor.getString(3).equals(request_click)){
+                        mApp.l4 = request_click;
                         id_parent_send = cursor.getString(4);
                         counter = cursor.getInt(6);
                         counter++;
@@ -272,5 +275,11 @@ public class Display_Rama_4 extends AppCompatActivity {
         if(the_distance>threshold)
             return false;
         return true;
+    }
+    // default
+    @Override
+    public void onBackPressed() {
+        mApp.l = 3;
+        super.onBackPressed();
     }
 }

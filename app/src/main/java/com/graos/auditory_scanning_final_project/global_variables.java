@@ -15,6 +15,7 @@ public class global_variables extends Application {
     public String l1="";
     public String l2="";
     public String l3="";
+    public String l4="";
     public boolean auto_recognize = false;
     public boolean statistic_sort = false;
     public boolean first_listening = false;

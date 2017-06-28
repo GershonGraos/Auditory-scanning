@@ -281,4 +281,10 @@ public class Display_Rama_3 extends AppCompatActivity {
             return false;
         return true;
     }
+    // default
+    @Override
+    public void onBackPressed() {
+        mApp.l = 2;
+        super.onBackPressed();
+    }
 }

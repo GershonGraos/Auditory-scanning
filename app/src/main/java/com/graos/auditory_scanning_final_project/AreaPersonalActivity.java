@@ -158,7 +158,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         builder.setView(view);
         builder.setPositiveButton(R.string.newPtnt_ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(user_id.getText().toString() == null || user_name.getText().toString() == null)
+                if(user_id.getText().toString().isEmpty() || user_name.getText().toString().isEmpty())
                     Toast.makeText(AreaPersonalActivity.this,R.string.error_fields_required_alert,Toast.LENGTH_SHORT).show();
 
                 else{

@@ -344,9 +344,7 @@ public class Display_Rama_1 extends AppCompatActivity
                 mSpeechRecognizer.stopListening();
                 customHandler.removeCallbacks(updateTimerThread);
             }
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
 
@@ -364,10 +362,8 @@ public class Display_Rama_1 extends AppCompatActivity
                 mApp.auto_recognize = true;
             }
             if(items_count>0) {
-                if(!mApp.auto_recognize){
-                    mSpeechRecognizer.stopListening();
-                    customHandler.removeCallbacks(updateTimerThread);
-                }
+                mSpeechRecognizer.stopListening();
+                customHandler.removeCallbacks(updateTimerThread);
                 startActivity(getIntent());
                 finish();
             }
@@ -376,7 +372,8 @@ public class Display_Rama_1 extends AppCompatActivity
 
         else if (id == R.id.nav_sort_list_by_statistic) {
             MenuItem t = navigationView.getMenu().getItem(3);
-            if(t.isChecked()) {
+            MenuItem t2 = navigationView.getMenu().getItem(2);
+            if(t.isChecked()||(t2.isChecked()&&mApp.statistic_sort)) {
                 t.setChecked(false);
                 t.setTitle(R.string.option_sort_list_by_statistic_active);
                 Toast.makeText(this,R.string.statistic_stop,Toast.LENGTH_SHORT).show();
@@ -388,6 +385,8 @@ public class Display_Rama_1 extends AppCompatActivity
                 mApp.statistic_sort = true;
             }
             if(items_count>0) {
+                mSpeechRecognizer.stopListening();
+                customHandler.removeCallbacks(updateTimerThread);
                 startActivity(getIntent());
                 finish();
             }

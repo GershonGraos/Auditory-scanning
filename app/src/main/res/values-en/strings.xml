@@ -19,8 +19,15 @@
     <string name="tittle_help_main">Instruction</string>
     <string name="error_user_pass">There are no users in the database, please register</string>
     <string name="error_user_not_exists">The User Name not exist</string>
+    <string name="error_therapist_not_exists">This user not exist</string>
     <string name="error_pass">Error! Invalid password, please enter a valid password</string>
     <string name="text_help_main">In this screen, the therapist will be able to connect to the system by entering his ID/passport number and password</string>
+    <string name="therapist_id">Id/Passport number</string>
+    <string name="therapist_username">User name</string>
+    <string name="therapist_your_password_is">Your password is:</string>
+    <string name="therapist_your_password">Your Password</string>
+    <string name="therapist_ok">Ok</string>
+
 
     <!-- Strings related to SignUp -->
     <string name="title_activity_sign_up">Sign up</string>

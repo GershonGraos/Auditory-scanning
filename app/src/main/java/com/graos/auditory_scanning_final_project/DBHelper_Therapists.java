@@ -51,7 +51,11 @@ public class DBHelper_Therapists extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
         return res;
     }
-
+    public Cursor show_therapist_data_by_id_and_user_name(String Therapist_id,String Therapist_username){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME+ " where id = '" + Therapist_id + "' AND user_name = '" + Therapist_username + "'", null);
+        return res;
+    }
     public boolean update_data(String id_user, String name ,String user_name, String password){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -63,7 +67,6 @@ public class DBHelper_Therapists extends SQLiteOpenHelper {
         log_this_action_for_mongo();
         return true;
     }
-
     public Integer delete_data(String id_user){
         SQLiteDatabase db = this.getWritableDatabase();
         log_this_action_for_mongo();
