@@ -41,25 +41,18 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SignUpActivity"
-            android:label="@string/title_activity_sign_up" />
-        <activity
-            android:name=".AreaPersonalActivity"
-            android:theme="@style/NoActionBar" />
+
+        <activity android:name=".SignUpActivity" android:label="@string/title_activity_sign_up" />
+        <activity android:name=".AreaPersonalActivity" android:theme="@style/NoActionBar" />
         <activity android:name=".AlgorithmLevel" android:theme="@style/NoActionBar" />
-        <activity android:name=".Edit_Rama_1" />
-        <activity android:name=".Demo_internal_screen" />
+        <activity android:name=".Edit_Rama_1"  />
         <activity android:name=".Edit_Rama_2" />
         <activity android:name=".Edit_Rama_3" />
         <activity android:name=".Edit_Rama_4" />
-        <activity
-            android:name=".Display_Rama_1"
-            android:label="@string/title_activity_display_rama1"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Display_Rama_1" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Display_Rama_2" />
         <activity android:name=".Display_Rama_3" />
-        <activity android:name=".Display_Rama_4"></activity>
+        <activity android:name=".Display_Rama_4"> </activity>
     </application>
 
 </manifest>

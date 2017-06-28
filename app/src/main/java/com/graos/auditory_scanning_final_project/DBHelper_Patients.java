@@ -51,10 +51,16 @@ public class DBHelper_Patients extends SQLiteOpenHelper{
         return res;
     }
 
+    public Cursor show_patients_by_id(String id_th){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME + " where therapist_id = '" + id_th + "'", null);
+        return res;
+    }
+
     public Integer delete_patient(String id_patient){
         SQLiteDatabase db = this.getWritableDatabase();
         log_this_action_for_mongo();
-        return db.delete(TABLE_NAME, "id_pt = ?", new String[] { id_patient } );
+        return db.delete(TABLE_NAME, "id = ?", new String[] { id_patient } );
     }
 
     private void log_this_action_for_mongo(){

@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
 
 //        //------Doron's Shortcut-------
-        _userLogin.setText("121");
-        _passLogIn.setText("123456");
+//        _userLogin.setText("121");
+//        _passLogIn.setText("123456");
         //---------------------------
 
 //        ------Gershon's Shortcut-------
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle(R.string.tittle_help_main);
         builder.setIcon(R.mipmap.ic_help3);
-        builder.setMessage(R.string.text_help_main);
+        builder.setMessage(R.string.help_main_activity);
         builder.show();
     }
 
@@ -193,8 +193,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }
-                if(!user_found)
-                    Toast.makeText(this,R.string. error_user_not_exists,Toast.LENGTH_SHORT).show();
             }
             else
                 Toast.makeText(this,R.string.error_user_pass,Toast.LENGTH_SHORT).show();
@@ -204,34 +202,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,R.string.error_field_pass_user,Toast.LENGTH_SHORT).show();
 
     }
-
-
-//        int flag = 0;
-//
-//        if(user.length() == 0){
-//            _userLogin.setError(getString(R.string.error_field_required));
-//            focusView = _userLogin;
-//            cancel = true;
-//            flag++;
-//        }
-//
-//        else if(password.length() == 0){
-//            _passLogIn.setError(getString(R.string.error_field_required));
-//            focusView = _passLogIn;
-//            cancel = true;
-//            flag++;
-//        }
-//
-//        if(flag == 0)
-//        {
-//            Intent i = new Intent(this, AreaPersonalActivity.class);
-//            i.putExtra("USER_SIGN_IN",user);
-//            startActivity(i);
-//        }
-//
-//        else{
-//            Toast.makeText(this,R.string.error_field_pass_user,Toast.LENGTH_SHORT).show();
-//        }
     public void open_forgot_window(View v) {
         View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.forgot_password_activity, null);
         final EditText user_id = (EditText) view.findViewById(R.id.therapist_id);

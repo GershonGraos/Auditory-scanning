@@ -92,6 +92,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l){
         id_patient = adapterView.getItemAtPosition(position).toString();
+
     }
 
     @Override
@@ -132,11 +133,15 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
 
         if(c.getCount() == 0){
             Intent it = new Intent(AreaPersonalActivity.this, Edit_Rama_1.class);
+            mApp.idPatient = id_patient;
+            mApp.idTherapist = id_therapist_to_displayAct;
             it.putExtra("ID_PATIENT",id_patient);
             startActivity(it);
         }
         else{
             Intent i = new Intent(this, Display_Rama_1.class);
+            mApp.idPatient = id_patient;
+            mApp.idTherapist = id_therapist_to_displayAct;
             i.putExtra("ID_PATIENT", id_patient);
             i.putExtra("ID_ONLY", id_therapist_to_displayAct);
             startActivity(i);
@@ -269,22 +274,50 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
 
     // SPINNER VIEW
     public void populateSpinnerView(){
-        Cursor cursor = my_dbHelper_patients.show_patients();
+        Cursor cursor = my_dbHelper_patients.show_patients_by_id(id_therapist);
         if(cursor.getCount() != 0) {
             list_patients = new ArrayList<String>();
             //Toast.makeText(this,"id: "+id_therapist, Toast.LENGTH_SHORT).show();
 
             while (cursor.moveToNext()) {
-                if(cursor.getString(2).equals(id_therapist)){
-                    id_therapist_to_displayAct = cursor.getString(2);
-                    list_patients.add(cursor.getString(1) + " - " + cursor.getString(0));
-                }
+                id_therapist_to_displayAct = cursor.getString(2);
+                list_patients.add(cursor.getString(1) + " - " + cursor.getString(0));
             }
             adapter = new ArrayAdapter<String>(AreaPersonalActivity.this,android.R.layout.simple_spinner_item, list_patients);
             adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
             _spinner_patient.setAdapter(adapter);
         }
 
+    }
+
+
+    // REMOVE PATIENT
+    public void remove_patient(View v){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(AreaPersonalActivity.this);
+        builder.setTitle(R.string.delete_pt_tittle);
+        builder.setIcon(R.mipmap.ic_remove);
+        builder.setMessage(R.string.delete_pt_quetion)
+
+                .setPositiveButton(R.string.button_get_yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        my_dbHelper_patients = new DBHelper_Patients(AreaPersonalActivity.this);
+                        String[] myStrings_ids = id_patient.split(" - ");
+                        String id_pti = myStrings_ids[1];
+                        Integer delete_row = my_dbHelper_patients.delete_patient(id_pti);
+                        if(delete_row > 0){
+                            populateSpinnerView();
+                            Toast.makeText(getApplicationContext(), R.string.delete_pt_item , Toast.LENGTH_LONG).show();
+                        }
+                        else
+                            Toast.makeText(getApplicationContext(), R.string.error_delete_pt_item , Toast.LENGTH_LONG).show();
+                    }
+                })
+
+                .setNegativeButton(R.string.button_get_no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        builder.show();
     }
 
 
