@@ -60,7 +60,7 @@ public class DBHelper_Patients extends SQLiteOpenHelper{
     public Integer delete_patient(String id_patient){
         SQLiteDatabase db = this.getWritableDatabase();
         log_this_action_for_mongo();
-        return db.delete(TABLE_NAME, "id_pt = ?", new String[] { id_patient } );
+        return db.delete(TABLE_NAME, "id = ?", new String[] { id_patient } );
     }
 
     private void log_this_action_for_mongo(){

@@ -58,6 +58,11 @@
     <string name="newPtnt_text">Add patient</string>
     <string name="newPtnt_cancel">cancel</string>
     <string name="newPtnt_ok">add</string>
+    <string name="remove_pt">remove</string>
+    <string name="delete_pt_tittle">Delete Patient</string>
+    <string name="delete_pt_quetion">Are you sure?</string>
+    <string name="delete_pt_item">The patient is deleted</string>
+    <string name="error_delete_pt_item">Error, deletion no executed</string>
     <string name="error_fields_required_alert">Please enter name and id</string>
 
     <!-- Strings related to Display List Patient -->
@@ -115,11 +120,11 @@
     <string name="your_position_header">Your Position</string>
 
     <!--helps -->
-    <string name="help_main_activity">In this screen, the therapist will be able to connect to the system by entering his ID/passport number and password.</string>
+    <string name="help_main_activity">In this screen, the therapist will be able to connect to the system by entering his ID/passport number and password, If he does not have an account he can go to the registration screen if he forgets a password, can be restored </string>
     <string name="help_sign_up_activity">In this screen the therapist can be register as a new user. It is important to him to remember his username and his password for future login.</string>
-    <string name="help_personal_area_activity">In this screen, the therapist can add a new patient or select an existing patient from the combo box and then switch to the desired screen (screen editing - new patient, display screen - an existing patient).</string>
+    <string name="help_personal_area_activity">In this screen, the therapist can add a new patientor delete an existing patient or select an patient from the combo box and then switch to the desired screen (screen editing - new patient, display screen - an existing patient).</string>
     <string name="help_edit_patient_activity">In this screen the therapist can: record / watch / delete the video of  the \'Yes\' command of the patient, he can also add and edit / delete the patient\'s requests by long-click, and the option to add requests up to 4 internal levels.</string>
-    <string name="help_display_patient_activity">In this screen, the therapist can view the auditory menu manually or switch to voice recognition mode so that he can automatically browse and listen to the patient\'s \'Yes\' command. You can also switch to \'Edit\' or \'Personal Area\' and arrange the lists statistically.</string>
+    <string name="help_display_patient_activity">In this screen, the therapist can view the auditory menu manually or switch to voice recognition mode so that he can automatically browse and listen to the patient\'s \'Yes\' command. He can also switch to \'Edit\' or \'Personal Area\' and arrange the lists statistically.</string>
     <string name="help_algorithm_level_activity">In this screen, the therapist and the patient will be able to know at what stage they are in the auditory lists.</string>
 
     <!-- Strings related to Demo Screen -->

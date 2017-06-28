@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle(R.string.tittle_help_main);
         builder.setIcon(R.mipmap.ic_help3);
-        builder.setMessage(R.string.text_help_main);
+        builder.setMessage(R.string.help_main_activity);
         builder.show();
     }
 
@@ -189,8 +189,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }
-                if(!user_found)
-                    Toast.makeText(this,R.string. error_user_not_exists,Toast.LENGTH_SHORT).show();
             }
             else
                 Toast.makeText(this,R.string.error_user_pass,Toast.LENGTH_SHORT).show();

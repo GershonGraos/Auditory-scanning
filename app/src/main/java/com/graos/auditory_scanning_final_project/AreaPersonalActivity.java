@@ -92,6 +92,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l){
         id_patient = adapterView.getItemAtPosition(position).toString();
+
     }
 
     @Override
@@ -287,6 +288,36 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
             _spinner_patient.setAdapter(adapter);
         }
 
+    }
+
+
+    // REMOVE PATIENT
+    public void remove_patient(View v){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(AreaPersonalActivity.this);
+        builder.setTitle(R.string.delete_pt_tittle);
+        builder.setIcon(R.mipmap.ic_remove);
+        builder.setMessage(R.string.delete_pt_quetion)
+
+                .setPositiveButton(R.string.button_get_yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        my_dbHelper_patients = new DBHelper_Patients(AreaPersonalActivity.this);
+                        String[] myStrings_ids = id_patient.split(" - ");
+                        String id_pti = myStrings_ids[1];
+                        Integer delete_row = my_dbHelper_patients.delete_patient(id_pti);
+                        if(delete_row > 0){
+                            populateSpinnerView();
+                            Toast.makeText(getApplicationContext(), R.string.delete_pt_item , Toast.LENGTH_LONG).show();
+                        }
+                        else
+                            Toast.makeText(getApplicationContext(), R.string.error_delete_pt_item , Toast.LENGTH_LONG).show();
+                    }
+                })
+
+                .setNegativeButton(R.string.button_get_no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        builder.show();
     }
 
 

@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#9BDDFF">
+        android:background="#000000">
 
         <ImageView
             android:id="@+id/imageView6"
@@ -25,6 +25,7 @@
             android:id="@+id/btn_level_1"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:textColor="#006B3C"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
@@ -39,6 +40,7 @@
             android:id="@+id/btn_level_2"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:textColor="#006B3C"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
@@ -53,6 +55,7 @@
             android:id="@+id/btn_level_3"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:textColor="#006B3C"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
@@ -67,6 +70,7 @@
             android:id="@+id/btn_level_4"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:textColor="#006B3C"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"

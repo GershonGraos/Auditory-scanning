@@ -57,6 +57,11 @@
     <string name="newPtnt_text">הוספת מטופל</string>
     <string name="newPtnt_cancel">בטל</string>
     <string name="newPtnt_ok">הוסף</string>
+    <string name="tittle_remove_pat">מחק</string>
+    <string name="delete_pt_tittle">מחיקת מטופל</string>
+    <string name="delete_pt_quetion">האם אתה בטוח?</string>
+    <string name="delete_pt_item">מחיקה בוצעה בהצלחה</string>
+    <string name="error_delete_pt_item">מחיקה לא הצליחה</string>
     <string name="error_fields_required_alert">כל השדות הינם שדות חובה</string>
 
     <!-- Strings related to Display List Patient -->
@@ -118,11 +123,11 @@
     <string name="your_position_header">המיקום שלך</string>
 
     <!--helps -->
-    <string name="help_main_activity">במסך זה המטפל יוכל להתחבר למערכת ע\"י הקשת מס\' תעודת הזהות/דרכון שלו והסיסמה שלו, במידה והוא משתמש חדש יוכל הוא לעבור למסך הרישום.</string>
+    <string name="help_main_activity">במסך זה המטפל יוכל להתחבר למערכת ע\"י הקשת מס\' תעודת הזהות/דרכון והסיסמה שלו, במידה והוא משתמש חדש יוכל הוא לעבור למסך הרישום, במידה ושכח את הסיסמא ניתן לשחזר אותה.</string>
     <string name="help_sign_up_activity">במסך זה יש לרשום משתמש חדש, חשוב לזכור את שם המשתמש והסיסמא לצורך כניסה לחשבון בעתיד.</string>
-    <string name="help_personal_area_activity">במסך זה ניתן להוסיף מטופל חדש או לבחור מטופל קיים בתיבה המשולבת ואז לעבור למסך הנדרש (מסך עריכה - מטופל חדש, מסך תצוגה - מטופל קיים).</string>
+    <string name="help_personal_area_activity">במסך זה ניתן להוסיף מטופל חדש/למחוק מטופל קיים/לבחור מטופל בתיבה המשולבת ואז לעבור למסך הנדרש (מסך עריכה - מטופל חדש, מסך תצוגה - מטופל קיים).</string>
     <string name="help_edit_patient_activity">במסך זה ניתן: להקליט/לצפות/למחוק את הוידאו של פקודת ה-\'כן\' של המטופל ,כמו כן ניתן להוסיף ולערוך/למחוק ע"י לחיצה 'ממושכת' בקשות של המטופל, וכן קיימת האופציה להוספת בקשות עד ל-4 רמות פנימיות.</string>
-    <string name="help_display_patient_activity">במסך זה ניתן לעיין בתפריט האודיטורי באופן ידני או לעבור למצב זיהוי קולי באופן המאפשר דפדוף אוטומטי והאזנה לפקודת ה-\'כן\' של המטופל, כמו כן ניתן לעבור למצב \'עריכה\' או \'איזור האישי\' ולסדר את הרשימות באופן סטטיסטי.</string>
+    <string name="help_display_patient_activity">במסך זה ניתן לעיין בתפריט האודיטורי באופן ידני או לעבור למצב זיהוי קולי באופן המאפשר דפדוף אוטומטי והאזנה לפקודת ה-\'כן\' של המטופל, ניתן גם לעבור למצב \'עריכה\' או \'איזור האישי\' ולסדר את הרשימות באופן סטטיסטי ולקבל מבט מלמעלה באיזה מקום נמצא בתפריט הרשימה.</string>
     <string name="help_algorithm_level_activity">במסך זה המטפל והמטופל יוכלו לדעת באיזה שלב היררכי הם נמצאים בתפריטי הרשימות האודיטוריות.</string>
 
     <!-- Strings related to Slide Menu -->

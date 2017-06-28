@@ -28,12 +28,12 @@
                     android:id="@+id/imageView20"
                     android:layout_width="135dp"
                     android:layout_height="135dp"
+                    android:layout_below="@+id/imageView7"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     android:layout_marginTop="25dp"
                     android:foregroundGravity="center"
-                    app:srcCompat="@mipmap/ic_select"
-                    android:layout_below="@+id/imageView7"
-                    android:layout_centerHorizontal="true" />
+                    app:srcCompat="@mipmap/ic_select" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -52,25 +52,24 @@
                     android:id="@+id/spinner_show"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView3"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:popupBackground="#E7FEFF"
                     android:textDirection="ltr"
-                    android:textSize="18sp"
-                    android:layout_below="@+id/textView3"
-                    android:layout_centerHorizontal="true" />
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:id="@+id/imageView22"
                     android:layout_width="70dp"
                     android:layout_height="62dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="80dp"
                     android:layout_marginEnd="7dp"
-                    android:layout_toStartOf="@+id/imageView20"
                     android:onClick="addPatient"
-                    app:srcCompat="@mipmap/ic_add1" />
+                    app:srcCompat="@mipmap/ic_add1"
+                    android:layout_below="@+id/textView8"
+                    android:layout_toStartOf="@+id/imageView20" />
 
                 <ImageView
                     android:id="@+id/imageView7"
@@ -85,14 +84,13 @@
 
                 <ImageView
                     android:id="@+id/imageView21"
-                    android:layout_width="60dp"
-                    android:layout_height="40dp"
-                    android:layout_alignBottom="@+id/imageView22"
-                    android:layout_alignTop="@+id/imageView22"
-                    android:layout_marginStart="16dp"
-                    android:layout_toEndOf="@+id/imageView20"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="15dp"
                     android:onClick="press_next"
-                    app:srcCompat="@mipmap/ic_next" />
+                    app:srcCompat="@mipmap/ic_next"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -105,16 +103,35 @@
                     android:text="@string/tittle_button_next"
                     android:textSize="13sp" />
 
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="70dp"
+                    android:layout_height="56dp"
+                    app:srcCompat="@mipmap/ic_remove_patient"
+                    android:layout_above="@+id/textView"
+                    android:layout_alignParentEnd="true"
+                    android:onClick="remove_patient"
+                    android:layout_marginEnd="7dp" />
+
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/imageView22"
-                    android:layout_alignStart="@+id/imageView22"
-                    android:layout_alignTop="@+id/textView"
+                    android:layout_above="@+id/imageView10"
                     android:gravity="center"
+                    android:text="@string/tittle_remove_pat"
+                    android:layout_alignStart="@+id/imageView10"
+                    android:layout_alignEnd="@+id/imageView10" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/imageView10"
+                    android:gravity="center"
+                    android:layout_alignStart="@+id/imageView22"
                     android:text="@string/tittle_button_add"
-                    android:textSize="13sp" />
+                    android:layout_alignEnd="@+id/imageView22" />
 
 
             </RelativeLayout>
