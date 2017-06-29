@@ -116,7 +116,8 @@
     <string name="delete_video_tittle">מחיקת סרטון</string>
     <string name="button_go_display">לעבור למסך התצוגה</string>
     <string name="progress_dialog_msg">מעבד וידאו. אנא המתן...</string>
-
+    <string name="error_video_file_not_found_head">שגיאה! קובץ הוידאו לא נמצא במכשיר.</string>
+    <string name="error_video_file_not_found_body">קובץ הוידאו לא נמצא במכשיר, כנראה שנמחק או אבד. \n נתוני ההקלטה יוסרו מהמערכת ,אנא הקלט מטופל בשנית.</string>
 
     <!-- Strings related to Demo Screen -->
     <string name="button_get_yes">כן</string>

@@ -118,6 +118,8 @@
     <string name="delete_video_tittle">Video remove</string>
     <string name="button_go_display">Switch to Display screen</string>
     <string name="progress_dialog_msg">Processing video. Please wait...</string>
+    <string name="error_video_file_not_found_head">Error! The video file is not on the device.</string>
+    <string name="error_video_file_not_found_body">The video file is not on the device, probably deleted or lost. \n The recording data will be removed from the system, please make a new video of the patient.</string>
 
     <!-- Strings related to Algorithm Level Screen -->
     <string name="level_1">Level 1</string>
