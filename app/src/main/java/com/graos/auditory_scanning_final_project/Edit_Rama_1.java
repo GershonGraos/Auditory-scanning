@@ -69,6 +69,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
     DBHelper_Patients_Data dbHelper_patients_data;
     boolean flag_delete_video = false;
     private ProgressDialog dialog;
+    boolean in_start_video_and_hide_button = false;
 
 
     DBHelper_Requests my_dbHelper_requests;
@@ -100,15 +101,6 @@ public class Edit_Rama_1 extends AppCompatActivity {
         text_delete_video = (TextView) findViewById(R.id.textView_delete_video);
         text_video = (TextView) findViewById(R.id.textView_video);
 
-        if(mApp.getAudioPath()!=null){
-            UriYesVideo = mApp.getUriYesVideo();
-            audio_path = mApp.getAudioPath();
-            abs_path = audio_path.substring(0,audio_path.lastIndexOf(".flac")+1) + "mp4";
-            btn_rec_yes_mode = true;
-            text_delete_video.setVisibility(View.VISIBLE);
-            text_video.setText(R.string.button_watch_record);
-            rec_del_btn.setVisibility(View.VISIBLE);
-        }
 
         // ----- DB -------
         my_dbHelper_requests = new DBHelper_Requests(Edit_Rama_1.this);
@@ -217,7 +209,6 @@ public class Edit_Rama_1 extends AppCompatActivity {
             }
         }
 
-
         patient_video =  (VideoView) findViewById(R.id.PatientVideoView);
         VideoContainer = (RelativeLayout) findViewById(R.id.VideoContainer);
         patient_video.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
@@ -231,6 +222,13 @@ public class Edit_Rama_1 extends AppCompatActivity {
                 text_delete_video.setVisibility(View.VISIBLE);
             }
         });
+
+        dbHelper_patients_data = new DBHelper_Patients_Data(Edit_Rama_1.this);
+        UriYesVideo = mApp.getUriYesVideo();
+        audio_path = mApp.getAudioPath();
+        if(audio_path!=null)
+            abs_path = audio_path.substring(0,audio_path.lastIndexOf(".flac")+1) + "mp4";
+        if_video_exsist();
     }
 
 
@@ -479,12 +477,12 @@ public class Edit_Rama_1 extends AppCompatActivity {
                         mApp.setAudioPath(audio_path);
                         mApp.setMatchesList(matches);
 
-                        dbHelper_patients_data = new DBHelper_Patients_Data(Edit_Rama_1.this);
                         JSONArray mJSONArray = new JSONArray(matches);
                         dbHelper_patients_data.insert_patient_data(id_patient,abs_path,audio_path,mJSONArray.toString());
                         rec_del_btn.setVisibility(View.VISIBLE);
                         text_delete_video.setVisibility(View.VISIBLE);
 
+                        text_video.setText(R.string.button_watch_record);
                         btn_rec_yes_mode = true;
                         dialog.cancel();
                     }
@@ -508,14 +506,12 @@ public class Edit_Rama_1 extends AppCompatActivity {
             if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
             }
-            text_video.setText(R.string.button_watch_record);
         }else{
             start_video_and_hide_button(UriYesVideo);
         }
     }
 
     public void onClick_delete_record_yes(final View view){
-        dbHelper_patients_data = new DBHelper_Patients_Data(Edit_Rama_1.this);
         final AlertDialog.Builder builder = new AlertDialog.Builder(Edit_Rama_1.this);
         builder.setTitle(R.string.delete_video_tittle);
         builder.setIcon(R.mipmap.ic_remove);
@@ -555,6 +551,16 @@ public class Edit_Rama_1 extends AppCompatActivity {
     }
 
     private void start_video_and_hide_button(Uri video_uri){
+        in_start_video_and_hide_button = true;
+        boolean exsist = if_video_exsist();
+        if(!exsist){
+            btn_rec_yes_mode = false;
+            rec_del_btn.setVisibility(View.INVISIBLE);
+            text_delete_video.setVisibility(View.INVISIBLE);
+            text_video.setText(R.string.button_yes);
+            return;
+        }
+
         VideoContainer.setVisibility(View.VISIBLE);
         DisplayMetrics metrics = new DisplayMetrics(); getWindowManager().getDefaultDisplay().getMetrics(metrics);
         android.widget.RelativeLayout.LayoutParams params = (android.widget.RelativeLayout.LayoutParams) VideoContainer.getLayoutParams();
@@ -594,6 +600,39 @@ public class Edit_Rama_1 extends AppCompatActivity {
         builder.setIcon(R.mipmap.ic_help3);
         builder.setMessage(R.string.help_edit_patient_activity);
         builder.show();
+    }
+
+    public boolean if_video_exsist(){
+        File f;
+        if(abs_path!=null){
+            f = new File(abs_path);
+            if(f.exists()) {
+                if(!in_start_video_and_hide_button) {
+                    btn_rec_yes_mode = true;
+                    text_delete_video.setVisibility(View.VISIBLE);
+                    text_video.setText(R.string.button_watch_record);
+                    rec_del_btn.setVisibility(View.VISIBLE);
+                }
+                in_start_video_and_hide_button = false;
+                return true;
+            }else{
+                mApp.alertMessage(thisContext,thisContext.getResources().getString(R.string.error_video_file_not_found_head),thisContext.getResources().getString(R.string.error_video_file_not_found_body));
+                if(dbHelper_patients_data.delete_patient_data_by_id(id_patient)){
+                    btn_rec_yes_mode = false;
+                    f = new File(abs_path);
+                    f.delete();
+                    f = new File(audio_path);
+                    f.delete();
+                    mApp.setAudioPath(null);
+                    mApp.setUriYesVideo(null);
+                    mApp.setMatchesList(null);
+                }
+                Toast.makeText(Edit_Rama_1.this, R.string.delete_record_msg, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+        }
+        return true;
     }
 
 }

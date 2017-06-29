@@ -65,7 +65,7 @@
     <string name="newPtnt_text">Add patient</string>
     <string name="newPtnt_cancel">cancel</string>
     <string name="newPtnt_ok">add</string>
-    <string name="remove_pt">remove</string>
+    <string name="tittle_remove_pat">remove</string>
     <string name="delete_pt_tittle">Delete Patient</string>
     <string name="delete_pt_quetion">Are you sure?</string>
     <string name="delete_pt_item">The patient is deleted</string>
@@ -118,6 +118,8 @@
     <string name="delete_video_tittle">Video remove</string>
     <string name="button_go_display">Switch to Display screen</string>
     <string name="progress_dialog_msg">Processing video. Please wait...</string>
+    <string name="error_video_file_not_found_head">Error! The video file is not on the device.</string>
+    <string name="error_video_file_not_found_body">The video file is not on the device, probably deleted or lost. \n The recording data will be removed from the system, please make a new video of the patient.</string>
 
     <!-- Strings related to Algorithm Level Screen -->
     <string name="level_1">Level 1</string>
