@@ -76,73 +76,76 @@ public class MainActivity extends AppCompatActivity {
             if(cursor.getInt(0)>7){
                 all_data_cursor.moveToFirst();
                 if(all_data_cursor.getString(1).equals("1") || all_data_cursor.getString(2).equals("1") || all_data_cursor.getString(3).equals("1") || all_data_cursor.getString(4).equals("1")) {
-                    MongoClientURI uri = new MongoClientURI("mongodb://yerson28890:auditoryMongo1!@ds133398.mlab.com:33398/patients_db");
-                    MongoClient client = new MongoClient(uri);
-                    MongoDatabase db = client.getDatabase(uri.getDatabase());
+                    try{
+                        MongoClientURI uri = new MongoClientURI("mongodb://yerson28890:auditoryMongo1!@ds133398.mlab.com:33398/patients_db");
+                        MongoClient client = new MongoClient(uri);
+                        MongoDatabase db = client.getDatabase(uri.getDatabase());
 
-                    if(all_data_cursor.getString(1).equals("1")){
-                        MongoCollection<BasicDBObject> collection = db.getCollection("patients", BasicDBObject.class);
-                        collection.deleteMany(new BasicDBObject());
-                        DBHelper_Patients dbHelper_patients = new DBHelper_Patients(this);
-                        Cursor c = dbHelper_patients.show_patients();
-                        BasicDBObject document;
-                        while(c.moveToNext()){
-                            document = new BasicDBObject();
-                            document.put("id", c.getString(0));
-                            document.put("name", c.getString(1));
-                            document.put("therapist_id", c.getString(2));
-                            collection.insertOne(document);
+                        if(all_data_cursor.getString(1).equals("1")){
+                            MongoCollection<BasicDBObject> collection = db.getCollection("patients", BasicDBObject.class);
+                            collection.deleteMany(new BasicDBObject());
+                            DBHelper_Patients dbHelper_patients = new DBHelper_Patients(this);
+                            Cursor c = dbHelper_patients.show_patients();
+                            BasicDBObject document;
+                            while(c.moveToNext()){
+                                document = new BasicDBObject();
+                                document.put("id", c.getString(0));
+                                document.put("name", c.getString(1));
+                                document.put("therapist_id", c.getString(2));
+                                collection.insertOne(document);
+                            }
                         }
-                    }
-                    if(all_data_cursor.getString(2).equals("1")){
-                        MongoCollection<BasicDBObject> collection = db.getCollection("therapists", BasicDBObject.class);
-                        collection.deleteMany(new BasicDBObject());
-                        DBHelper_Therapists dbHelper_therapists = new DBHelper_Therapists(this);
-                        Cursor c = dbHelper_therapists.show_data_therapists();
-                        BasicDBObject document;
-                        while(c.moveToNext()){
-                            document = new BasicDBObject();
-                            document.put("id", c.getString(0));
-                            document.put("name", c.getString(1));
-                            document.put("user_name", c.getString(2));
-                            document.put("password", c.getString(3));
-                            collection.insertOne(document);
+                        if(all_data_cursor.getString(2).equals("1")){
+                            MongoCollection<BasicDBObject> collection = db.getCollection("therapists", BasicDBObject.class);
+                            collection.deleteMany(new BasicDBObject());
+                            DBHelper_Therapists dbHelper_therapists = new DBHelper_Therapists(this);
+                            Cursor c = dbHelper_therapists.show_data_therapists();
+                            BasicDBObject document;
+                            while(c.moveToNext()){
+                                document = new BasicDBObject();
+                                document.put("id", c.getString(0));
+                                document.put("name", c.getString(1));
+                                document.put("user_name", c.getString(2));
+                                document.put("password", c.getString(3));
+                                collection.insertOne(document);
+                            }
                         }
-                    }
-                    if(all_data_cursor.getString(3).equals("1")){
-                        MongoCollection<BasicDBObject> collection = db.getCollection("tbl_requests", BasicDBObject.class);
-                        collection.deleteMany(new BasicDBObject());
-                        DBHelper_Requests dbHelper_requests = new DBHelper_Requests(this);
-                        Cursor c = dbHelper_requests.show_requests();
-                        BasicDBObject document;
-                        while(c.moveToNext()){
-                            document = new BasicDBObject();
-                            document.put("id_patient", c.getString(0));
-                            document.put("parent_id", c.getString(1));
-                            document.put("stage", c.getString(2));
-                            document.put("request", c.getString(3));
-                            document.put("id", c.getInt(4));
-                            document.put("last_update", c.getString(5));
-                            document.put("counter", c.getInt(6));
-                            collection.insertOne(document);
+                        if(all_data_cursor.getString(3).equals("1")){
+                            MongoCollection<BasicDBObject> collection = db.getCollection("tbl_requests", BasicDBObject.class);
+                            collection.deleteMany(new BasicDBObject());
+                            DBHelper_Requests dbHelper_requests = new DBHelper_Requests(this);
+                            Cursor c = dbHelper_requests.show_requests();
+                            BasicDBObject document;
+                            while(c.moveToNext()){
+                                document = new BasicDBObject();
+                                document.put("id_patient", c.getString(0));
+                                document.put("parent_id", c.getString(1));
+                                document.put("stage", c.getString(2));
+                                document.put("request", c.getString(3));
+                                document.put("id", c.getInt(4));
+                                document.put("last_update", c.getString(5));
+                                document.put("counter", c.getInt(6));
+                                collection.insertOne(document);
+                            }
                         }
-                    }
-                    if(all_data_cursor.getString(4).equals("1")){
-                        MongoCollection<BasicDBObject> collection = db.getCollection("tbl_patients_data", BasicDBObject.class);
-                        collection.deleteMany(new BasicDBObject());
-                        DBHelper_Patients_Data dbHelper_patients_data = new DBHelper_Patients_Data(this);
-                        Cursor c = dbHelper_patients_data.get_patient_data();
-                        BasicDBObject document;
-                        while(c.moveToNext()){
-                            document = new BasicDBObject();
-                            document.put("patient_id", c.getString(0));
-                            document.put("yes_video", c.getString(1));
-                            document.put("yes_audio", c.getString(2));
-                            document.put("words_list", c.getString(3));
-                            collection.insertOne(document);
+                        if(all_data_cursor.getString(4).equals("1")){
+                            MongoCollection<BasicDBObject> collection = db.getCollection("tbl_patients_data", BasicDBObject.class);
+                            collection.deleteMany(new BasicDBObject());
+                            DBHelper_Patients_Data dbHelper_patients_data = new DBHelper_Patients_Data(this);
+                            Cursor c = dbHelper_patients_data.get_patient_data();
+                            BasicDBObject document;
+                            while(c.moveToNext()){
+                                document = new BasicDBObject();
+                                document.put("patient_id", c.getString(0));
+                                document.put("yes_video", c.getString(1));
+                                document.put("yes_audio", c.getString(2));
+                                document.put("words_list", c.getString(3));
+                                collection.insertOne(document);
+                            }
                         }
+                        dbHelper_mongoDB_data.reset_mongo_data();
+                    }catch (Exception e){
                     }
-                    dbHelper_mongoDB_data.reset_mongo_data();
                 }
             }
         }
@@ -190,9 +193,12 @@ public class MainActivity extends AppCompatActivity {
                         else{
                             Toast.makeText(this,R.string.error_pass,Toast.LENGTH_SHORT).show();
                             _passLogIn.setText("");
+                            return;
                         }
                     }
                 }
+                if(!user_found)
+                    Toast.makeText(this,R.string.error_therapist_not_exists,Toast.LENGTH_SHORT).show();
             }
             else
                 Toast.makeText(this,R.string.error_user_pass,Toast.LENGTH_SHORT).show();

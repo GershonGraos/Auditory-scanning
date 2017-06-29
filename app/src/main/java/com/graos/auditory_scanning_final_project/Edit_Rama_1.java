@@ -485,6 +485,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
                         rec_del_btn.setVisibility(View.VISIBLE);
                         text_delete_video.setVisibility(View.VISIBLE);
 
+                        text_video.setText(R.string.button_watch_record);
                         btn_rec_yes_mode = true;
                         dialog.cancel();
                     }
@@ -508,7 +509,6 @@ public class Edit_Rama_1 extends AppCompatActivity {
             if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
                 startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
             }
-            text_video.setText(R.string.button_watch_record);
         }else{
             start_video_and_hide_button(UriYesVideo);
         }

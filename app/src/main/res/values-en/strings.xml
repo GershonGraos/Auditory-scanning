@@ -65,7 +65,7 @@
     <string name="newPtnt_text">Add patient</string>
     <string name="newPtnt_cancel">cancel</string>
     <string name="newPtnt_ok">add</string>
-    <string name="remove_pt">remove</string>
+    <string name="tittle_remove_pat">remove</string>
     <string name="delete_pt_tittle">Delete Patient</string>
     <string name="delete_pt_quetion">Are you sure?</string>
     <string name="delete_pt_item">The patient is deleted</string>
