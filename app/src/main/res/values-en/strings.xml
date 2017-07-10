@@ -27,6 +27,8 @@
     <string name="therapist_your_password_is">Your password is:</string>
     <string name="therapist_your_password">Your Password</string>
     <string name="therapist_ok">Ok</string>
+    <string name="check_box_rememberMe">Remember me</string>
+    <string name="invalid_input">Please enter correct details</string>
 
 
     <!-- Strings related to SignUp -->

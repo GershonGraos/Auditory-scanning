@@ -11,6 +11,8 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/LinearLayout01"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -28,16 +30,16 @@
                 android:onClick="help_main_activity"
                 app:srcCompat="@mipmap/ic_help3" />
 
-            <ImageView
-                android:id="@+id/imageView17"
-                android:layout_width="596dp"
-                android:layout_height="164dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_weight="0.07"
-                app:srcCompat="@mipmap/logo" />
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="596dp"
+        android:layout_height="164dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.07"
+        app:srcCompat="@mipmap/logo" />
 
-            <TextView
+    <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,23 +103,39 @@
                 android:gravity="center"
                 android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/button_login"
-                style="?android:textAppearanceSmall"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/button_style"
-                android:gravity="center"
-                android:onClick="press_signIn"
-                android:textSize="16sp"
-                android:textColor="#008000"
-                android:text="@string/app_textButtonLogin"
-                android:textAllCaps="false"
-                android:textStyle="bold" />
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_above="@+id/editText_login_pass"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="-28dp"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="#ffffff"
+                    android:onClick="update_stay_state"
+                    android:text="@string/check_box_rememberMe"
+                    android:textAllCaps="false"
+                    android:textDirection="ltr" />
+
+                <Button
+                    android:id="@+id/button_login"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/button_style"
+                    android:gravity="center"
+                    android:onClick="press_signIn"
+                    android:textSize="16sp"
+                    android:textColor="#008000"
+                    android:text="@string/app_textButtonLogin"
+                    android:textAllCaps="false"
+                    android:textStyle="bold" />
 
             <TextView
                 android:layout_width="76dp"

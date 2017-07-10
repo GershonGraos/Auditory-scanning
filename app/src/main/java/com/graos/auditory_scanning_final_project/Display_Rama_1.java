@@ -344,8 +344,14 @@ public class Display_Rama_1 extends AppCompatActivity
                 mSpeechRecognizer.stopListening();
                 customHandler.removeCallbacks(updateTimerThread);
             }
+            DBHelper_Therapists my_dbHelper_Therapist; my_dbHelper_Therapist = new DBHelper_Therapists(this);
+            Cursor cursor_temp = my_dbHelper_Therapist.get_stay_connected_status();
+            if(cursor_temp.getCount()>0){
+                cursor_temp.moveToFirst();
+                my_dbHelper_Therapist.update_stay_connected_status_by_id(cursor_temp.getString(0),"false");
+            }
             Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }
