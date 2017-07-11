@@ -40,8 +40,17 @@ public class MainActivity extends AppCompatActivity {
     // ***************************************************
     // ************* ON CREATE **************************
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        thisContext = this;
+
         my_dbHelper_Therapist = new DBHelper_Therapists(this);
         Cursor cursor_temp = my_dbHelper_Therapist.get_stay_connected_status();
+
+        CheckBox ch = (CheckBox)findViewById(R.id.checkBox);
+        ch.setButtonDrawable(this.getResources().getDrawable(R.drawable.check_custom));
+
+        // state log in - checkbox 'remember me'
         if(cursor_temp.getCount()>0){
             Intent i = new Intent(this, AreaPersonalActivity.class);
             cursor_temp.moveToFirst();
@@ -50,10 +59,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         }
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        thisContext = this;
-
 
         _passLogIn = (EditText) findViewById(R.id.editText_login_pass);
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
@@ -283,7 +288,8 @@ public class MainActivity extends AppCompatActivity {
         String stay_status = "";
         Cursor c = my_dbHelper_Therapist.show_therapist_data_by_user_name(user_name_stay);
         CheckBox ch = (CheckBox)findViewById(R.id.checkBox);
-        if(ch.isChecked()) {
+
+        if(ch.isChecked()){
             stay_status = "true";
         }else{
             stay_status = "false";

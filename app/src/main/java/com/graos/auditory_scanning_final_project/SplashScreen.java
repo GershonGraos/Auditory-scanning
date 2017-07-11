@@ -38,10 +38,18 @@ public class SplashScreen extends Activity {
 
         anim = AnimationUtils.loadAnimation(this, R.anim.translate);
         anim.reset();
+
+        Animation a =  AnimationUtils.loadAnimation(this, R.anim.beta);
+        a.reset();
+
+        a = AnimationUtils.loadAnimation(this, R.anim.translate_beta);
+        a.reset();
+
         ImageView iv = (ImageView) findViewById(R.id.splash);
-        TextView tv = (TextView) findViewById(R.id.textView_splash);
+        TextView tv = (TextView) findViewById(R.id.text_splash);
+
         tv.clearAnimation();
-        tv.startAnimation(anim);
+        tv.startAnimation(a);
         iv.clearAnimation();
         iv.startAnimation(anim);
 
@@ -55,8 +63,7 @@ public class SplashScreen extends Activity {
                         sleep(100);
                         waited += 100;
                     }
-                    Intent intent = new Intent(SplashScreen.this,
-                            MainActivity.class);
+                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                     SplashScreen.this.finish();
