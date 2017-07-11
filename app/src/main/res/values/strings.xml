@@ -27,6 +27,8 @@
     <string name="therapist_your_password_is">הסיסמה שלך הינה:</string>
     <string name="therapist_your_password">הסיסמה שלך</string>
     <string name="therapist_ok">אישור</string>
+    <string name="check_box_rememberMe">זכור אותי</string>
+    <string name="invalid_input">נא להזין פרטים נכונים</string>
 
 
     <!-- Strings related to SignUp -->

@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -39,10 +40,20 @@ public class MainActivity extends AppCompatActivity {
     // ***************************************************
     // ************* ON CREATE **************************
     protected void onCreate(Bundle savedInstanceState) {
+        my_dbHelper_Therapist = new DBHelper_Therapists(this);
+        Cursor cursor_temp = my_dbHelper_Therapist.get_stay_connected_status();
+        if(cursor_temp.getCount()>0){
+            Intent i = new Intent(this, AreaPersonalActivity.class);
+            cursor_temp.moveToFirst();
+            i.putExtra("ID_REGISTER", cursor_temp.getString(0));  // put only this data to next activity
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+            finish();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         thisContext = this;
-        my_dbHelper_Therapist = new DBHelper_Therapists(this);
+
 
         _passLogIn = (EditText) findViewById(R.id.editText_login_pass);
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
@@ -75,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             if(cursor.getInt(0)>7){
                 all_data_cursor.moveToFirst();
                 if(all_data_cursor.getString(1).equals("1") || all_data_cursor.getString(2).equals("1") || all_data_cursor.getString(3).equals("1") || all_data_cursor.getString(4).equals("1")) {
-                    try{
+                    try {
                         MongoClientURI uri = new MongoClientURI("mongodb://yerson28890:auditoryMongo1!@ds133398.mlab.com:33398/patients_db");
                         MongoClient client = new MongoClient(uri);
                         MongoDatabase db = client.getDatabase(uri.getDatabase());
@@ -112,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                                 collection.insertOne(document);
                             }
                         }
+
                         if (all_data_cursor.getString(3).equals("1")) {
                             MongoCollection<BasicDBObject> collection = db.getCollection("tbl_requests", BasicDBObject.class);
                             collection.deleteMany(new BasicDBObject());
@@ -263,5 +275,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
         builder.show();
+    }
+
+    public void update_stay_state(View v){
+        String user_name_stay = _userLogin.getText().toString();
+        String password_stay = _passLogIn.getText().toString();
+        String stay_status = "";
+        Cursor c = my_dbHelper_Therapist.show_therapist_data_by_user_name(user_name_stay);
+        CheckBox ch = (CheckBox)findViewById(R.id.checkBox);
+        if(ch.isChecked()) {
+            stay_status = "true";
+        }else{
+            stay_status = "false";
+        }
+        if(ch.isChecked()) {
+            if (!user_name_stay.isEmpty() && !password_stay.isEmpty() && c.getCount() > 0) {
+                my_dbHelper_Therapist.update_stay_connected_status(user_name_stay, password_stay, stay_status);
+            } else {
+                Toast.makeText(MainActivity.this, R.string.invalid_input, Toast.LENGTH_SHORT).show();
+                ch.setChecked(false);
+            }
+        }
     }
 }
