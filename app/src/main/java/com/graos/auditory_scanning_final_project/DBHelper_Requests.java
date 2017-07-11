@@ -111,6 +111,19 @@ public class DBHelper_Requests extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("select request from " + TABLE_NAME + " where id_patient = '" + patient_id + "' AND parent_id = '" + parent_id + "' AND stage = '" + stage + "'", null);
         return res;
     }
+    public Cursor get_req_id_by_req_name(String req){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select id from " + TABLE_NAME + " where request = '"+req+"'", null);
+        return res;
+    }
+    public Cursor get_request_id_by_request_and_patient_id_and_parent_request(String req,String patient_id,String parent_req){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor tmp = get_req_id_by_req_name(parent_req);
+        tmp.moveToFirst();
+        String p_id = tmp.getString(0);
+        Cursor res = db.rawQuery("select id from " + TABLE_NAME + " where request = '"+req+"' and parent_id = '"+p_id+"' and id_patient = '"+patient_id+"'", null);
+        return res;
+    }
     private void log_this_action_for_mongo(){
         DBHelper_MongoDB_Data dbHelper_mongoDB_data = new DBHelper_MongoDB_Data(thisContext);
         dbHelper_mongoDB_data.update_mongo_data("","","1","");
