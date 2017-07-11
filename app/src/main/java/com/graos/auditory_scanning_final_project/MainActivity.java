@@ -34,15 +34,23 @@ public class MainActivity extends AppCompatActivity {
     boolean cancel = false;
     Context thisContext;
 
-
     private MongoClient mongoClient;
 
     //boolean isRightToLeft = getResources().getBoolean(R.bool.is_right_to_left);}
     // ***************************************************
     // ************* ON CREATE **************************
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        thisContext = this;
+
         my_dbHelper_Therapist = new DBHelper_Therapists(this);
         Cursor cursor_temp = my_dbHelper_Therapist.get_stay_connected_status();
+
+        CheckBox ch = (CheckBox)findViewById(R.id.checkBox);
+        ch.setButtonDrawable(this.getResources().getDrawable(R.drawable.check_custom));
+
+        // state log in - checkbox 'remember me'
         if(cursor_temp.getCount()>0){
             Intent i = new Intent(this, AreaPersonalActivity.class);
             cursor_temp.moveToFirst();
@@ -51,10 +59,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         }
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        thisContext = this;
-
 
         _passLogIn = (EditText) findViewById(R.id.editText_login_pass);
         _userLogin = (EditText) findViewById(R.id.editText_login_user);
@@ -87,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
             if(cursor.getInt(0)>7){
                 all_data_cursor.moveToFirst();
                 if(all_data_cursor.getString(1).equals("1") || all_data_cursor.getString(2).equals("1") || all_data_cursor.getString(3).equals("1") || all_data_cursor.getString(4).equals("1")) {
-
                     try {
                         MongoClientURI uri = new MongoClientURI("mongodb://yerson28890:auditoryMongo1!@ds133398.mlab.com:33398/patients_db");
                         MongoClient client = new MongoClient(uri);
@@ -99,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                             DBHelper_Patients dbHelper_patients = new DBHelper_Patients(this);
                             Cursor c = dbHelper_patients.show_patients();
                             BasicDBObject document;
+
                             while (c.moveToNext()) {
                                 document = new BasicDBObject();
                                 document.put("id", c.getString(0));
@@ -114,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                             DBHelper_Therapists dbHelper_therapists = new DBHelper_Therapists(this);
                             Cursor c = dbHelper_therapists.show_data_therapists();
                             BasicDBObject document;
+
                             while (c.moveToNext()) {
                                 document = new BasicDBObject();
                                 document.put("id", c.getString(0));
@@ -283,7 +288,8 @@ public class MainActivity extends AppCompatActivity {
         String stay_status = "";
         Cursor c = my_dbHelper_Therapist.show_therapist_data_by_user_name(user_name_stay);
         CheckBox ch = (CheckBox)findViewById(R.id.checkBox);
-        if(ch.isChecked()) {
+
+        if(ch.isChecked()){
             stay_status = "true";
         }else{
             stay_status = "false";

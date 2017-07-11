@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#9BDDFF"
+    android:background="@drawable/dra_b"
     android:layout_gravity="center"
     android:id="@+id/lin_lay"
     android:gravity="center"
@@ -11,21 +11,21 @@
 
     <ImageView
         android:id="@+id/splash"
-        android:layout_width="296dp"
-        android:layout_height="284dp"
-        android:layout_marginTop="-60dp"
+        android:layout_width="218dp"
+        android:layout_height="222dp"
+        android:layout_gravity="center"
         android:background="@mipmap/logo" />
 
     <TextView
-        android:id="@+id/textView_splash"
+        android:id="@+id/text_splash"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="@string/app_textSplash"
-        android:textColor="#FFFFFF"
-        android:textDirection="ltr"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:textColor="#F8F8FF"
+        android:layout_marginTop="-32dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="@string/activity_home" />
 </LinearLayout>
 

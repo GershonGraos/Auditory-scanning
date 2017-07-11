@@ -112,6 +112,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
         Intent i_result_patient;
         i_result_patient = getIntent();
         id_patient = i_result_patient.getStringExtra("ID_PATIENT");
+        mApp.idPatient = id_patient;
 
         _patient.setText(id_patient);
 
