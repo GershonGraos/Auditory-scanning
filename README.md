@@ -17,3 +17,5 @@ https://drive.google.com/file/d/0B2mm2-m6dcZzTzhBYVU0M25UWXc/view
 and install it.
 <br />
 Enjoy :)
+
+Written by Doron Azizi and Gershon Graos.
