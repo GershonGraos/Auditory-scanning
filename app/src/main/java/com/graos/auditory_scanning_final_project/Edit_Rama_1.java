@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -168,46 +169,11 @@ public class Edit_Rama_1 extends AppCompatActivity {
         // ----------- VIDEO RECORD ------------
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this,
-                    Manifest.permission.RECORD_AUDIO)) {
-            } else {// No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions((Activity) this,
-                        new String[]{Manifest.permission.RECORD_AUDIO},
-                        REQUEST_RECORD_AUDIO);
-            }
-        }
-
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            } else {// No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions((Activity) this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        REQUEST_WRITE_STORAGE);
-            }
-        }
-
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) this,
-                    Manifest.permission.CAMERA)) {
-            } else {// No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions((Activity) this,
-                        new String[]{Manifest.permission.CAMERA},
-                        CAMERA_REQUEST);
-            }
+        int PERMISSION_ALL = 1;
+        String[] PERMISSIONS = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
+        if(!hasPermissions(this, PERMISSIONS)){
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
         }
 
         patient_video =  (VideoView) findViewById(R.id.PatientVideoView);
@@ -632,6 +598,17 @@ public class Edit_Rama_1 extends AppCompatActivity {
                 return false;
             }
 
+        }
+        return true;
+    }
+
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
         }
         return true;
     }
