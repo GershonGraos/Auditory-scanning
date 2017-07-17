@@ -193,7 +193,6 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
                             mApp.l4="";
                             mApp.idPatient = idNew_patient;
                             mApp.idTherapist = id_therapist_to_displayAct;
-
                             Intent it = new Intent(AreaPersonalActivity.this, Edit_Rama_1.class);
                             it.putExtra("ID_PATIENT",nameNew_patient + " - " + idNew_patient);
                             startActivity(it);
