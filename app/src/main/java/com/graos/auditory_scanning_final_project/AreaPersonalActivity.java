@@ -183,6 +183,16 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
                         else{
                             Toast.makeText(AreaPersonalActivity.this, R.string.sign_up_successful, Toast.LENGTH_SHORT).show();
                             populateSpinnerView();
+                            mApp.setUriYesVideo(null);
+                            mApp.setAudioPath(null);
+                            mApp.setMatchesList(null);
+                            mApp.l = 0;
+                            mApp.l1="";
+                            mApp.l2="";
+                            mApp.l3="";
+                            mApp.l4="";
+                            mApp.idPatient = idNew_patient;
+                            mApp.idTherapist = id_therapist_to_displayAct;
                             Intent it = new Intent(AreaPersonalActivity.this, Edit_Rama_1.class);
                             it.putExtra("ID_PATIENT",nameNew_patient + " - " + idNew_patient);
                             startActivity(it);
