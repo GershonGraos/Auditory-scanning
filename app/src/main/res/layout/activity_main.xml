@@ -37,6 +37,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:layout_weight="0.07"
+                android:layout_marginLeft="25dp"
                 app:srcCompat="@mipmap/logo" />
 
             <TextView

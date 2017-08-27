@@ -48,6 +48,7 @@
                     android:layout_height="140dp"
                     android:layout_gravity="center"
                     android:layout_weight="0.32"
+                    android:layout_marginLeft="25dp"
                     app:srcCompat="@mipmap/logo" />
 
 
