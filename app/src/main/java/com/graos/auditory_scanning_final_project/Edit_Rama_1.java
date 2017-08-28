@@ -361,8 +361,9 @@ public class Edit_Rama_1 extends AppCompatActivity {
         return dateFormat.format(date);
     }
 
-    // ----------- VIDEO FUNCTIONS ------------
+    // ----------- VIDEO FUNCTIONS -----------
     @Override
+    // view the video
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             patient_video.stopPlayback();
@@ -370,6 +371,7 @@ public class Edit_Rama_1 extends AppCompatActivity {
             patient_video.setVideoURI(null);
             dialog = ProgressDialog.show(Edit_Rama_1.this, "",
                     "Processing video. Please wait...", true);
+            //get the video
             UriYesVideo = intent.getData();
             //convert from video to audio
             abs_path = getRealPathFromURI(this,UriYesVideo);
@@ -597,8 +599,8 @@ public class Edit_Rama_1 extends AppCompatActivity {
                 Toast.makeText(Edit_Rama_1.this, R.string.delete_record_msg, Toast.LENGTH_SHORT).show();
                 return false;
             }
-
         }
+
         return true;
     }
 

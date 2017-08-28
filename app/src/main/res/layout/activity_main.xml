@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/dra_b" >
 
-    <!--<pl.polidea.view.ZoomView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+    <pl.polidea.view.ZoomView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -169,5 +169,5 @@
                 android:textColor="#F8F8FF"
                 android:textStyle="bold" />
         </LinearLayout>
-    <!--</pl.polidea.view.ZoomView>-->
+    </pl.polidea.view.ZoomView>
 </ScrollView>

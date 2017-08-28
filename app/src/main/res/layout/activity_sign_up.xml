@@ -17,9 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--<pl.polidea.view.ZoomView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
+        <pl.polidea.view.ZoomView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/email_login_form"
@@ -51,7 +51,7 @@
                     android:layout_marginLeft="25dp"
                     app:srcCompat="@mipmap/logo" />
 
-                
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -144,7 +144,7 @@
 
             </LinearLayout>
 
-        <!--</pl.polidea.view.ZoomView>-->
+        </pl.polidea.view.ZoomView>
     </ScrollView>
 
 
