@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/dra_b" >
 
-    <pl.polidea.view.ZoomView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<pl.polidea.view.ZoomView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -33,7 +33,7 @@
             <ImageView
                 android:id="@+id/imageView17"
                 android:layout_width="596dp"
-                android:layout_height="164dp"
+                android:layout_height="148dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:layout_weight="0.07"
@@ -169,5 +169,5 @@
                 android:textColor="#F8F8FF"
                 android:textStyle="bold" />
         </LinearLayout>
-    </pl.polidea.view.ZoomView>
+    <!--</pl.polidea.view.ZoomView>-->
 </ScrollView>
