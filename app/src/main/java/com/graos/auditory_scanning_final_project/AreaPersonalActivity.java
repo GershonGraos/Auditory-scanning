@@ -58,6 +58,7 @@ public class AreaPersonalActivity extends AppCompatActivity implements AdapterVi
         setTitle(R.string.nameActivity_area_personal);
 
         mApp = ((global_variables)getApplicationContext());
+        mApp.is_start_from_display_rama_1 = false;
 
         first_entry = true;
         my_dbHelper_patients = new DBHelper_Patients(this);

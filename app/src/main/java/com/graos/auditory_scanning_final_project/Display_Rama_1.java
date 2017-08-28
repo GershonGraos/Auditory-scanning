@@ -99,6 +99,7 @@ public class Display_Rama_1 extends AppCompatActivity
         mApp = ((global_variables)getApplicationContext());
         mApp.l = 1;
         STT_matches = mApp.getMatchesList();
+        mApp.is_start_from_display_rama_1 = true;
 
         if(mApp.statistic_sort) {
             MenuItem t = navigationView.getMenu().getItem(3);

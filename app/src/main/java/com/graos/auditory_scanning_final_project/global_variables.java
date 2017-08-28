@@ -57,4 +57,6 @@ public class global_variables extends Application {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+    public boolean is_start_from_display_rama_1 = false;
 }

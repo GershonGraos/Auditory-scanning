@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     View focusView = null;
     boolean cancel = false;
     Context thisContext;
+    private global_variables mApp;
 
     private MongoClient mongoClient;
 
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         thisContext = this;
+
+        mApp = ((global_variables)getApplicationContext());
+        mApp.is_start_from_display_rama_1 = false;
 
         my_dbHelper_Therapist = new DBHelper_Therapists(this);
         Cursor cursor_temp = my_dbHelper_Therapist.get_stay_connected_status();

@@ -16,6 +16,8 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -613,6 +615,21 @@ public class Edit_Rama_1 extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    // default
+    @Override
+    public void onBackPressed() {
+        if(mApp.is_start_from_display_rama_1) {
+            Intent intent = new Intent(this, Display_Rama_1.class);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("ID_PATIENT", mApp.idPatient);
+            intent.putExtra("ID_ONLY", mApp.idTherapist);
+            startActivity(intent);
+            finish();
+        }
+        else
+            super.onBackPressed();
     }
 
 }
