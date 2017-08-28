@@ -21,7 +21,7 @@
     <application
         android:name=".global_variables"
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@mipmap/ic_5"
         android:label="@string/activity_home"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
