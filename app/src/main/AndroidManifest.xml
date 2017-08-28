@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
 
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
