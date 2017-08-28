@@ -15,7 +15,7 @@
         android:layout_height="170dp"
         android:layout_gravity="center"
         android:layout_marginLeft="25dp"
-        android:background="@mipmap/ic_logo_2"
+        android:background="@mipmap/logo"
         android:layout_marginTop="-25dp" />
 
     <TextView
@@ -25,6 +25,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="#F8F8FF"
+        android:layout_marginTop="-12dp"
         android:textSize="18sp"
         android:textStyle="bold"
         android:text="@string/activity_home" />
