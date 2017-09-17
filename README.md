@@ -9,13 +9,24 @@ For example, the patient wants to call someone/say that something is bothering h
 where he will be asked whether he wants to eat – cooked food/vegetables/fruits/drinks, etc'.
 Also, if the patient said yes to drinking, the drinking menu opens up and asks him about the types of drinking and so on.
 
+### The app contains:
+  * Registration of more than one therapist
+  * Registration of more than one patient
+  * Registration and accurate management of Auditory lists up to 4 internal levels
+  * Record a video of the patient when he indicating the "yes" command and converted to voice
+  * Voice recognition by the app of the "yes" command in order to know the patient's exact  will
+  
+
 ## Installation Guide
-Just download the AuditoryScanning.apk file to your mobile from here:
+Download the AuditoryScanning.apk file to your mobile from here:
 <br />
 https://drive.google.com/file/d/0B2mm2-m6dcZzTzhBYVU0M25UWXc/view
 <br />
+
+or from Google Play with the name of "סריקה שמיעתית"
+
 and install it.
-<br />
+<br /> 
 Enjoy :)
 
 Written by Doron Azizi and Gershon Graos.
