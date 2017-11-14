@@ -24,9 +24,13 @@ https://drive.google.com/file/d/0B2mm2-m6dcZzTzhBYVU0M25UWXc/view
 <br />
 
 or from Google Play with the name of "סריקה שמיעתית"
-
 and install it.
 <br /> 
 Enjoy :)
 
+![logo](https://github.com/GershonGraos/Final-project-Auditory-scanning/blob/master/app/src/main/ic_logito-web.png)
+
+
 Written by Doron Azizi and Gershon Graos.
+
+
