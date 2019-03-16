@@ -31,6 +31,5 @@ Enjoy :)
 ![logo](https://github.com/GershonGraos/Final-project-Auditory-scanning/blob/master/app/src/main/ic_logito-web.png)
 
 
-Written by Doron Azizi and Gershon Graos.
 
 
